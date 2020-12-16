@@ -2,7 +2,7 @@
 
 import sys
 import ply.yacc as yacc
-from lexer import Lexer
+from Lexer import Lexer
 
 class Parser:
 
@@ -24,26 +24,26 @@ class Parser:
         exit(1)
 
     def p_program0(self, t):
-        """ program : command"""
+        """ program : command """
 
     def p_program1(self, t):
-        """ program : program command"""
+        """ program : program command """
 
     def p_command0(self, t):
         """ command  :  FORWARD INT
-                     |  FD INT"""
+                     |  FD INT """
 
     def p_command1(self, t):
         """ command  :  BACK INT
-                     |  BK INT"""
+                     |  BK INT """
 
     def p_command2(self, t):
         """ command  :  LT INT
-                     |  LEFT INT"""
+                     |  LEFT INT """
 
     def p_command3(self, t):
         """ command  :  RT INT
-                     |  RIGHT INT"""
+                     |  RIGHT INT """
 
     def p_command4(self, t):
         """ command  :  SETPOS '[' INT INT ']' """
@@ -62,17 +62,17 @@ class Parser:
 
     def p_command9(self, t):
         """ command  :  PD
-                    |  PENDOWN"""
+                     |  PENDOWN """
 
     def p_command10(self, t):
         """ command  :  PU
-                    |  PENUP"""
+                    |  PENUP """
 
     def p_command11(self, t):
         """ command  :  SETPENCOLOR '[' INT INT INT ']' """
 
     def p_command12(self, t):
-        """ command  :  MAKE VARNAME INT"""
+        """ command  :  MAKE VARNAME INT """
 
     def p_command13(self, t):
         """ command  :  IF """ # TODO
@@ -81,10 +81,11 @@ class Parser:
         """ command  :  IFELSE """  # TODO
 
     def p_command15(self, t):
-        """ command  :  REPEAT """  # TODO
+        """ command  :  REPEAT INT '[' program ']' 
+                     |  REPEAT VARUSE '[' program ']' """
 
     def p_command16(self, t):
-        """ command  :  WHILE """  # TODO
+        """ command  :  WHILE '[' ']' '[' program ']'"""  # TODO: Adicionar a expressao (TRUE ou FALSE)
 
     def p_command17(self, t):
         """ command  :  TO """  # TODO

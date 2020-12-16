@@ -1,0 +1,1608 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> command
+Rule 2     program -> program command
+Rule 3     command -> FORWARD INT
+Rule 4     command -> FD INT
+Rule 5     command -> BACK INT
+Rule 6     command -> BK INT
+Rule 7     command -> LT INT
+Rule 8     command -> LEFT INT
+Rule 9     command -> RT INT
+Rule 10    command -> RIGHT INT
+Rule 11    command -> SETPOS [ INT INT ]
+Rule 12    command -> SETXY INT INT
+Rule 13    command -> SETX INT
+Rule 14    command -> SETY INT
+Rule 15    command -> HOME
+Rule 16    command -> PD
+Rule 17    command -> PENDOWN
+Rule 18    command -> PU
+Rule 19    command -> PENUP
+Rule 20    command -> SETPENCOLOR [ INT INT INT ]
+Rule 21    command -> MAKE VARNAME INT
+Rule 22    command -> IF
+Rule 23    command -> IFELSE
+Rule 24    command -> REPEAT INT [ program ]
+Rule 25    command -> REPEAT VARUSE [ program ]
+Rule 26    command -> WHILE [ ] [ program ]
+Rule 27    command -> TO
+
+Terminals, with rules where they appear
+
+BACK                 : 5
+BK                   : 6
+FD                   : 4
+FORWARD              : 3
+HOME                 : 15
+IF                   : 22
+IFELSE               : 23
+INT                  : 3 4 5 6 7 8 9 10 11 11 12 12 13 14 20 20 20 21 24
+LEFT                 : 8
+LT                   : 7
+MAKE                 : 21
+PD                   : 16
+PENDOWN              : 17
+PENUP                : 19
+PU                   : 18
+REPEAT               : 24 25
+RIGHT                : 10
+RT                   : 9
+SETPENCOLOR          : 20
+SETPOS               : 11
+SETX                 : 13
+SETXY                : 12
+SETY                 : 14
+TO                   : 27
+VARNAME              : 21
+VARUSE               : 25
+WHILE                : 26
+[                    : 11 20 24 25 26 26
+]                    : 11 20 24 25 26 26
+error                : 
+
+Nonterminals, with rules where they appear
+
+command              : 1 2
+program              : 2 24 25 26 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . command
+    (2) program -> . program command
+    (3) command -> . FORWARD INT
+    (4) command -> . FD INT
+    (5) command -> . BACK INT
+    (6) command -> . BK INT
+    (7) command -> . LT INT
+    (8) command -> . LEFT INT
+    (9) command -> . RT INT
+    (10) command -> . RIGHT INT
+    (11) command -> . SETPOS [ INT INT ]
+    (12) command -> . SETXY INT INT
+    (13) command -> . SETX INT
+    (14) command -> . SETY INT
+    (15) command -> . HOME
+    (16) command -> . PD
+    (17) command -> . PENDOWN
+    (18) command -> . PU
+    (19) command -> . PENUP
+    (20) command -> . SETPENCOLOR [ INT INT INT ]
+    (21) command -> . MAKE VARNAME INT
+    (22) command -> . IF
+    (23) command -> . IFELSE
+    (24) command -> . REPEAT INT [ program ]
+    (25) command -> . REPEAT VARUSE [ program ]
+    (26) command -> . WHILE [ ] [ program ]
+    (27) command -> . TO
+
+    FORWARD         shift and go to state 3
+    FD              shift and go to state 4
+    BACK            shift and go to state 5
+    BK              shift and go to state 6
+    LT              shift and go to state 7
+    LEFT            shift and go to state 8
+    RT              shift and go to state 9
+    RIGHT           shift and go to state 10
+    SETPOS          shift and go to state 11
+    SETXY           shift and go to state 12
+    SETX            shift and go to state 13
+    SETY            shift and go to state 14
+    HOME            shift and go to state 15
+    PD              shift and go to state 16
+    PENDOWN         shift and go to state 17
+    PU              shift and go to state 18
+    PENUP           shift and go to state 19
+    SETPENCOLOR     shift and go to state 20
+    MAKE            shift and go to state 21
+    IF              shift and go to state 22
+    IFELSE          shift and go to state 23
+    REPEAT          shift and go to state 24
+    WHILE           shift and go to state 25
+    TO              shift and go to state 26
+
+    program                        shift and go to state 1
+    command                        shift and go to state 2
+
+state 1
+
+    (0) S' -> program .
+    (2) program -> program . command
+    (3) command -> . FORWARD INT
+    (4) command -> . FD INT
+    (5) command -> . BACK INT
+    (6) command -> . BK INT
+    (7) command -> . LT INT
+    (8) command -> . LEFT INT
+    (9) command -> . RT INT
+    (10) command -> . RIGHT INT
+    (11) command -> . SETPOS [ INT INT ]
+    (12) command -> . SETXY INT INT
+    (13) command -> . SETX INT
+    (14) command -> . SETY INT
+    (15) command -> . HOME
+    (16) command -> . PD
+    (17) command -> . PENDOWN
+    (18) command -> . PU
+    (19) command -> . PENUP
+    (20) command -> . SETPENCOLOR [ INT INT INT ]
+    (21) command -> . MAKE VARNAME INT
+    (22) command -> . IF
+    (23) command -> . IFELSE
+    (24) command -> . REPEAT INT [ program ]
+    (25) command -> . REPEAT VARUSE [ program ]
+    (26) command -> . WHILE [ ] [ program ]
+    (27) command -> . TO
+
+    FORWARD         shift and go to state 3
+    FD              shift and go to state 4
+    BACK            shift and go to state 5
+    BK              shift and go to state 6
+    LT              shift and go to state 7
+    LEFT            shift and go to state 8
+    RT              shift and go to state 9
+    RIGHT           shift and go to state 10
+    SETPOS          shift and go to state 11
+    SETXY           shift and go to state 12
+    SETX            shift and go to state 13
+    SETY            shift and go to state 14
+    HOME            shift and go to state 15
+    PD              shift and go to state 16
+    PENDOWN         shift and go to state 17
+    PU              shift and go to state 18
+    PENUP           shift and go to state 19
+    SETPENCOLOR     shift and go to state 20
+    MAKE            shift and go to state 21
+    IF              shift and go to state 22
+    IFELSE          shift and go to state 23
+    REPEAT          shift and go to state 24
+    WHILE           shift and go to state 25
+    TO              shift and go to state 26
+
+    command                        shift and go to state 27
+
+state 2
+
+    (1) program -> command .
+
+    FORWARD         reduce using rule 1 (program -> command .)
+    FD              reduce using rule 1 (program -> command .)
+    BACK            reduce using rule 1 (program -> command .)
+    BK              reduce using rule 1 (program -> command .)
+    LT              reduce using rule 1 (program -> command .)
+    LEFT            reduce using rule 1 (program -> command .)
+    RT              reduce using rule 1 (program -> command .)
+    RIGHT           reduce using rule 1 (program -> command .)
+    SETPOS          reduce using rule 1 (program -> command .)
+    SETXY           reduce using rule 1 (program -> command .)
+    SETX            reduce using rule 1 (program -> command .)
+    SETY            reduce using rule 1 (program -> command .)
+    HOME            reduce using rule 1 (program -> command .)
+    PD              reduce using rule 1 (program -> command .)
+    PENDOWN         reduce using rule 1 (program -> command .)
+    PU              reduce using rule 1 (program -> command .)
+    PENUP           reduce using rule 1 (program -> command .)
+    SETPENCOLOR     reduce using rule 1 (program -> command .)
+    MAKE            reduce using rule 1 (program -> command .)
+    IF              reduce using rule 1 (program -> command .)
+    IFELSE          reduce using rule 1 (program -> command .)
+    REPEAT          reduce using rule 1 (program -> command .)
+    WHILE           reduce using rule 1 (program -> command .)
+    TO              reduce using rule 1 (program -> command .)
+    $end            reduce using rule 1 (program -> command .)
+    ]               reduce using rule 1 (program -> command .)
+
+
+state 3
+
+    (3) command -> FORWARD . INT
+
+    INT             shift and go to state 28
+
+
+state 4
+
+    (4) command -> FD . INT
+
+    INT             shift and go to state 29
+
+
+state 5
+
+    (5) command -> BACK . INT
+
+    INT             shift and go to state 30
+
+
+state 6
+
+    (6) command -> BK . INT
+
+    INT             shift and go to state 31
+
+
+state 7
+
+    (7) command -> LT . INT
+
+    INT             shift and go to state 32
+
+
+state 8
+
+    (8) command -> LEFT . INT
+
+    INT             shift and go to state 33
+
+
+state 9
+
+    (9) command -> RT . INT
+
+    INT             shift and go to state 34
+
+
+state 10
+
+    (10) command -> RIGHT . INT
+
+    INT             shift and go to state 35
+
+
+state 11
+
+    (11) command -> SETPOS . [ INT INT ]
+
+    [               shift and go to state 36
+
+
+state 12
+
+    (12) command -> SETXY . INT INT
+
+    INT             shift and go to state 37
+
+
+state 13
+
+    (13) command -> SETX . INT
+
+    INT             shift and go to state 38
+
+
+state 14
+
+    (14) command -> SETY . INT
+
+    INT             shift and go to state 39
+
+
+state 15
+
+    (15) command -> HOME .
+
+    FORWARD         reduce using rule 15 (command -> HOME .)
+    FD              reduce using rule 15 (command -> HOME .)
+    BACK            reduce using rule 15 (command -> HOME .)
+    BK              reduce using rule 15 (command -> HOME .)
+    LT              reduce using rule 15 (command -> HOME .)
+    LEFT            reduce using rule 15 (command -> HOME .)
+    RT              reduce using rule 15 (command -> HOME .)
+    RIGHT           reduce using rule 15 (command -> HOME .)
+    SETPOS          reduce using rule 15 (command -> HOME .)
+    SETXY           reduce using rule 15 (command -> HOME .)
+    SETX            reduce using rule 15 (command -> HOME .)
+    SETY            reduce using rule 15 (command -> HOME .)
+    HOME            reduce using rule 15 (command -> HOME .)
+    PD              reduce using rule 15 (command -> HOME .)
+    PENDOWN         reduce using rule 15 (command -> HOME .)
+    PU              reduce using rule 15 (command -> HOME .)
+    PENUP           reduce using rule 15 (command -> HOME .)
+    SETPENCOLOR     reduce using rule 15 (command -> HOME .)
+    MAKE            reduce using rule 15 (command -> HOME .)
+    IF              reduce using rule 15 (command -> HOME .)
+    IFELSE          reduce using rule 15 (command -> HOME .)
+    REPEAT          reduce using rule 15 (command -> HOME .)
+    WHILE           reduce using rule 15 (command -> HOME .)
+    TO              reduce using rule 15 (command -> HOME .)
+    $end            reduce using rule 15 (command -> HOME .)
+    ]               reduce using rule 15 (command -> HOME .)
+
+
+state 16
+
+    (16) command -> PD .
+
+    FORWARD         reduce using rule 16 (command -> PD .)
+    FD              reduce using rule 16 (command -> PD .)
+    BACK            reduce using rule 16 (command -> PD .)
+    BK              reduce using rule 16 (command -> PD .)
+    LT              reduce using rule 16 (command -> PD .)
+    LEFT            reduce using rule 16 (command -> PD .)
+    RT              reduce using rule 16 (command -> PD .)
+    RIGHT           reduce using rule 16 (command -> PD .)
+    SETPOS          reduce using rule 16 (command -> PD .)
+    SETXY           reduce using rule 16 (command -> PD .)
+    SETX            reduce using rule 16 (command -> PD .)
+    SETY            reduce using rule 16 (command -> PD .)
+    HOME            reduce using rule 16 (command -> PD .)
+    PD              reduce using rule 16 (command -> PD .)
+    PENDOWN         reduce using rule 16 (command -> PD .)
+    PU              reduce using rule 16 (command -> PD .)
+    PENUP           reduce using rule 16 (command -> PD .)
+    SETPENCOLOR     reduce using rule 16 (command -> PD .)
+    MAKE            reduce using rule 16 (command -> PD .)
+    IF              reduce using rule 16 (command -> PD .)
+    IFELSE          reduce using rule 16 (command -> PD .)
+    REPEAT          reduce using rule 16 (command -> PD .)
+    WHILE           reduce using rule 16 (command -> PD .)
+    TO              reduce using rule 16 (command -> PD .)
+    $end            reduce using rule 16 (command -> PD .)
+    ]               reduce using rule 16 (command -> PD .)
+
+
+state 17
+
+    (17) command -> PENDOWN .
+
+    FORWARD         reduce using rule 17 (command -> PENDOWN .)
+    FD              reduce using rule 17 (command -> PENDOWN .)
+    BACK            reduce using rule 17 (command -> PENDOWN .)
+    BK              reduce using rule 17 (command -> PENDOWN .)
+    LT              reduce using rule 17 (command -> PENDOWN .)
+    LEFT            reduce using rule 17 (command -> PENDOWN .)
+    RT              reduce using rule 17 (command -> PENDOWN .)
+    RIGHT           reduce using rule 17 (command -> PENDOWN .)
+    SETPOS          reduce using rule 17 (command -> PENDOWN .)
+    SETXY           reduce using rule 17 (command -> PENDOWN .)
+    SETX            reduce using rule 17 (command -> PENDOWN .)
+    SETY            reduce using rule 17 (command -> PENDOWN .)
+    HOME            reduce using rule 17 (command -> PENDOWN .)
+    PD              reduce using rule 17 (command -> PENDOWN .)
+    PENDOWN         reduce using rule 17 (command -> PENDOWN .)
+    PU              reduce using rule 17 (command -> PENDOWN .)
+    PENUP           reduce using rule 17 (command -> PENDOWN .)
+    SETPENCOLOR     reduce using rule 17 (command -> PENDOWN .)
+    MAKE            reduce using rule 17 (command -> PENDOWN .)
+    IF              reduce using rule 17 (command -> PENDOWN .)
+    IFELSE          reduce using rule 17 (command -> PENDOWN .)
+    REPEAT          reduce using rule 17 (command -> PENDOWN .)
+    WHILE           reduce using rule 17 (command -> PENDOWN .)
+    TO              reduce using rule 17 (command -> PENDOWN .)
+    $end            reduce using rule 17 (command -> PENDOWN .)
+    ]               reduce using rule 17 (command -> PENDOWN .)
+
+
+state 18
+
+    (18) command -> PU .
+
+    FORWARD         reduce using rule 18 (command -> PU .)
+    FD              reduce using rule 18 (command -> PU .)
+    BACK            reduce using rule 18 (command -> PU .)
+    BK              reduce using rule 18 (command -> PU .)
+    LT              reduce using rule 18 (command -> PU .)
+    LEFT            reduce using rule 18 (command -> PU .)
+    RT              reduce using rule 18 (command -> PU .)
+    RIGHT           reduce using rule 18 (command -> PU .)
+    SETPOS          reduce using rule 18 (command -> PU .)
+    SETXY           reduce using rule 18 (command -> PU .)
+    SETX            reduce using rule 18 (command -> PU .)
+    SETY            reduce using rule 18 (command -> PU .)
+    HOME            reduce using rule 18 (command -> PU .)
+    PD              reduce using rule 18 (command -> PU .)
+    PENDOWN         reduce using rule 18 (command -> PU .)
+    PU              reduce using rule 18 (command -> PU .)
+    PENUP           reduce using rule 18 (command -> PU .)
+    SETPENCOLOR     reduce using rule 18 (command -> PU .)
+    MAKE            reduce using rule 18 (command -> PU .)
+    IF              reduce using rule 18 (command -> PU .)
+    IFELSE          reduce using rule 18 (command -> PU .)
+    REPEAT          reduce using rule 18 (command -> PU .)
+    WHILE           reduce using rule 18 (command -> PU .)
+    TO              reduce using rule 18 (command -> PU .)
+    $end            reduce using rule 18 (command -> PU .)
+    ]               reduce using rule 18 (command -> PU .)
+
+
+state 19
+
+    (19) command -> PENUP .
+
+    FORWARD         reduce using rule 19 (command -> PENUP .)
+    FD              reduce using rule 19 (command -> PENUP .)
+    BACK            reduce using rule 19 (command -> PENUP .)
+    BK              reduce using rule 19 (command -> PENUP .)
+    LT              reduce using rule 19 (command -> PENUP .)
+    LEFT            reduce using rule 19 (command -> PENUP .)
+    RT              reduce using rule 19 (command -> PENUP .)
+    RIGHT           reduce using rule 19 (command -> PENUP .)
+    SETPOS          reduce using rule 19 (command -> PENUP .)
+    SETXY           reduce using rule 19 (command -> PENUP .)
+    SETX            reduce using rule 19 (command -> PENUP .)
+    SETY            reduce using rule 19 (command -> PENUP .)
+    HOME            reduce using rule 19 (command -> PENUP .)
+    PD              reduce using rule 19 (command -> PENUP .)
+    PENDOWN         reduce using rule 19 (command -> PENUP .)
+    PU              reduce using rule 19 (command -> PENUP .)
+    PENUP           reduce using rule 19 (command -> PENUP .)
+    SETPENCOLOR     reduce using rule 19 (command -> PENUP .)
+    MAKE            reduce using rule 19 (command -> PENUP .)
+    IF              reduce using rule 19 (command -> PENUP .)
+    IFELSE          reduce using rule 19 (command -> PENUP .)
+    REPEAT          reduce using rule 19 (command -> PENUP .)
+    WHILE           reduce using rule 19 (command -> PENUP .)
+    TO              reduce using rule 19 (command -> PENUP .)
+    $end            reduce using rule 19 (command -> PENUP .)
+    ]               reduce using rule 19 (command -> PENUP .)
+
+
+state 20
+
+    (20) command -> SETPENCOLOR . [ INT INT INT ]
+
+    [               shift and go to state 40
+
+
+state 21
+
+    (21) command -> MAKE . VARNAME INT
+
+    VARNAME         shift and go to state 41
+
+
+state 22
+
+    (22) command -> IF .
+
+    FORWARD         reduce using rule 22 (command -> IF .)
+    FD              reduce using rule 22 (command -> IF .)
+    BACK            reduce using rule 22 (command -> IF .)
+    BK              reduce using rule 22 (command -> IF .)
+    LT              reduce using rule 22 (command -> IF .)
+    LEFT            reduce using rule 22 (command -> IF .)
+    RT              reduce using rule 22 (command -> IF .)
+    RIGHT           reduce using rule 22 (command -> IF .)
+    SETPOS          reduce using rule 22 (command -> IF .)
+    SETXY           reduce using rule 22 (command -> IF .)
+    SETX            reduce using rule 22 (command -> IF .)
+    SETY            reduce using rule 22 (command -> IF .)
+    HOME            reduce using rule 22 (command -> IF .)
+    PD              reduce using rule 22 (command -> IF .)
+    PENDOWN         reduce using rule 22 (command -> IF .)
+    PU              reduce using rule 22 (command -> IF .)
+    PENUP           reduce using rule 22 (command -> IF .)
+    SETPENCOLOR     reduce using rule 22 (command -> IF .)
+    MAKE            reduce using rule 22 (command -> IF .)
+    IF              reduce using rule 22 (command -> IF .)
+    IFELSE          reduce using rule 22 (command -> IF .)
+    REPEAT          reduce using rule 22 (command -> IF .)
+    WHILE           reduce using rule 22 (command -> IF .)
+    TO              reduce using rule 22 (command -> IF .)
+    $end            reduce using rule 22 (command -> IF .)
+    ]               reduce using rule 22 (command -> IF .)
+
+
+state 23
+
+    (23) command -> IFELSE .
+
+    FORWARD         reduce using rule 23 (command -> IFELSE .)
+    FD              reduce using rule 23 (command -> IFELSE .)
+    BACK            reduce using rule 23 (command -> IFELSE .)
+    BK              reduce using rule 23 (command -> IFELSE .)
+    LT              reduce using rule 23 (command -> IFELSE .)
+    LEFT            reduce using rule 23 (command -> IFELSE .)
+    RT              reduce using rule 23 (command -> IFELSE .)
+    RIGHT           reduce using rule 23 (command -> IFELSE .)
+    SETPOS          reduce using rule 23 (command -> IFELSE .)
+    SETXY           reduce using rule 23 (command -> IFELSE .)
+    SETX            reduce using rule 23 (command -> IFELSE .)
+    SETY            reduce using rule 23 (command -> IFELSE .)
+    HOME            reduce using rule 23 (command -> IFELSE .)
+    PD              reduce using rule 23 (command -> IFELSE .)
+    PENDOWN         reduce using rule 23 (command -> IFELSE .)
+    PU              reduce using rule 23 (command -> IFELSE .)
+    PENUP           reduce using rule 23 (command -> IFELSE .)
+    SETPENCOLOR     reduce using rule 23 (command -> IFELSE .)
+    MAKE            reduce using rule 23 (command -> IFELSE .)
+    IF              reduce using rule 23 (command -> IFELSE .)
+    IFELSE          reduce using rule 23 (command -> IFELSE .)
+    REPEAT          reduce using rule 23 (command -> IFELSE .)
+    WHILE           reduce using rule 23 (command -> IFELSE .)
+    TO              reduce using rule 23 (command -> IFELSE .)
+    $end            reduce using rule 23 (command -> IFELSE .)
+    ]               reduce using rule 23 (command -> IFELSE .)
+
+
+state 24
+
+    (24) command -> REPEAT . INT [ program ]
+    (25) command -> REPEAT . VARUSE [ program ]
+
+    INT             shift and go to state 42
+    VARUSE          shift and go to state 43
+
+
+state 25
+
+    (26) command -> WHILE . [ ] [ program ]
+
+    [               shift and go to state 44
+
+
+state 26
+
+    (27) command -> TO .
+
+    FORWARD         reduce using rule 27 (command -> TO .)
+    FD              reduce using rule 27 (command -> TO .)
+    BACK            reduce using rule 27 (command -> TO .)
+    BK              reduce using rule 27 (command -> TO .)
+    LT              reduce using rule 27 (command -> TO .)
+    LEFT            reduce using rule 27 (command -> TO .)
+    RT              reduce using rule 27 (command -> TO .)
+    RIGHT           reduce using rule 27 (command -> TO .)
+    SETPOS          reduce using rule 27 (command -> TO .)
+    SETXY           reduce using rule 27 (command -> TO .)
+    SETX            reduce using rule 27 (command -> TO .)
+    SETY            reduce using rule 27 (command -> TO .)
+    HOME            reduce using rule 27 (command -> TO .)
+    PD              reduce using rule 27 (command -> TO .)
+    PENDOWN         reduce using rule 27 (command -> TO .)
+    PU              reduce using rule 27 (command -> TO .)
+    PENUP           reduce using rule 27 (command -> TO .)
+    SETPENCOLOR     reduce using rule 27 (command -> TO .)
+    MAKE            reduce using rule 27 (command -> TO .)
+    IF              reduce using rule 27 (command -> TO .)
+    IFELSE          reduce using rule 27 (command -> TO .)
+    REPEAT          reduce using rule 27 (command -> TO .)
+    WHILE           reduce using rule 27 (command -> TO .)
+    TO              reduce using rule 27 (command -> TO .)
+    $end            reduce using rule 27 (command -> TO .)
+    ]               reduce using rule 27 (command -> TO .)
+
+
+state 27
+
+    (2) program -> program command .
+
+    FORWARD         reduce using rule 2 (program -> program command .)
+    FD              reduce using rule 2 (program -> program command .)
+    BACK            reduce using rule 2 (program -> program command .)
+    BK              reduce using rule 2 (program -> program command .)
+    LT              reduce using rule 2 (program -> program command .)
+    LEFT            reduce using rule 2 (program -> program command .)
+    RT              reduce using rule 2 (program -> program command .)
+    RIGHT           reduce using rule 2 (program -> program command .)
+    SETPOS          reduce using rule 2 (program -> program command .)
+    SETXY           reduce using rule 2 (program -> program command .)
+    SETX            reduce using rule 2 (program -> program command .)
+    SETY            reduce using rule 2 (program -> program command .)
+    HOME            reduce using rule 2 (program -> program command .)
+    PD              reduce using rule 2 (program -> program command .)
+    PENDOWN         reduce using rule 2 (program -> program command .)
+    PU              reduce using rule 2 (program -> program command .)
+    PENUP           reduce using rule 2 (program -> program command .)
+    SETPENCOLOR     reduce using rule 2 (program -> program command .)
+    MAKE            reduce using rule 2 (program -> program command .)
+    IF              reduce using rule 2 (program -> program command .)
+    IFELSE          reduce using rule 2 (program -> program command .)
+    REPEAT          reduce using rule 2 (program -> program command .)
+    WHILE           reduce using rule 2 (program -> program command .)
+    TO              reduce using rule 2 (program -> program command .)
+    $end            reduce using rule 2 (program -> program command .)
+    ]               reduce using rule 2 (program -> program command .)
+
+
+state 28
+
+    (3) command -> FORWARD INT .
+
+    FORWARD         reduce using rule 3 (command -> FORWARD INT .)
+    FD              reduce using rule 3 (command -> FORWARD INT .)
+    BACK            reduce using rule 3 (command -> FORWARD INT .)
+    BK              reduce using rule 3 (command -> FORWARD INT .)
+    LT              reduce using rule 3 (command -> FORWARD INT .)
+    LEFT            reduce using rule 3 (command -> FORWARD INT .)
+    RT              reduce using rule 3 (command -> FORWARD INT .)
+    RIGHT           reduce using rule 3 (command -> FORWARD INT .)
+    SETPOS          reduce using rule 3 (command -> FORWARD INT .)
+    SETXY           reduce using rule 3 (command -> FORWARD INT .)
+    SETX            reduce using rule 3 (command -> FORWARD INT .)
+    SETY            reduce using rule 3 (command -> FORWARD INT .)
+    HOME            reduce using rule 3 (command -> FORWARD INT .)
+    PD              reduce using rule 3 (command -> FORWARD INT .)
+    PENDOWN         reduce using rule 3 (command -> FORWARD INT .)
+    PU              reduce using rule 3 (command -> FORWARD INT .)
+    PENUP           reduce using rule 3 (command -> FORWARD INT .)
+    SETPENCOLOR     reduce using rule 3 (command -> FORWARD INT .)
+    MAKE            reduce using rule 3 (command -> FORWARD INT .)
+    IF              reduce using rule 3 (command -> FORWARD INT .)
+    IFELSE          reduce using rule 3 (command -> FORWARD INT .)
+    REPEAT          reduce using rule 3 (command -> FORWARD INT .)
+    WHILE           reduce using rule 3 (command -> FORWARD INT .)
+    TO              reduce using rule 3 (command -> FORWARD INT .)
+    $end            reduce using rule 3 (command -> FORWARD INT .)
+    ]               reduce using rule 3 (command -> FORWARD INT .)
+
+
+state 29
+
+    (4) command -> FD INT .
+
+    FORWARD         reduce using rule 4 (command -> FD INT .)
+    FD              reduce using rule 4 (command -> FD INT .)
+    BACK            reduce using rule 4 (command -> FD INT .)
+    BK              reduce using rule 4 (command -> FD INT .)
+    LT              reduce using rule 4 (command -> FD INT .)
+    LEFT            reduce using rule 4 (command -> FD INT .)
+    RT              reduce using rule 4 (command -> FD INT .)
+    RIGHT           reduce using rule 4 (command -> FD INT .)
+    SETPOS          reduce using rule 4 (command -> FD INT .)
+    SETXY           reduce using rule 4 (command -> FD INT .)
+    SETX            reduce using rule 4 (command -> FD INT .)
+    SETY            reduce using rule 4 (command -> FD INT .)
+    HOME            reduce using rule 4 (command -> FD INT .)
+    PD              reduce using rule 4 (command -> FD INT .)
+    PENDOWN         reduce using rule 4 (command -> FD INT .)
+    PU              reduce using rule 4 (command -> FD INT .)
+    PENUP           reduce using rule 4 (command -> FD INT .)
+    SETPENCOLOR     reduce using rule 4 (command -> FD INT .)
+    MAKE            reduce using rule 4 (command -> FD INT .)
+    IF              reduce using rule 4 (command -> FD INT .)
+    IFELSE          reduce using rule 4 (command -> FD INT .)
+    REPEAT          reduce using rule 4 (command -> FD INT .)
+    WHILE           reduce using rule 4 (command -> FD INT .)
+    TO              reduce using rule 4 (command -> FD INT .)
+    $end            reduce using rule 4 (command -> FD INT .)
+    ]               reduce using rule 4 (command -> FD INT .)
+
+
+state 30
+
+    (5) command -> BACK INT .
+
+    FORWARD         reduce using rule 5 (command -> BACK INT .)
+    FD              reduce using rule 5 (command -> BACK INT .)
+    BACK            reduce using rule 5 (command -> BACK INT .)
+    BK              reduce using rule 5 (command -> BACK INT .)
+    LT              reduce using rule 5 (command -> BACK INT .)
+    LEFT            reduce using rule 5 (command -> BACK INT .)
+    RT              reduce using rule 5 (command -> BACK INT .)
+    RIGHT           reduce using rule 5 (command -> BACK INT .)
+    SETPOS          reduce using rule 5 (command -> BACK INT .)
+    SETXY           reduce using rule 5 (command -> BACK INT .)
+    SETX            reduce using rule 5 (command -> BACK INT .)
+    SETY            reduce using rule 5 (command -> BACK INT .)
+    HOME            reduce using rule 5 (command -> BACK INT .)
+    PD              reduce using rule 5 (command -> BACK INT .)
+    PENDOWN         reduce using rule 5 (command -> BACK INT .)
+    PU              reduce using rule 5 (command -> BACK INT .)
+    PENUP           reduce using rule 5 (command -> BACK INT .)
+    SETPENCOLOR     reduce using rule 5 (command -> BACK INT .)
+    MAKE            reduce using rule 5 (command -> BACK INT .)
+    IF              reduce using rule 5 (command -> BACK INT .)
+    IFELSE          reduce using rule 5 (command -> BACK INT .)
+    REPEAT          reduce using rule 5 (command -> BACK INT .)
+    WHILE           reduce using rule 5 (command -> BACK INT .)
+    TO              reduce using rule 5 (command -> BACK INT .)
+    $end            reduce using rule 5 (command -> BACK INT .)
+    ]               reduce using rule 5 (command -> BACK INT .)
+
+
+state 31
+
+    (6) command -> BK INT .
+
+    FORWARD         reduce using rule 6 (command -> BK INT .)
+    FD              reduce using rule 6 (command -> BK INT .)
+    BACK            reduce using rule 6 (command -> BK INT .)
+    BK              reduce using rule 6 (command -> BK INT .)
+    LT              reduce using rule 6 (command -> BK INT .)
+    LEFT            reduce using rule 6 (command -> BK INT .)
+    RT              reduce using rule 6 (command -> BK INT .)
+    RIGHT           reduce using rule 6 (command -> BK INT .)
+    SETPOS          reduce using rule 6 (command -> BK INT .)
+    SETXY           reduce using rule 6 (command -> BK INT .)
+    SETX            reduce using rule 6 (command -> BK INT .)
+    SETY            reduce using rule 6 (command -> BK INT .)
+    HOME            reduce using rule 6 (command -> BK INT .)
+    PD              reduce using rule 6 (command -> BK INT .)
+    PENDOWN         reduce using rule 6 (command -> BK INT .)
+    PU              reduce using rule 6 (command -> BK INT .)
+    PENUP           reduce using rule 6 (command -> BK INT .)
+    SETPENCOLOR     reduce using rule 6 (command -> BK INT .)
+    MAKE            reduce using rule 6 (command -> BK INT .)
+    IF              reduce using rule 6 (command -> BK INT .)
+    IFELSE          reduce using rule 6 (command -> BK INT .)
+    REPEAT          reduce using rule 6 (command -> BK INT .)
+    WHILE           reduce using rule 6 (command -> BK INT .)
+    TO              reduce using rule 6 (command -> BK INT .)
+    $end            reduce using rule 6 (command -> BK INT .)
+    ]               reduce using rule 6 (command -> BK INT .)
+
+
+state 32
+
+    (7) command -> LT INT .
+
+    FORWARD         reduce using rule 7 (command -> LT INT .)
+    FD              reduce using rule 7 (command -> LT INT .)
+    BACK            reduce using rule 7 (command -> LT INT .)
+    BK              reduce using rule 7 (command -> LT INT .)
+    LT              reduce using rule 7 (command -> LT INT .)
+    LEFT            reduce using rule 7 (command -> LT INT .)
+    RT              reduce using rule 7 (command -> LT INT .)
+    RIGHT           reduce using rule 7 (command -> LT INT .)
+    SETPOS          reduce using rule 7 (command -> LT INT .)
+    SETXY           reduce using rule 7 (command -> LT INT .)
+    SETX            reduce using rule 7 (command -> LT INT .)
+    SETY            reduce using rule 7 (command -> LT INT .)
+    HOME            reduce using rule 7 (command -> LT INT .)
+    PD              reduce using rule 7 (command -> LT INT .)
+    PENDOWN         reduce using rule 7 (command -> LT INT .)
+    PU              reduce using rule 7 (command -> LT INT .)
+    PENUP           reduce using rule 7 (command -> LT INT .)
+    SETPENCOLOR     reduce using rule 7 (command -> LT INT .)
+    MAKE            reduce using rule 7 (command -> LT INT .)
+    IF              reduce using rule 7 (command -> LT INT .)
+    IFELSE          reduce using rule 7 (command -> LT INT .)
+    REPEAT          reduce using rule 7 (command -> LT INT .)
+    WHILE           reduce using rule 7 (command -> LT INT .)
+    TO              reduce using rule 7 (command -> LT INT .)
+    $end            reduce using rule 7 (command -> LT INT .)
+    ]               reduce using rule 7 (command -> LT INT .)
+
+
+state 33
+
+    (8) command -> LEFT INT .
+
+    FORWARD         reduce using rule 8 (command -> LEFT INT .)
+    FD              reduce using rule 8 (command -> LEFT INT .)
+    BACK            reduce using rule 8 (command -> LEFT INT .)
+    BK              reduce using rule 8 (command -> LEFT INT .)
+    LT              reduce using rule 8 (command -> LEFT INT .)
+    LEFT            reduce using rule 8 (command -> LEFT INT .)
+    RT              reduce using rule 8 (command -> LEFT INT .)
+    RIGHT           reduce using rule 8 (command -> LEFT INT .)
+    SETPOS          reduce using rule 8 (command -> LEFT INT .)
+    SETXY           reduce using rule 8 (command -> LEFT INT .)
+    SETX            reduce using rule 8 (command -> LEFT INT .)
+    SETY            reduce using rule 8 (command -> LEFT INT .)
+    HOME            reduce using rule 8 (command -> LEFT INT .)
+    PD              reduce using rule 8 (command -> LEFT INT .)
+    PENDOWN         reduce using rule 8 (command -> LEFT INT .)
+    PU              reduce using rule 8 (command -> LEFT INT .)
+    PENUP           reduce using rule 8 (command -> LEFT INT .)
+    SETPENCOLOR     reduce using rule 8 (command -> LEFT INT .)
+    MAKE            reduce using rule 8 (command -> LEFT INT .)
+    IF              reduce using rule 8 (command -> LEFT INT .)
+    IFELSE          reduce using rule 8 (command -> LEFT INT .)
+    REPEAT          reduce using rule 8 (command -> LEFT INT .)
+    WHILE           reduce using rule 8 (command -> LEFT INT .)
+    TO              reduce using rule 8 (command -> LEFT INT .)
+    $end            reduce using rule 8 (command -> LEFT INT .)
+    ]               reduce using rule 8 (command -> LEFT INT .)
+
+
+state 34
+
+    (9) command -> RT INT .
+
+    FORWARD         reduce using rule 9 (command -> RT INT .)
+    FD              reduce using rule 9 (command -> RT INT .)
+    BACK            reduce using rule 9 (command -> RT INT .)
+    BK              reduce using rule 9 (command -> RT INT .)
+    LT              reduce using rule 9 (command -> RT INT .)
+    LEFT            reduce using rule 9 (command -> RT INT .)
+    RT              reduce using rule 9 (command -> RT INT .)
+    RIGHT           reduce using rule 9 (command -> RT INT .)
+    SETPOS          reduce using rule 9 (command -> RT INT .)
+    SETXY           reduce using rule 9 (command -> RT INT .)
+    SETX            reduce using rule 9 (command -> RT INT .)
+    SETY            reduce using rule 9 (command -> RT INT .)
+    HOME            reduce using rule 9 (command -> RT INT .)
+    PD              reduce using rule 9 (command -> RT INT .)
+    PENDOWN         reduce using rule 9 (command -> RT INT .)
+    PU              reduce using rule 9 (command -> RT INT .)
+    PENUP           reduce using rule 9 (command -> RT INT .)
+    SETPENCOLOR     reduce using rule 9 (command -> RT INT .)
+    MAKE            reduce using rule 9 (command -> RT INT .)
+    IF              reduce using rule 9 (command -> RT INT .)
+    IFELSE          reduce using rule 9 (command -> RT INT .)
+    REPEAT          reduce using rule 9 (command -> RT INT .)
+    WHILE           reduce using rule 9 (command -> RT INT .)
+    TO              reduce using rule 9 (command -> RT INT .)
+    $end            reduce using rule 9 (command -> RT INT .)
+    ]               reduce using rule 9 (command -> RT INT .)
+
+
+state 35
+
+    (10) command -> RIGHT INT .
+
+    FORWARD         reduce using rule 10 (command -> RIGHT INT .)
+    FD              reduce using rule 10 (command -> RIGHT INT .)
+    BACK            reduce using rule 10 (command -> RIGHT INT .)
+    BK              reduce using rule 10 (command -> RIGHT INT .)
+    LT              reduce using rule 10 (command -> RIGHT INT .)
+    LEFT            reduce using rule 10 (command -> RIGHT INT .)
+    RT              reduce using rule 10 (command -> RIGHT INT .)
+    RIGHT           reduce using rule 10 (command -> RIGHT INT .)
+    SETPOS          reduce using rule 10 (command -> RIGHT INT .)
+    SETXY           reduce using rule 10 (command -> RIGHT INT .)
+    SETX            reduce using rule 10 (command -> RIGHT INT .)
+    SETY            reduce using rule 10 (command -> RIGHT INT .)
+    HOME            reduce using rule 10 (command -> RIGHT INT .)
+    PD              reduce using rule 10 (command -> RIGHT INT .)
+    PENDOWN         reduce using rule 10 (command -> RIGHT INT .)
+    PU              reduce using rule 10 (command -> RIGHT INT .)
+    PENUP           reduce using rule 10 (command -> RIGHT INT .)
+    SETPENCOLOR     reduce using rule 10 (command -> RIGHT INT .)
+    MAKE            reduce using rule 10 (command -> RIGHT INT .)
+    IF              reduce using rule 10 (command -> RIGHT INT .)
+    IFELSE          reduce using rule 10 (command -> RIGHT INT .)
+    REPEAT          reduce using rule 10 (command -> RIGHT INT .)
+    WHILE           reduce using rule 10 (command -> RIGHT INT .)
+    TO              reduce using rule 10 (command -> RIGHT INT .)
+    $end            reduce using rule 10 (command -> RIGHT INT .)
+    ]               reduce using rule 10 (command -> RIGHT INT .)
+
+
+state 36
+
+    (11) command -> SETPOS [ . INT INT ]
+
+    INT             shift and go to state 45
+
+
+state 37
+
+    (12) command -> SETXY INT . INT
+
+    INT             shift and go to state 46
+
+
+state 38
+
+    (13) command -> SETX INT .
+
+    FORWARD         reduce using rule 13 (command -> SETX INT .)
+    FD              reduce using rule 13 (command -> SETX INT .)
+    BACK            reduce using rule 13 (command -> SETX INT .)
+    BK              reduce using rule 13 (command -> SETX INT .)
+    LT              reduce using rule 13 (command -> SETX INT .)
+    LEFT            reduce using rule 13 (command -> SETX INT .)
+    RT              reduce using rule 13 (command -> SETX INT .)
+    RIGHT           reduce using rule 13 (command -> SETX INT .)
+    SETPOS          reduce using rule 13 (command -> SETX INT .)
+    SETXY           reduce using rule 13 (command -> SETX INT .)
+    SETX            reduce using rule 13 (command -> SETX INT .)
+    SETY            reduce using rule 13 (command -> SETX INT .)
+    HOME            reduce using rule 13 (command -> SETX INT .)
+    PD              reduce using rule 13 (command -> SETX INT .)
+    PENDOWN         reduce using rule 13 (command -> SETX INT .)
+    PU              reduce using rule 13 (command -> SETX INT .)
+    PENUP           reduce using rule 13 (command -> SETX INT .)
+    SETPENCOLOR     reduce using rule 13 (command -> SETX INT .)
+    MAKE            reduce using rule 13 (command -> SETX INT .)
+    IF              reduce using rule 13 (command -> SETX INT .)
+    IFELSE          reduce using rule 13 (command -> SETX INT .)
+    REPEAT          reduce using rule 13 (command -> SETX INT .)
+    WHILE           reduce using rule 13 (command -> SETX INT .)
+    TO              reduce using rule 13 (command -> SETX INT .)
+    $end            reduce using rule 13 (command -> SETX INT .)
+    ]               reduce using rule 13 (command -> SETX INT .)
+
+
+state 39
+
+    (14) command -> SETY INT .
+
+    FORWARD         reduce using rule 14 (command -> SETY INT .)
+    FD              reduce using rule 14 (command -> SETY INT .)
+    BACK            reduce using rule 14 (command -> SETY INT .)
+    BK              reduce using rule 14 (command -> SETY INT .)
+    LT              reduce using rule 14 (command -> SETY INT .)
+    LEFT            reduce using rule 14 (command -> SETY INT .)
+    RT              reduce using rule 14 (command -> SETY INT .)
+    RIGHT           reduce using rule 14 (command -> SETY INT .)
+    SETPOS          reduce using rule 14 (command -> SETY INT .)
+    SETXY           reduce using rule 14 (command -> SETY INT .)
+    SETX            reduce using rule 14 (command -> SETY INT .)
+    SETY            reduce using rule 14 (command -> SETY INT .)
+    HOME            reduce using rule 14 (command -> SETY INT .)
+    PD              reduce using rule 14 (command -> SETY INT .)
+    PENDOWN         reduce using rule 14 (command -> SETY INT .)
+    PU              reduce using rule 14 (command -> SETY INT .)
+    PENUP           reduce using rule 14 (command -> SETY INT .)
+    SETPENCOLOR     reduce using rule 14 (command -> SETY INT .)
+    MAKE            reduce using rule 14 (command -> SETY INT .)
+    IF              reduce using rule 14 (command -> SETY INT .)
+    IFELSE          reduce using rule 14 (command -> SETY INT .)
+    REPEAT          reduce using rule 14 (command -> SETY INT .)
+    WHILE           reduce using rule 14 (command -> SETY INT .)
+    TO              reduce using rule 14 (command -> SETY INT .)
+    $end            reduce using rule 14 (command -> SETY INT .)
+    ]               reduce using rule 14 (command -> SETY INT .)
+
+
+state 40
+
+    (20) command -> SETPENCOLOR [ . INT INT INT ]
+
+    INT             shift and go to state 47
+
+
+state 41
+
+    (21) command -> MAKE VARNAME . INT
+
+    INT             shift and go to state 48
+
+
+state 42
+
+    (24) command -> REPEAT INT . [ program ]
+
+    [               shift and go to state 49
+
+
+state 43
+
+    (25) command -> REPEAT VARUSE . [ program ]
+
+    [               shift and go to state 50
+
+
+state 44
+
+    (26) command -> WHILE [ . ] [ program ]
+
+    ]               shift and go to state 51
+
+
+state 45
+
+    (11) command -> SETPOS [ INT . INT ]
+
+    INT             shift and go to state 52
+
+
+state 46
+
+    (12) command -> SETXY INT INT .
+
+    FORWARD         reduce using rule 12 (command -> SETXY INT INT .)
+    FD              reduce using rule 12 (command -> SETXY INT INT .)
+    BACK            reduce using rule 12 (command -> SETXY INT INT .)
+    BK              reduce using rule 12 (command -> SETXY INT INT .)
+    LT              reduce using rule 12 (command -> SETXY INT INT .)
+    LEFT            reduce using rule 12 (command -> SETXY INT INT .)
+    RT              reduce using rule 12 (command -> SETXY INT INT .)
+    RIGHT           reduce using rule 12 (command -> SETXY INT INT .)
+    SETPOS          reduce using rule 12 (command -> SETXY INT INT .)
+    SETXY           reduce using rule 12 (command -> SETXY INT INT .)
+    SETX            reduce using rule 12 (command -> SETXY INT INT .)
+    SETY            reduce using rule 12 (command -> SETXY INT INT .)
+    HOME            reduce using rule 12 (command -> SETXY INT INT .)
+    PD              reduce using rule 12 (command -> SETXY INT INT .)
+    PENDOWN         reduce using rule 12 (command -> SETXY INT INT .)
+    PU              reduce using rule 12 (command -> SETXY INT INT .)
+    PENUP           reduce using rule 12 (command -> SETXY INT INT .)
+    SETPENCOLOR     reduce using rule 12 (command -> SETXY INT INT .)
+    MAKE            reduce using rule 12 (command -> SETXY INT INT .)
+    IF              reduce using rule 12 (command -> SETXY INT INT .)
+    IFELSE          reduce using rule 12 (command -> SETXY INT INT .)
+    REPEAT          reduce using rule 12 (command -> SETXY INT INT .)
+    WHILE           reduce using rule 12 (command -> SETXY INT INT .)
+    TO              reduce using rule 12 (command -> SETXY INT INT .)
+    $end            reduce using rule 12 (command -> SETXY INT INT .)
+    ]               reduce using rule 12 (command -> SETXY INT INT .)
+
+
+state 47
+
+    (20) command -> SETPENCOLOR [ INT . INT INT ]
+
+    INT             shift and go to state 53
+
+
+state 48
+
+    (21) command -> MAKE VARNAME INT .
+
+    FORWARD         reduce using rule 21 (command -> MAKE VARNAME INT .)
+    FD              reduce using rule 21 (command -> MAKE VARNAME INT .)
+    BACK            reduce using rule 21 (command -> MAKE VARNAME INT .)
+    BK              reduce using rule 21 (command -> MAKE VARNAME INT .)
+    LT              reduce using rule 21 (command -> MAKE VARNAME INT .)
+    LEFT            reduce using rule 21 (command -> MAKE VARNAME INT .)
+    RT              reduce using rule 21 (command -> MAKE VARNAME INT .)
+    RIGHT           reduce using rule 21 (command -> MAKE VARNAME INT .)
+    SETPOS          reduce using rule 21 (command -> MAKE VARNAME INT .)
+    SETXY           reduce using rule 21 (command -> MAKE VARNAME INT .)
+    SETX            reduce using rule 21 (command -> MAKE VARNAME INT .)
+    SETY            reduce using rule 21 (command -> MAKE VARNAME INT .)
+    HOME            reduce using rule 21 (command -> MAKE VARNAME INT .)
+    PD              reduce using rule 21 (command -> MAKE VARNAME INT .)
+    PENDOWN         reduce using rule 21 (command -> MAKE VARNAME INT .)
+    PU              reduce using rule 21 (command -> MAKE VARNAME INT .)
+    PENUP           reduce using rule 21 (command -> MAKE VARNAME INT .)
+    SETPENCOLOR     reduce using rule 21 (command -> MAKE VARNAME INT .)
+    MAKE            reduce using rule 21 (command -> MAKE VARNAME INT .)
+    IF              reduce using rule 21 (command -> MAKE VARNAME INT .)
+    IFELSE          reduce using rule 21 (command -> MAKE VARNAME INT .)
+    REPEAT          reduce using rule 21 (command -> MAKE VARNAME INT .)
+    WHILE           reduce using rule 21 (command -> MAKE VARNAME INT .)
+    TO              reduce using rule 21 (command -> MAKE VARNAME INT .)
+    $end            reduce using rule 21 (command -> MAKE VARNAME INT .)
+    ]               reduce using rule 21 (command -> MAKE VARNAME INT .)
+
+
+state 49
+
+    (24) command -> REPEAT INT [ . program ]
+    (1) program -> . command
+    (2) program -> . program command
+    (3) command -> . FORWARD INT
+    (4) command -> . FD INT
+    (5) command -> . BACK INT
+    (6) command -> . BK INT
+    (7) command -> . LT INT
+    (8) command -> . LEFT INT
+    (9) command -> . RT INT
+    (10) command -> . RIGHT INT
+    (11) command -> . SETPOS [ INT INT ]
+    (12) command -> . SETXY INT INT
+    (13) command -> . SETX INT
+    (14) command -> . SETY INT
+    (15) command -> . HOME
+    (16) command -> . PD
+    (17) command -> . PENDOWN
+    (18) command -> . PU
+    (19) command -> . PENUP
+    (20) command -> . SETPENCOLOR [ INT INT INT ]
+    (21) command -> . MAKE VARNAME INT
+    (22) command -> . IF
+    (23) command -> . IFELSE
+    (24) command -> . REPEAT INT [ program ]
+    (25) command -> . REPEAT VARUSE [ program ]
+    (26) command -> . WHILE [ ] [ program ]
+    (27) command -> . TO
+
+    FORWARD         shift and go to state 3
+    FD              shift and go to state 4
+    BACK            shift and go to state 5
+    BK              shift and go to state 6
+    LT              shift and go to state 7
+    LEFT            shift and go to state 8
+    RT              shift and go to state 9
+    RIGHT           shift and go to state 10
+    SETPOS          shift and go to state 11
+    SETXY           shift and go to state 12
+    SETX            shift and go to state 13
+    SETY            shift and go to state 14
+    HOME            shift and go to state 15
+    PD              shift and go to state 16
+    PENDOWN         shift and go to state 17
+    PU              shift and go to state 18
+    PENUP           shift and go to state 19
+    SETPENCOLOR     shift and go to state 20
+    MAKE            shift and go to state 21
+    IF              shift and go to state 22
+    IFELSE          shift and go to state 23
+    REPEAT          shift and go to state 24
+    WHILE           shift and go to state 25
+    TO              shift and go to state 26
+
+    program                        shift and go to state 54
+    command                        shift and go to state 2
+
+state 50
+
+    (25) command -> REPEAT VARUSE [ . program ]
+    (1) program -> . command
+    (2) program -> . program command
+    (3) command -> . FORWARD INT
+    (4) command -> . FD INT
+    (5) command -> . BACK INT
+    (6) command -> . BK INT
+    (7) command -> . LT INT
+    (8) command -> . LEFT INT
+    (9) command -> . RT INT
+    (10) command -> . RIGHT INT
+    (11) command -> . SETPOS [ INT INT ]
+    (12) command -> . SETXY INT INT
+    (13) command -> . SETX INT
+    (14) command -> . SETY INT
+    (15) command -> . HOME
+    (16) command -> . PD
+    (17) command -> . PENDOWN
+    (18) command -> . PU
+    (19) command -> . PENUP
+    (20) command -> . SETPENCOLOR [ INT INT INT ]
+    (21) command -> . MAKE VARNAME INT
+    (22) command -> . IF
+    (23) command -> . IFELSE
+    (24) command -> . REPEAT INT [ program ]
+    (25) command -> . REPEAT VARUSE [ program ]
+    (26) command -> . WHILE [ ] [ program ]
+    (27) command -> . TO
+
+    FORWARD         shift and go to state 3
+    FD              shift and go to state 4
+    BACK            shift and go to state 5
+    BK              shift and go to state 6
+    LT              shift and go to state 7
+    LEFT            shift and go to state 8
+    RT              shift and go to state 9
+    RIGHT           shift and go to state 10
+    SETPOS          shift and go to state 11
+    SETXY           shift and go to state 12
+    SETX            shift and go to state 13
+    SETY            shift and go to state 14
+    HOME            shift and go to state 15
+    PD              shift and go to state 16
+    PENDOWN         shift and go to state 17
+    PU              shift and go to state 18
+    PENUP           shift and go to state 19
+    SETPENCOLOR     shift and go to state 20
+    MAKE            shift and go to state 21
+    IF              shift and go to state 22
+    IFELSE          shift and go to state 23
+    REPEAT          shift and go to state 24
+    WHILE           shift and go to state 25
+    TO              shift and go to state 26
+
+    program                        shift and go to state 55
+    command                        shift and go to state 2
+
+state 51
+
+    (26) command -> WHILE [ ] . [ program ]
+
+    [               shift and go to state 56
+
+
+state 52
+
+    (11) command -> SETPOS [ INT INT . ]
+
+    ]               shift and go to state 57
+
+
+state 53
+
+    (20) command -> SETPENCOLOR [ INT INT . INT ]
+
+    INT             shift and go to state 58
+
+
+state 54
+
+    (24) command -> REPEAT INT [ program . ]
+    (2) program -> program . command
+    (3) command -> . FORWARD INT
+    (4) command -> . FD INT
+    (5) command -> . BACK INT
+    (6) command -> . BK INT
+    (7) command -> . LT INT
+    (8) command -> . LEFT INT
+    (9) command -> . RT INT
+    (10) command -> . RIGHT INT
+    (11) command -> . SETPOS [ INT INT ]
+    (12) command -> . SETXY INT INT
+    (13) command -> . SETX INT
+    (14) command -> . SETY INT
+    (15) command -> . HOME
+    (16) command -> . PD
+    (17) command -> . PENDOWN
+    (18) command -> . PU
+    (19) command -> . PENUP
+    (20) command -> . SETPENCOLOR [ INT INT INT ]
+    (21) command -> . MAKE VARNAME INT
+    (22) command -> . IF
+    (23) command -> . IFELSE
+    (24) command -> . REPEAT INT [ program ]
+    (25) command -> . REPEAT VARUSE [ program ]
+    (26) command -> . WHILE [ ] [ program ]
+    (27) command -> . TO
+
+    ]               shift and go to state 59
+    FORWARD         shift and go to state 3
+    FD              shift and go to state 4
+    BACK            shift and go to state 5
+    BK              shift and go to state 6
+    LT              shift and go to state 7
+    LEFT            shift and go to state 8
+    RT              shift and go to state 9
+    RIGHT           shift and go to state 10
+    SETPOS          shift and go to state 11
+    SETXY           shift and go to state 12
+    SETX            shift and go to state 13
+    SETY            shift and go to state 14
+    HOME            shift and go to state 15
+    PD              shift and go to state 16
+    PENDOWN         shift and go to state 17
+    PU              shift and go to state 18
+    PENUP           shift and go to state 19
+    SETPENCOLOR     shift and go to state 20
+    MAKE            shift and go to state 21
+    IF              shift and go to state 22
+    IFELSE          shift and go to state 23
+    REPEAT          shift and go to state 24
+    WHILE           shift and go to state 25
+    TO              shift and go to state 26
+
+    command                        shift and go to state 27
+
+state 55
+
+    (25) command -> REPEAT VARUSE [ program . ]
+    (2) program -> program . command
+    (3) command -> . FORWARD INT
+    (4) command -> . FD INT
+    (5) command -> . BACK INT
+    (6) command -> . BK INT
+    (7) command -> . LT INT
+    (8) command -> . LEFT INT
+    (9) command -> . RT INT
+    (10) command -> . RIGHT INT
+    (11) command -> . SETPOS [ INT INT ]
+    (12) command -> . SETXY INT INT
+    (13) command -> . SETX INT
+    (14) command -> . SETY INT
+    (15) command -> . HOME
+    (16) command -> . PD
+    (17) command -> . PENDOWN
+    (18) command -> . PU
+    (19) command -> . PENUP
+    (20) command -> . SETPENCOLOR [ INT INT INT ]
+    (21) command -> . MAKE VARNAME INT
+    (22) command -> . IF
+    (23) command -> . IFELSE
+    (24) command -> . REPEAT INT [ program ]
+    (25) command -> . REPEAT VARUSE [ program ]
+    (26) command -> . WHILE [ ] [ program ]
+    (27) command -> . TO
+
+    ]               shift and go to state 60
+    FORWARD         shift and go to state 3
+    FD              shift and go to state 4
+    BACK            shift and go to state 5
+    BK              shift and go to state 6
+    LT              shift and go to state 7
+    LEFT            shift and go to state 8
+    RT              shift and go to state 9
+    RIGHT           shift and go to state 10
+    SETPOS          shift and go to state 11
+    SETXY           shift and go to state 12
+    SETX            shift and go to state 13
+    SETY            shift and go to state 14
+    HOME            shift and go to state 15
+    PD              shift and go to state 16
+    PENDOWN         shift and go to state 17
+    PU              shift and go to state 18
+    PENUP           shift and go to state 19
+    SETPENCOLOR     shift and go to state 20
+    MAKE            shift and go to state 21
+    IF              shift and go to state 22
+    IFELSE          shift and go to state 23
+    REPEAT          shift and go to state 24
+    WHILE           shift and go to state 25
+    TO              shift and go to state 26
+
+    command                        shift and go to state 27
+
+state 56
+
+    (26) command -> WHILE [ ] [ . program ]
+    (1) program -> . command
+    (2) program -> . program command
+    (3) command -> . FORWARD INT
+    (4) command -> . FD INT
+    (5) command -> . BACK INT
+    (6) command -> . BK INT
+    (7) command -> . LT INT
+    (8) command -> . LEFT INT
+    (9) command -> . RT INT
+    (10) command -> . RIGHT INT
+    (11) command -> . SETPOS [ INT INT ]
+    (12) command -> . SETXY INT INT
+    (13) command -> . SETX INT
+    (14) command -> . SETY INT
+    (15) command -> . HOME
+    (16) command -> . PD
+    (17) command -> . PENDOWN
+    (18) command -> . PU
+    (19) command -> . PENUP
+    (20) command -> . SETPENCOLOR [ INT INT INT ]
+    (21) command -> . MAKE VARNAME INT
+    (22) command -> . IF
+    (23) command -> . IFELSE
+    (24) command -> . REPEAT INT [ program ]
+    (25) command -> . REPEAT VARUSE [ program ]
+    (26) command -> . WHILE [ ] [ program ]
+    (27) command -> . TO
+
+    FORWARD         shift and go to state 3
+    FD              shift and go to state 4
+    BACK            shift and go to state 5
+    BK              shift and go to state 6
+    LT              shift and go to state 7
+    LEFT            shift and go to state 8
+    RT              shift and go to state 9
+    RIGHT           shift and go to state 10
+    SETPOS          shift and go to state 11
+    SETXY           shift and go to state 12
+    SETX            shift and go to state 13
+    SETY            shift and go to state 14
+    HOME            shift and go to state 15
+    PD              shift and go to state 16
+    PENDOWN         shift and go to state 17
+    PU              shift and go to state 18
+    PENUP           shift and go to state 19
+    SETPENCOLOR     shift and go to state 20
+    MAKE            shift and go to state 21
+    IF              shift and go to state 22
+    IFELSE          shift and go to state 23
+    REPEAT          shift and go to state 24
+    WHILE           shift and go to state 25
+    TO              shift and go to state 26
+
+    program                        shift and go to state 61
+    command                        shift and go to state 2
+
+state 57
+
+    (11) command -> SETPOS [ INT INT ] .
+
+    FORWARD         reduce using rule 11 (command -> SETPOS [ INT INT ] .)
+    FD              reduce using rule 11 (command -> SETPOS [ INT INT ] .)
+    BACK            reduce using rule 11 (command -> SETPOS [ INT INT ] .)
+    BK              reduce using rule 11 (command -> SETPOS [ INT INT ] .)
+    LT              reduce using rule 11 (command -> SETPOS [ INT INT ] .)
+    LEFT            reduce using rule 11 (command -> SETPOS [ INT INT ] .)
+    RT              reduce using rule 11 (command -> SETPOS [ INT INT ] .)
+    RIGHT           reduce using rule 11 (command -> SETPOS [ INT INT ] .)
+    SETPOS          reduce using rule 11 (command -> SETPOS [ INT INT ] .)
+    SETXY           reduce using rule 11 (command -> SETPOS [ INT INT ] .)
+    SETX            reduce using rule 11 (command -> SETPOS [ INT INT ] .)
+    SETY            reduce using rule 11 (command -> SETPOS [ INT INT ] .)
+    HOME            reduce using rule 11 (command -> SETPOS [ INT INT ] .)
+    PD              reduce using rule 11 (command -> SETPOS [ INT INT ] .)
+    PENDOWN         reduce using rule 11 (command -> SETPOS [ INT INT ] .)
+    PU              reduce using rule 11 (command -> SETPOS [ INT INT ] .)
+    PENUP           reduce using rule 11 (command -> SETPOS [ INT INT ] .)
+    SETPENCOLOR     reduce using rule 11 (command -> SETPOS [ INT INT ] .)
+    MAKE            reduce using rule 11 (command -> SETPOS [ INT INT ] .)
+    IF              reduce using rule 11 (command -> SETPOS [ INT INT ] .)
+    IFELSE          reduce using rule 11 (command -> SETPOS [ INT INT ] .)
+    REPEAT          reduce using rule 11 (command -> SETPOS [ INT INT ] .)
+    WHILE           reduce using rule 11 (command -> SETPOS [ INT INT ] .)
+    TO              reduce using rule 11 (command -> SETPOS [ INT INT ] .)
+    $end            reduce using rule 11 (command -> SETPOS [ INT INT ] .)
+    ]               reduce using rule 11 (command -> SETPOS [ INT INT ] .)
+
+
+state 58
+
+    (20) command -> SETPENCOLOR [ INT INT INT . ]
+
+    ]               shift and go to state 62
+
+
+state 59
+
+    (24) command -> REPEAT INT [ program ] .
+
+    FORWARD         reduce using rule 24 (command -> REPEAT INT [ program ] .)
+    FD              reduce using rule 24 (command -> REPEAT INT [ program ] .)
+    BACK            reduce using rule 24 (command -> REPEAT INT [ program ] .)
+    BK              reduce using rule 24 (command -> REPEAT INT [ program ] .)
+    LT              reduce using rule 24 (command -> REPEAT INT [ program ] .)
+    LEFT            reduce using rule 24 (command -> REPEAT INT [ program ] .)
+    RT              reduce using rule 24 (command -> REPEAT INT [ program ] .)
+    RIGHT           reduce using rule 24 (command -> REPEAT INT [ program ] .)
+    SETPOS          reduce using rule 24 (command -> REPEAT INT [ program ] .)
+    SETXY           reduce using rule 24 (command -> REPEAT INT [ program ] .)
+    SETX            reduce using rule 24 (command -> REPEAT INT [ program ] .)
+    SETY            reduce using rule 24 (command -> REPEAT INT [ program ] .)
+    HOME            reduce using rule 24 (command -> REPEAT INT [ program ] .)
+    PD              reduce using rule 24 (command -> REPEAT INT [ program ] .)
+    PENDOWN         reduce using rule 24 (command -> REPEAT INT [ program ] .)
+    PU              reduce using rule 24 (command -> REPEAT INT [ program ] .)
+    PENUP           reduce using rule 24 (command -> REPEAT INT [ program ] .)
+    SETPENCOLOR     reduce using rule 24 (command -> REPEAT INT [ program ] .)
+    MAKE            reduce using rule 24 (command -> REPEAT INT [ program ] .)
+    IF              reduce using rule 24 (command -> REPEAT INT [ program ] .)
+    IFELSE          reduce using rule 24 (command -> REPEAT INT [ program ] .)
+    REPEAT          reduce using rule 24 (command -> REPEAT INT [ program ] .)
+    WHILE           reduce using rule 24 (command -> REPEAT INT [ program ] .)
+    TO              reduce using rule 24 (command -> REPEAT INT [ program ] .)
+    $end            reduce using rule 24 (command -> REPEAT INT [ program ] .)
+    ]               reduce using rule 24 (command -> REPEAT INT [ program ] .)
+
+
+state 60
+
+    (25) command -> REPEAT VARUSE [ program ] .
+
+    FORWARD         reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
+    FD              reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
+    BACK            reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
+    BK              reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
+    LT              reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
+    LEFT            reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
+    RT              reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
+    RIGHT           reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
+    SETPOS          reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
+    SETXY           reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
+    SETX            reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
+    SETY            reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
+    HOME            reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
+    PD              reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
+    PENDOWN         reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
+    PU              reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
+    PENUP           reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
+    SETPENCOLOR     reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
+    MAKE            reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
+    IF              reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
+    IFELSE          reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
+    REPEAT          reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
+    WHILE           reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
+    TO              reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
+    $end            reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
+    ]               reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
+
+
+state 61
+
+    (26) command -> WHILE [ ] [ program . ]
+    (2) program -> program . command
+    (3) command -> . FORWARD INT
+    (4) command -> . FD INT
+    (5) command -> . BACK INT
+    (6) command -> . BK INT
+    (7) command -> . LT INT
+    (8) command -> . LEFT INT
+    (9) command -> . RT INT
+    (10) command -> . RIGHT INT
+    (11) command -> . SETPOS [ INT INT ]
+    (12) command -> . SETXY INT INT
+    (13) command -> . SETX INT
+    (14) command -> . SETY INT
+    (15) command -> . HOME
+    (16) command -> . PD
+    (17) command -> . PENDOWN
+    (18) command -> . PU
+    (19) command -> . PENUP
+    (20) command -> . SETPENCOLOR [ INT INT INT ]
+    (21) command -> . MAKE VARNAME INT
+    (22) command -> . IF
+    (23) command -> . IFELSE
+    (24) command -> . REPEAT INT [ program ]
+    (25) command -> . REPEAT VARUSE [ program ]
+    (26) command -> . WHILE [ ] [ program ]
+    (27) command -> . TO
+
+    ]               shift and go to state 63
+    FORWARD         shift and go to state 3
+    FD              shift and go to state 4
+    BACK            shift and go to state 5
+    BK              shift and go to state 6
+    LT              shift and go to state 7
+    LEFT            shift and go to state 8
+    RT              shift and go to state 9
+    RIGHT           shift and go to state 10
+    SETPOS          shift and go to state 11
+    SETXY           shift and go to state 12
+    SETX            shift and go to state 13
+    SETY            shift and go to state 14
+    HOME            shift and go to state 15
+    PD              shift and go to state 16
+    PENDOWN         shift and go to state 17
+    PU              shift and go to state 18
+    PENUP           shift and go to state 19
+    SETPENCOLOR     shift and go to state 20
+    MAKE            shift and go to state 21
+    IF              shift and go to state 22
+    IFELSE          shift and go to state 23
+    REPEAT          shift and go to state 24
+    WHILE           shift and go to state 25
+    TO              shift and go to state 26
+
+    command                        shift and go to state 27
+
+state 62
+
+    (20) command -> SETPENCOLOR [ INT INT INT ] .
+
+    FORWARD         reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
+    FD              reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
+    BACK            reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
+    BK              reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
+    LT              reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
+    LEFT            reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
+    RT              reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
+    RIGHT           reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
+    SETPOS          reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
+    SETXY           reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
+    SETX            reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
+    SETY            reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
+    HOME            reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
+    PD              reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
+    PENDOWN         reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
+    PU              reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
+    PENUP           reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
+    SETPENCOLOR     reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
+    MAKE            reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
+    IF              reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
+    IFELSE          reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
+    REPEAT          reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
+    WHILE           reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
+    TO              reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
+    $end            reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
+    ]               reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
+
+
+state 63
+
+    (26) command -> WHILE [ ] [ program ] .
+
+    FORWARD         reduce using rule 26 (command -> WHILE [ ] [ program ] .)
+    FD              reduce using rule 26 (command -> WHILE [ ] [ program ] .)
+    BACK            reduce using rule 26 (command -> WHILE [ ] [ program ] .)
+    BK              reduce using rule 26 (command -> WHILE [ ] [ program ] .)
+    LT              reduce using rule 26 (command -> WHILE [ ] [ program ] .)
+    LEFT            reduce using rule 26 (command -> WHILE [ ] [ program ] .)
+    RT              reduce using rule 26 (command -> WHILE [ ] [ program ] .)
+    RIGHT           reduce using rule 26 (command -> WHILE [ ] [ program ] .)
+    SETPOS          reduce using rule 26 (command -> WHILE [ ] [ program ] .)
+    SETXY           reduce using rule 26 (command -> WHILE [ ] [ program ] .)
+    SETX            reduce using rule 26 (command -> WHILE [ ] [ program ] .)
+    SETY            reduce using rule 26 (command -> WHILE [ ] [ program ] .)
+    HOME            reduce using rule 26 (command -> WHILE [ ] [ program ] .)
+    PD              reduce using rule 26 (command -> WHILE [ ] [ program ] .)
+    PENDOWN         reduce using rule 26 (command -> WHILE [ ] [ program ] .)
+    PU              reduce using rule 26 (command -> WHILE [ ] [ program ] .)
+    PENUP           reduce using rule 26 (command -> WHILE [ ] [ program ] .)
+    SETPENCOLOR     reduce using rule 26 (command -> WHILE [ ] [ program ] .)
+    MAKE            reduce using rule 26 (command -> WHILE [ ] [ program ] .)
+    IF              reduce using rule 26 (command -> WHILE [ ] [ program ] .)
+    IFELSE          reduce using rule 26 (command -> WHILE [ ] [ program ] .)
+    REPEAT          reduce using rule 26 (command -> WHILE [ ] [ program ] .)
+    WHILE           reduce using rule 26 (command -> WHILE [ ] [ program ] .)
+    TO              reduce using rule 26 (command -> WHILE [ ] [ program ] .)
+    $end            reduce using rule 26 (command -> WHILE [ ] [ program ] .)
+    ]               reduce using rule 26 (command -> WHILE [ ] [ program ] .)
+
