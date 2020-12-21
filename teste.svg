@@ -1,0 +1,10 @@
+<svg viewBox="0 0 200.00 200.00" xmlns="http://www.w3.org/2000/svg">
+<line x1="1" y1="200"                     x2="1.0000000000000016" y2="175.0"                     style="stroke: rgb(0, 0, 0); stroke-width: 1px"/>
+<line x1="1.0000000000000016" y1="175.0"                     x2="26.0" y2="175.0"                     style="stroke: rgb(255, 0, 255); stroke-width: 1px"/>
+<line x1="26.0" y1="175.0"                     x2="26.0" y2="150.0"                     style="stroke: rgb(255, 255, 255); stroke-width: 1px"/>
+<line x1="26.0" y1="150.0"                     x2="51.0" y2="150.0"                     style="stroke: rgb(255, 0, 0); stroke-width: 1px"/>
+<line x1="51.0" y1="150.0"                     x2="51.0" y2="125.0"                     style="stroke: rgb(255, 255, 0); stroke-width: 1px"/>
+<line x1="51.0" y1="125.0"                     x2="76.0" y2="125.0"                     style="stroke: rgb(0, 255, 0); stroke-width: 1px"/>
+<line x1="76.0" y1="125.0"                     x2="76.0" y2="100.0"                     style="stroke: rgb(100, 10, 100); stroke-width: 1px"/>
+<line x1="76.0" y1="100.0"                     x2="101.0" y2="100.0"                     style="stroke: rgb(0, 255, 255); stroke-width: 1px"/>
+</svg>

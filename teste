@@ -1,2 +1,11 @@
-forward 20 lt 200 fd 300
-rt 150 back 10
+pu
+setpos [ 1 200 ]
+pd
+fd 25 rt 90 setpencolor [ 255 0 255 ]
+fd 25 lt 90 setpencolor [ 255 255 255 ]
+fd 25 rt 90 setpencolor [ 255 0 0 ]
+fd 25 lt 90 setpencolor [ 255 255 0 ]
+fd 25 rt 90 setpencolor [ 0 255 0 ]
+fd 25 lt 90 setpencolor [ 100 10 100 ]
+fd 25 rt 90 setpencolor [ 0 255 255 ]
+fd 25 lt 90 setpencolor [ 0 0 255 ]

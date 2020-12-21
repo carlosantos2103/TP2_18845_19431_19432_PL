@@ -3,9 +3,18 @@
 
 from Parser import Parser
 from Lexer import Lexer
+import svg
 
 with open("teste", mode="r") as fh:
     contents = fh.read()
+
+
+def clearFile(file_name):
+    open(file_name, 'w+').close()
+
+clearFile("teste.svg")
+
+svg.createFile("teste.svg")
 
 lexer = Lexer()
 lexer.Build(contents)
@@ -13,6 +22,8 @@ lexer.Build(contents)
 for t in iter(lexer.lexer.token, None):
     print(t)
 
+
 parser = Parser()
 parser.Parse(contents)
 
+svg.endFile("teste.svg")

@@ -1,5 +1,9 @@
 Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 
+Unused terminals:
+
+    WHILE
+
 Grammar
 
 Rule 0     S' -> program
@@ -28,8 +32,6 @@ Rule 22    command -> IF
 Rule 23    command -> IFELSE
 Rule 24    command -> REPEAT INT [ program ]
 Rule 25    command -> REPEAT VARUSE [ program ]
-Rule 26    command -> WHILE [ ] [ program ]
-Rule 27    command -> TO
 
 Terminals, with rules where they appear
 
@@ -56,18 +58,17 @@ SETPOS               : 11
 SETX                 : 13
 SETXY                : 12
 SETY                 : 14
-TO                   : 27
 VARNAME              : 21
 VARUSE               : 25
-WHILE                : 26
-[                    : 11 20 24 25 26 26
-]                    : 11 20 24 25 26 26
+WHILE                : 
+[                    : 11 20 24 25
+]                    : 11 20 24 25
 error                : 
 
 Nonterminals, with rules where they appear
 
 command              : 1 2
-program              : 2 24 25 26 0
+program              : 2 24 25 0
 
 Parsing method: LALR
 
@@ -99,8 +100,6 @@ state 0
     (23) command -> . IFELSE
     (24) command -> . REPEAT INT [ program ]
     (25) command -> . REPEAT VARUSE [ program ]
-    (26) command -> . WHILE [ ] [ program ]
-    (27) command -> . TO
 
     FORWARD         shift and go to state 3
     FD              shift and go to state 4
@@ -124,8 +123,6 @@ state 0
     IF              shift and go to state 22
     IFELSE          shift and go to state 23
     REPEAT          shift and go to state 24
-    WHILE           shift and go to state 25
-    TO              shift and go to state 26
 
     program                        shift and go to state 1
     command                        shift and go to state 2
@@ -157,8 +154,6 @@ state 1
     (23) command -> . IFELSE
     (24) command -> . REPEAT INT [ program ]
     (25) command -> . REPEAT VARUSE [ program ]
-    (26) command -> . WHILE [ ] [ program ]
-    (27) command -> . TO
 
     FORWARD         shift and go to state 3
     FD              shift and go to state 4
@@ -182,10 +177,8 @@ state 1
     IF              shift and go to state 22
     IFELSE          shift and go to state 23
     REPEAT          shift and go to state 24
-    WHILE           shift and go to state 25
-    TO              shift and go to state 26
 
-    command                        shift and go to state 27
+    command                        shift and go to state 25
 
 state 2
 
@@ -213,8 +206,6 @@ state 2
     IF              reduce using rule 1 (program -> command .)
     IFELSE          reduce using rule 1 (program -> command .)
     REPEAT          reduce using rule 1 (program -> command .)
-    WHILE           reduce using rule 1 (program -> command .)
-    TO              reduce using rule 1 (program -> command .)
     $end            reduce using rule 1 (program -> command .)
     ]               reduce using rule 1 (program -> command .)
 
@@ -223,84 +214,84 @@ state 3
 
     (3) command -> FORWARD . INT
 
-    INT             shift and go to state 28
+    INT             shift and go to state 26
 
 
 state 4
 
     (4) command -> FD . INT
 
-    INT             shift and go to state 29
+    INT             shift and go to state 27
 
 
 state 5
 
     (5) command -> BACK . INT
 
-    INT             shift and go to state 30
+    INT             shift and go to state 28
 
 
 state 6
 
     (6) command -> BK . INT
 
-    INT             shift and go to state 31
+    INT             shift and go to state 29
 
 
 state 7
 
     (7) command -> LT . INT
 
-    INT             shift and go to state 32
+    INT             shift and go to state 30
 
 
 state 8
 
     (8) command -> LEFT . INT
 
-    INT             shift and go to state 33
+    INT             shift and go to state 31
 
 
 state 9
 
     (9) command -> RT . INT
 
-    INT             shift and go to state 34
+    INT             shift and go to state 32
 
 
 state 10
 
     (10) command -> RIGHT . INT
 
-    INT             shift and go to state 35
+    INT             shift and go to state 33
 
 
 state 11
 
     (11) command -> SETPOS . [ INT INT ]
 
-    [               shift and go to state 36
+    [               shift and go to state 34
 
 
 state 12
 
     (12) command -> SETXY . INT INT
 
-    INT             shift and go to state 37
+    INT             shift and go to state 35
 
 
 state 13
 
     (13) command -> SETX . INT
 
-    INT             shift and go to state 38
+    INT             shift and go to state 36
 
 
 state 14
 
     (14) command -> SETY . INT
 
-    INT             shift and go to state 39
+    INT             shift and go to state 37
 
 
 state 15
@@ -329,8 +320,6 @@ state 15
     IF              reduce using rule 15 (command -> HOME .)
     IFELSE          reduce using rule 15 (command -> HOME .)
     REPEAT          reduce using rule 15 (command -> HOME .)
-    WHILE           reduce using rule 15 (command -> HOME .)
-    TO              reduce using rule 15 (command -> HOME .)
     $end            reduce using rule 15 (command -> HOME .)
     ]               reduce using rule 15 (command -> HOME .)
 
@@ -361,8 +350,6 @@ state 16
     IF              reduce using rule 16 (command -> PD .)
     IFELSE          reduce using rule 16 (command -> PD .)
     REPEAT          reduce using rule 16 (command -> PD .)
-    WHILE           reduce using rule 16 (command -> PD .)
-    TO              reduce using rule 16 (command -> PD .)
     $end            reduce using rule 16 (command -> PD .)
     ]               reduce using rule 16 (command -> PD .)
 
@@ -393,8 +380,6 @@ state 17
     IF              reduce using rule 17 (command -> PENDOWN .)
     IFELSE          reduce using rule 17 (command -> PENDOWN .)
     REPEAT          reduce using rule 17 (command -> PENDOWN .)
-    WHILE           reduce using rule 17 (command -> PENDOWN .)
-    TO              reduce using rule 17 (command -> PENDOWN .)
     $end            reduce using rule 17 (command -> PENDOWN .)
     ]               reduce using rule 17 (command -> PENDOWN .)
 
@@ -425,8 +410,6 @@ state 18
     IF              reduce using rule 18 (command -> PU .)
     IFELSE          reduce using rule 18 (command -> PU .)
     REPEAT          reduce using rule 18 (command -> PU .)
-    WHILE           reduce using rule 18 (command -> PU .)
-    TO              reduce using rule 18 (command -> PU .)
     $end            reduce using rule 18 (command -> PU .)
     ]               reduce using rule 18 (command -> PU .)
 
@@ -457,8 +440,6 @@ state 19
     IF              reduce using rule 19 (command -> PENUP .)
     IFELSE          reduce using rule 19 (command -> PENUP .)
     REPEAT          reduce using rule 19 (command -> PENUP .)
-    WHILE           reduce using rule 19 (command -> PENUP .)
-    TO              reduce using rule 19 (command -> PENUP .)
     $end            reduce using rule 19 (command -> PENUP .)
     ]               reduce using rule 19 (command -> PENUP .)
 
@@ -467,14 +448,14 @@ state 20
 
     (20) command -> SETPENCOLOR . [ INT INT INT ]
 
-    [               shift and go to state 40
+    [               shift and go to state 38
 
 
 state 21
 
     (21) command -> MAKE . VARNAME INT
 
-    VARNAME         shift and go to state 41
+    VARNAME         shift and go to state 39
 
 
 state 22
@@ -503,8 +484,6 @@ state 22
     IF              reduce using rule 22 (command -> IF .)
     IFELSE          reduce using rule 22 (command -> IF .)
     REPEAT          reduce using rule 22 (command -> IF .)
-    WHILE           reduce using rule 22 (command -> IF .)
-    TO              reduce using rule 22 (command -> IF .)
     $end            reduce using rule 22 (command -> IF .)
     ]               reduce using rule 22 (command -> IF .)
 
@@ -535,8 +514,6 @@ state 23
     IF              reduce using rule 23 (command -> IFELSE .)
     IFELSE          reduce using rule 23 (command -> IFELSE .)
     REPEAT          reduce using rule 23 (command -> IFELSE .)
-    WHILE           reduce using rule 23 (command -> IFELSE .)
-    TO              reduce using rule 23 (command -> IFELSE .)
     $end            reduce using rule 23 (command -> IFELSE .)
     ]               reduce using rule 23 (command -> IFELSE .)
 
@@ -546,50 +523,11 @@ state 24
     (24) command -> REPEAT . INT [ program ]
     (25) command -> REPEAT . VARUSE [ program ]
 
-    INT             shift and go to state 42
-    VARUSE          shift and go to state 43
+    INT             shift and go to state 40
+    VARUSE          shift and go to state 41
 
 
 state 25
-
-    (26) command -> WHILE . [ ] [ program ]
-
-    [               shift and go to state 44
-
-
-state 26
-
-    (27) command -> TO .
-
-    FORWARD         reduce using rule 27 (command -> TO .)
-    FD              reduce using rule 27 (command -> TO .)
-    BACK            reduce using rule 27 (command -> TO .)
-    BK              reduce using rule 27 (command -> TO .)
-    LT              reduce using rule 27 (command -> TO .)
-    LEFT            reduce using rule 27 (command -> TO .)
-    RT              reduce using rule 27 (command -> TO .)
-    RIGHT           reduce using rule 27 (command -> TO .)
-    SETPOS          reduce using rule 27 (command -> TO .)
-    SETXY           reduce using rule 27 (command -> TO .)
-    SETX            reduce using rule 27 (command -> TO .)
-    SETY            reduce using rule 27 (command -> TO .)
-    HOME            reduce using rule 27 (command -> TO .)
-    PD              reduce using rule 27 (command -> TO .)
-    PENDOWN         reduce using rule 27 (command -> TO .)
-    PU              reduce using rule 27 (command -> TO .)
-    PENUP           reduce using rule 27 (command -> TO .)
-    SETPENCOLOR     reduce using rule 27 (command -> TO .)
-    MAKE            reduce using rule 27 (command -> TO .)
-    IF              reduce using rule 27 (command -> TO .)
-    IFELSE          reduce using rule 27 (command -> TO .)
-    REPEAT          reduce using rule 27 (command -> TO .)
-    WHILE           reduce using rule 27 (command -> TO .)
-    TO              reduce using rule 27 (command -> TO .)
-    $end            reduce using rule 27 (command -> TO .)
-    ]               reduce using rule 27 (command -> TO .)
-
-
-state 27
 
     (2) program -> program command .
 
@@ -615,13 +553,11 @@ state 27
     IF              reduce using rule 2 (program -> program command .)
     IFELSE          reduce using rule 2 (program -> program command .)
     REPEAT          reduce using rule 2 (program -> program command .)
-    WHILE           reduce using rule 2 (program -> program command .)
-    TO              reduce using rule 2 (program -> program command .)
     $end            reduce using rule 2 (program -> program command .)
     ]               reduce using rule 2 (program -> program command .)
 
 
-state 28
+state 26
 
     (3) command -> FORWARD INT .
 
@@ -647,13 +583,11 @@ state 28
     IF              reduce using rule 3 (command -> FORWARD INT .)
     IFELSE          reduce using rule 3 (command -> FORWARD INT .)
     REPEAT          reduce using rule 3 (command -> FORWARD INT .)
-    WHILE           reduce using rule 3 (command -> FORWARD INT .)
-    TO              reduce using rule 3 (command -> FORWARD INT .)
     $end            reduce using rule 3 (command -> FORWARD INT .)
     ]               reduce using rule 3 (command -> FORWARD INT .)
 
 
-state 29
+state 27
 
     (4) command -> FD INT .
 
@@ -679,13 +613,11 @@ state 29
     IF              reduce using rule 4 (command -> FD INT .)
     IFELSE          reduce using rule 4 (command -> FD INT .)
     REPEAT          reduce using rule 4 (command -> FD INT .)
-    WHILE           reduce using rule 4 (command -> FD INT .)
-    TO              reduce using rule 4 (command -> FD INT .)
     $end            reduce using rule 4 (command -> FD INT .)
     ]               reduce using rule 4 (command -> FD INT .)
 
 
-state 30
+state 28
 
     (5) command -> BACK INT .
 
@@ -711,13 +643,11 @@ state 30
     IF              reduce using rule 5 (command -> BACK INT .)
     IFELSE          reduce using rule 5 (command -> BACK INT .)
     REPEAT          reduce using rule 5 (command -> BACK INT .)
-    WHILE           reduce using rule 5 (command -> BACK INT .)
-    TO              reduce using rule 5 (command -> BACK INT .)
     $end            reduce using rule 5 (command -> BACK INT .)
     ]               reduce using rule 5 (command -> BACK INT .)
 
 
-state 31
+state 29
 
     (6) command -> BK INT .
 
@@ -743,13 +673,11 @@ state 31
     IF              reduce using rule 6 (command -> BK INT .)
     IFELSE          reduce using rule 6 (command -> BK INT .)
     REPEAT          reduce using rule 6 (command -> BK INT .)
-    WHILE           reduce using rule 6 (command -> BK INT .)
-    TO              reduce using rule 6 (command -> BK INT .)
     $end            reduce using rule 6 (command -> BK INT .)
     ]               reduce using rule 6 (command -> BK INT .)
 
 
-state 32
+state 30
 
     (7) command -> LT INT .
 
@@ -775,13 +703,11 @@ state 32
     IF              reduce using rule 7 (command -> LT INT .)
     IFELSE          reduce using rule 7 (command -> LT INT .)
     REPEAT          reduce using rule 7 (command -> LT INT .)
-    WHILE           reduce using rule 7 (command -> LT INT .)
-    TO              reduce using rule 7 (command -> LT INT .)
     $end            reduce using rule 7 (command -> LT INT .)
     ]               reduce using rule 7 (command -> LT INT .)
 
 
-state 33
+state 31
 
     (8) command -> LEFT INT .
 
@@ -807,13 +733,11 @@ state 33
     IF              reduce using rule 8 (command -> LEFT INT .)
     IFELSE          reduce using rule 8 (command -> LEFT INT .)
     REPEAT          reduce using rule 8 (command -> LEFT INT .)
-    WHILE           reduce using rule 8 (command -> LEFT INT .)
-    TO              reduce using rule 8 (command -> LEFT INT .)
     $end            reduce using rule 8 (command -> LEFT INT .)
     ]               reduce using rule 8 (command -> LEFT INT .)
 
 
-state 34
+state 32
 
     (9) command -> RT INT .
 
@@ -839,13 +763,11 @@ state 34
     IF              reduce using rule 9 (command -> RT INT .)
     IFELSE          reduce using rule 9 (command -> RT INT .)
     REPEAT          reduce using rule 9 (command -> RT INT .)
-    WHILE           reduce using rule 9 (command -> RT INT .)
-    TO              reduce using rule 9 (command -> RT INT .)
     $end            reduce using rule 9 (command -> RT INT .)
     ]               reduce using rule 9 (command -> RT INT .)
 
 
-state 35
+state 33
 
     (10) command -> RIGHT INT .
 
@@ -871,27 +793,25 @@ state 35
     IF              reduce using rule 10 (command -> RIGHT INT .)
     IFELSE          reduce using rule 10 (command -> RIGHT INT .)
     REPEAT          reduce using rule 10 (command -> RIGHT INT .)
-    WHILE           reduce using rule 10 (command -> RIGHT INT .)
-    TO              reduce using rule 10 (command -> RIGHT INT .)
     $end            reduce using rule 10 (command -> RIGHT INT .)
     ]               reduce using rule 10 (command -> RIGHT INT .)
 
 
-state 36
+state 34
 
     (11) command -> SETPOS [ . INT INT ]
 
-    INT             shift and go to state 45
+    INT             shift and go to state 42
 
 
-state 37
+state 35
 
     (12) command -> SETXY INT . INT
 
-    INT             shift and go to state 46
+    INT             shift and go to state 43
 
 
-state 38
+state 36
 
     (13) command -> SETX INT .
 
@@ -917,13 +837,11 @@ state 38
     IF              reduce using rule 13 (command -> SETX INT .)
     IFELSE          reduce using rule 13 (command -> SETX INT .)
     REPEAT          reduce using rule 13 (command -> SETX INT .)
-    WHILE           reduce using rule 13 (command -> SETX INT .)
-    TO              reduce using rule 13 (command -> SETX INT .)
     $end            reduce using rule 13 (command -> SETX INT .)
     ]               reduce using rule 13 (command -> SETX INT .)
 
 
-state 39
+state 37
 
     (14) command -> SETY INT .
 
@@ -949,55 +867,46 @@ state 39
     IF              reduce using rule 14 (command -> SETY INT .)
     IFELSE          reduce using rule 14 (command -> SETY INT .)
     REPEAT          reduce using rule 14 (command -> SETY INT .)
-    WHILE           reduce using rule 14 (command -> SETY INT .)
-    TO              reduce using rule 14 (command -> SETY INT .)
     $end            reduce using rule 14 (command -> SETY INT .)
     ]               reduce using rule 14 (command -> SETY INT .)
 
 
-state 40
+state 38
 
     (20) command -> SETPENCOLOR [ . INT INT INT ]
 
-    INT             shift and go to state 47
+    INT             shift and go to state 44
+
+
+state 39
+
+    (21) command -> MAKE VARNAME . INT
+
+    INT             shift and go to state 45
+
+
+state 40
+
+    (24) command -> REPEAT INT . [ program ]
+
+    [               shift and go to state 46
 
 
 state 41
 
-    (21) command -> MAKE VARNAME . INT
+    (25) command -> REPEAT VARUSE . [ program ]
 
-    INT             shift and go to state 48
+    [               shift and go to state 47
 
 
 state 42
 
-    (24) command -> REPEAT INT . [ program ]
+    (11) command -> SETPOS [ INT . INT ]
 
-    [               shift and go to state 49
+    INT             shift and go to state 48
 
 
 state 43
-
-    (25) command -> REPEAT VARUSE . [ program ]
-
-    [               shift and go to state 50
-
-
-state 44
-
-    (26) command -> WHILE [ . ] [ program ]
-
-    ]               shift and go to state 51
-
-
-state 45
-
-    (11) command -> SETPOS [ INT . INT ]
-
-    INT             shift and go to state 52
-
-
-state 46
 
     (12) command -> SETXY INT INT .
 
@@ -1023,20 +932,18 @@ state 46
     IF              reduce using rule 12 (command -> SETXY INT INT .)
     IFELSE          reduce using rule 12 (command -> SETXY INT INT .)
     REPEAT          reduce using rule 12 (command -> SETXY INT INT .)
-    WHILE           reduce using rule 12 (command -> SETXY INT INT .)
-    TO              reduce using rule 12 (command -> SETXY INT INT .)
     $end            reduce using rule 12 (command -> SETXY INT INT .)
     ]               reduce using rule 12 (command -> SETXY INT INT .)
 
 
-state 47
+state 44
 
     (20) command -> SETPENCOLOR [ INT . INT INT ]
 
-    INT             shift and go to state 53
+    INT             shift and go to state 49
 
 
-state 48
+state 45
 
     (21) command -> MAKE VARNAME INT .
 
@@ -1062,13 +969,11 @@ state 48
     IF              reduce using rule 21 (command -> MAKE VARNAME INT .)
     IFELSE          reduce using rule 21 (command -> MAKE VARNAME INT .)
     REPEAT          reduce using rule 21 (command -> MAKE VARNAME INT .)
-    WHILE           reduce using rule 21 (command -> MAKE VARNAME INT .)
-    TO              reduce using rule 21 (command -> MAKE VARNAME INT .)
     $end            reduce using rule 21 (command -> MAKE VARNAME INT .)
     ]               reduce using rule 21 (command -> MAKE VARNAME INT .)
 
 
-state 49
+state 46
 
     (24) command -> REPEAT INT [ . program ]
     (1) program -> . command
@@ -1096,8 +1001,6 @@ state 49
     (23) command -> . IFELSE
     (24) command -> . REPEAT INT [ program ]
     (25) command -> . REPEAT VARUSE [ program ]
-    (26) command -> . WHILE [ ] [ program ]
-    (27) command -> . TO
 
     FORWARD         shift and go to state 3
     FD              shift and go to state 4
@@ -1121,13 +1024,11 @@ state 49
     IF              shift and go to state 22
     IFELSE          shift and go to state 23
     REPEAT          shift and go to state 24
-    WHILE           shift and go to state 25
-    TO              shift and go to state 26
 
-    program                        shift and go to state 54
+    program                        shift and go to state 50
     command                        shift and go to state 2
 
-state 50
+state 47
 
     (25) command -> REPEAT VARUSE [ . program ]
     (1) program -> . command
@@ -1155,8 +1056,6 @@ state 50
     (23) command -> . IFELSE
     (24) command -> . REPEAT INT [ program ]
     (25) command -> . REPEAT VARUSE [ program ]
-    (26) command -> . WHILE [ ] [ program ]
-    (27) command -> . TO
 
     FORWARD         shift and go to state 3
     FD              shift and go to state 4
@@ -1180,34 +1079,25 @@ state 50
     IF              shift and go to state 22
     IFELSE          shift and go to state 23
     REPEAT          shift and go to state 24
-    WHILE           shift and go to state 25
-    TO              shift and go to state 26
 
-    program                        shift and go to state 55
+    program                        shift and go to state 51
     command                        shift and go to state 2
 
-state 51
-
-    (26) command -> WHILE [ ] . [ program ]
-
-    [               shift and go to state 56
-
-
-state 52
+state 48
 
     (11) command -> SETPOS [ INT INT . ]
 
-    ]               shift and go to state 57
+    ]               shift and go to state 52
 
 
-state 53
+state 49
 
     (20) command -> SETPENCOLOR [ INT INT . INT ]
 
-    INT             shift and go to state 58
+    INT             shift and go to state 53
 
 
-state 54
+state 50
 
     (24) command -> REPEAT INT [ program . ]
     (2) program -> program . command
@@ -1234,10 +1124,8 @@ state 54
     (23) command -> . IFELSE
     (24) command -> . REPEAT INT [ program ]
     (25) command -> . REPEAT VARUSE [ program ]
-    (26) command -> . WHILE [ ] [ program ]
-    (27) command -> . TO
 
-    ]               shift and go to state 59
+    ]               shift and go to state 54
     FORWARD         shift and go to state 3
     FD              shift and go to state 4
     BACK            shift and go to state 5
@@ -1260,12 +1148,10 @@ state 54
     IF              shift and go to state 22
     IFELSE          shift and go to state 23
     REPEAT          shift and go to state 24
-    WHILE           shift and go to state 25
-    TO              shift and go to state 26
 
-    command                        shift and go to state 27
+    command                        shift and go to state 25
 
-state 55
+state 51
 
     (25) command -> REPEAT VARUSE [ program . ]
     (2) program -> program . command
@@ -1292,10 +1178,8 @@ state 55
     (23) command -> . IFELSE
     (24) command -> . REPEAT INT [ program ]
     (25) command -> . REPEAT VARUSE [ program ]
-    (26) command -> . WHILE [ ] [ program ]
-    (27) command -> . TO
 
-    ]               shift and go to state 60
+    ]               shift and go to state 55
     FORWARD         shift and go to state 3
     FD              shift and go to state 4
     BACK            shift and go to state 5
@@ -1318,71 +1202,10 @@ state 55
     IF              shift and go to state 22
     IFELSE          shift and go to state 23
     REPEAT          shift and go to state 24
-    WHILE           shift and go to state 25
-    TO              shift and go to state 26
 
-    command                        shift and go to state 27
+    command                        shift and go to state 25
 
-state 56
-
-    (26) command -> WHILE [ ] [ . program ]
-    (1) program -> . command
-    (2) program -> . program command
-    (3) command -> . FORWARD INT
-    (4) command -> . FD INT
-    (5) command -> . BACK INT
-    (6) command -> . BK INT
-    (7) command -> . LT INT
-    (8) command -> . LEFT INT
-    (9) command -> . RT INT
-    (10) command -> . RIGHT INT
-    (11) command -> . SETPOS [ INT INT ]
-    (12) command -> . SETXY INT INT
-    (13) command -> . SETX INT
-    (14) command -> . SETY INT
-    (15) command -> . HOME
-    (16) command -> . PD
-    (17) command -> . PENDOWN
-    (18) command -> . PU
-    (19) command -> . PENUP
-    (20) command -> . SETPENCOLOR [ INT INT INT ]
-    (21) command -> . MAKE VARNAME INT
-    (22) command -> . IF
-    (23) command -> . IFELSE
-    (24) command -> . REPEAT INT [ program ]
-    (25) command -> . REPEAT VARUSE [ program ]
-    (26) command -> . WHILE [ ] [ program ]
-    (27) command -> . TO
-
-    FORWARD         shift and go to state 3
-    FD              shift and go to state 4
-    BACK            shift and go to state 5
-    BK              shift and go to state 6
-    LT              shift and go to state 7
-    LEFT            shift and go to state 8
-    RT              shift and go to state 9
-    RIGHT           shift and go to state 10
-    SETPOS          shift and go to state 11
-    SETXY           shift and go to state 12
-    SETX            shift and go to state 13
-    SETY            shift and go to state 14
-    HOME            shift and go to state 15
-    PD              shift and go to state 16
-    PENDOWN         shift and go to state 17
-    PU              shift and go to state 18
-    PENUP           shift and go to state 19
-    SETPENCOLOR     shift and go to state 20
-    MAKE            shift and go to state 21
-    IF              shift and go to state 22
-    IFELSE          shift and go to state 23
-    REPEAT          shift and go to state 24
-    WHILE           shift and go to state 25
-    TO              shift and go to state 26
-
-    program                        shift and go to state 61
-    command                        shift and go to state 2
-
-state 57
+state 52
 
     (11) command -> SETPOS [ INT INT ] .
 
@@ -1408,20 +1231,18 @@ state 57
     IF              reduce using rule 11 (command -> SETPOS [ INT INT ] .)
     IFELSE          reduce using rule 11 (command -> SETPOS [ INT INT ] .)
     REPEAT          reduce using rule 11 (command -> SETPOS [ INT INT ] .)
-    WHILE           reduce using rule 11 (command -> SETPOS [ INT INT ] .)
-    TO              reduce using rule 11 (command -> SETPOS [ INT INT ] .)
     $end            reduce using rule 11 (command -> SETPOS [ INT INT ] .)
     ]               reduce using rule 11 (command -> SETPOS [ INT INT ] .)
 
 
-state 58
+state 53
 
     (20) command -> SETPENCOLOR [ INT INT INT . ]
 
-    ]               shift and go to state 62
+    ]               shift and go to state 56
 
 
-state 59
+state 54
 
     (24) command -> REPEAT INT [ program ] .
 
@@ -1447,13 +1268,11 @@ state 59
     IF              reduce using rule 24 (command -> REPEAT INT [ program ] .)
     IFELSE          reduce using rule 24 (command -> REPEAT INT [ program ] .)
     REPEAT          reduce using rule 24 (command -> REPEAT INT [ program ] .)
-    WHILE           reduce using rule 24 (command -> REPEAT INT [ program ] .)
-    TO              reduce using rule 24 (command -> REPEAT INT [ program ] .)
     $end            reduce using rule 24 (command -> REPEAT INT [ program ] .)
     ]               reduce using rule 24 (command -> REPEAT INT [ program ] .)
 
 
-state 60
+state 55
 
     (25) command -> REPEAT VARUSE [ program ] .
 
@@ -1479,71 +1298,11 @@ state 60
     IF              reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
     IFELSE          reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
     REPEAT          reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
-    WHILE           reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
-    TO              reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
     $end            reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
     ]               reduce using rule 25 (command -> REPEAT VARUSE [ program ] .)
 
 
-state 61
-
-    (26) command -> WHILE [ ] [ program . ]
-    (2) program -> program . command
-    (3) command -> . FORWARD INT
-    (4) command -> . FD INT
-    (5) command -> . BACK INT
-    (6) command -> . BK INT
-    (7) command -> . LT INT
-    (8) command -> . LEFT INT
-    (9) command -> . RT INT
-    (10) command -> . RIGHT INT
-    (11) command -> . SETPOS [ INT INT ]
-    (12) command -> . SETXY INT INT
-    (13) command -> . SETX INT
-    (14) command -> . SETY INT
-    (15) command -> . HOME
-    (16) command -> . PD
-    (17) command -> . PENDOWN
-    (18) command -> . PU
-    (19) command -> . PENUP
-    (20) command -> . SETPENCOLOR [ INT INT INT ]
-    (21) command -> . MAKE VARNAME INT
-    (22) command -> . IF
-    (23) command -> . IFELSE
-    (24) command -> . REPEAT INT [ program ]
-    (25) command -> . REPEAT VARUSE [ program ]
-    (26) command -> . WHILE [ ] [ program ]
-    (27) command -> . TO
-
-    ]               shift and go to state 63
-    FORWARD         shift and go to state 3
-    FD              shift and go to state 4
-    BACK            shift and go to state 5
-    BK              shift and go to state 6
-    LT              shift and go to state 7
-    LEFT            shift and go to state 8
-    RT              shift and go to state 9
-    RIGHT           shift and go to state 10
-    SETPOS          shift and go to state 11
-    SETXY           shift and go to state 12
-    SETX            shift and go to state 13
-    SETY            shift and go to state 14
-    HOME            shift and go to state 15
-    PD              shift and go to state 16
-    PENDOWN         shift and go to state 17
-    PU              shift and go to state 18
-    PENUP           shift and go to state 19
-    SETPENCOLOR     shift and go to state 20
-    MAKE            shift and go to state 21
-    IF              shift and go to state 22
-    IFELSE          shift and go to state 23
-    REPEAT          shift and go to state 24
-    WHILE           shift and go to state 25
-    TO              shift and go to state 26
-
-    command                        shift and go to state 27
-
-state 62
+state 56
 
     (20) command -> SETPENCOLOR [ INT INT INT ] .
 
@@ -1569,40 +1328,6 @@ state 62
     IF              reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
     IFELSE          reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
     REPEAT          reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
-    WHILE           reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
-    TO              reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
     $end            reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
     ]               reduce using rule 20 (command -> SETPENCOLOR [ INT INT INT ] .)
-
-
-state 63
-
-    (26) command -> WHILE [ ] [ program ] .
-
-    FORWARD         reduce using rule 26 (command -> WHILE [ ] [ program ] .)
-    FD              reduce using rule 26 (command -> WHILE [ ] [ program ] .)
-    BACK            reduce using rule 26 (command -> WHILE [ ] [ program ] .)
-    BK              reduce using rule 26 (command -> WHILE [ ] [ program ] .)
-    LT              reduce using rule 26 (command -> WHILE [ ] [ program ] .)
-    LEFT            reduce using rule 26 (command -> WHILE [ ] [ program ] .)
-    RT              reduce using rule 26 (command -> WHILE [ ] [ program ] .)
-    RIGHT           reduce using rule 26 (command -> WHILE [ ] [ program ] .)
-    SETPOS          reduce using rule 26 (command -> WHILE [ ] [ program ] .)
-    SETXY           reduce using rule 26 (command -> WHILE [ ] [ program ] .)
-    SETX            reduce using rule 26 (command -> WHILE [ ] [ program ] .)
-    SETY            reduce using rule 26 (command -> WHILE [ ] [ program ] .)
-    HOME            reduce using rule 26 (command -> WHILE [ ] [ program ] .)
-    PD              reduce using rule 26 (command -> WHILE [ ] [ program ] .)
-    PENDOWN         reduce using rule 26 (command -> WHILE [ ] [ program ] .)
-    PU              reduce using rule 26 (command -> WHILE [ ] [ program ] .)
-    PENUP           reduce using rule 26 (command -> WHILE [ ] [ program ] .)
-    SETPENCOLOR     reduce using rule 26 (command -> WHILE [ ] [ program ] .)
-    MAKE            reduce using rule 26 (command -> WHILE [ ] [ program ] .)
-    IF              reduce using rule 26 (command -> WHILE [ ] [ program ] .)
-    IFELSE          reduce using rule 26 (command -> WHILE [ ] [ program ] .)
-    REPEAT          reduce using rule 26 (command -> WHILE [ ] [ program ] .)
-    WHILE           reduce using rule 26 (command -> WHILE [ ] [ program ] .)
-    TO              reduce using rule 26 (command -> WHILE [ ] [ program ] .)
-    $end            reduce using rule 26 (command -> WHILE [ ] [ program ] .)
-    ]               reduce using rule 26 (command -> WHILE [ ] [ program ] .)
 

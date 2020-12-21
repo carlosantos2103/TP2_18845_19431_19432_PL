@@ -4,14 +4,14 @@ import ply.lex as lex
 import sys
 
 class Lexer:
-    literals = ""
+    literals = "[]"
     t_ignore = " \n\t"
     tokens = ("INT", "VARNAME", "VARUSE", "FD", "FORWARD", "BK", "BACK", "LT", "LEFT", "RT", "RIGHT", "SETPOS", "SETXY", "SETX",
-              "SETY", "HOME", "PD", "PENDOWN", "PU", "PENUP", "SETPENCOLOR", "MAKE", "IF", "IFELSE", "REPEAT", "WHILE", "TO")
+              "SETY", "HOME", "PD", "PENDOWN", "PU", "PENUP", "SETPENCOLOR", "MAKE", "IF", "IFELSE", "REPEAT", "WHILE")
 
     def t_COMMAND(self, t):
         r"""fd|forward|bk|back|lt|left|rt|right|setpos|setxy|setx|sety|home|pd|pendown|pu|penup|
-        setpencolor|make|if|ifelse|repeat|while|to"""
+        setpencolor|make|if|ifelse|repeat|while"""
         t.type = t.value.upper()
         return t
 
