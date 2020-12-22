@@ -1,11 +1,2 @@
-pu
-setpos [ 1 200 ]
-pd
-fd 25 rt 90 setpencolor [ 255 0 255 ]
-fd 25 lt 90 setpencolor [ 255 255 255 ]
-fd 25 rt 90 setpencolor [ 255 0 0 ]
-fd 25 lt 90 setpencolor [ 255 255 0 ]
-fd 25 rt 90 setpencolor [ 0 255 0 ]
-fd 25 lt 90 setpencolor [ 100 10 100 ]
-fd 25 rt 90 setpencolor [ 0 255 255 ]
-fd 25 lt 90 setpencolor [ 0 0 255 ]
+make "length 70
+repeat 380 [ repeat 4 [ fd :length rt 90 ] rt 1 ]

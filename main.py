@@ -19,9 +19,6 @@ svg.createFile("teste.svg")
 lexer = Lexer()
 lexer.Build(contents)
 
-for t in iter(lexer.lexer.token, None):
-    print(t)
-
 
 parser = Parser()
 parser.Parse(contents)
