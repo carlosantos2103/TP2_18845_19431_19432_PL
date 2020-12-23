@@ -30,7 +30,7 @@ class Parser:
             v1 = self.value(val[0])
             v2 = self.value(val[2])
             return eval("v1+v2")
-        if type(val) == int:
+        if type(val) == float:
             return val
         val = val[1:]
         if val in self.vars:

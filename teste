@@ -1,2 +1,7 @@
-make "length 70
-repeat 380 [ repeat 4 [ fd :length rt 90 ] rt 1 ]
+make "i 10
+make "l 2
+while [ :i > 0 ] [
+fd :l rt 90
+make "i :i - 1
+make "l 1.75*2
+]
