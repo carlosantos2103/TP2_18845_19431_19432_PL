@@ -28,12 +28,16 @@ def do_set_position(command, parser):
     new_pos = parser.pos
     if 'new_pos' in command.args:
         new_pos = parser.verif_pos(command.args['new_pos'])
+        print(f"New x:y {new_pos}")
     elif 'new_x' in command.args:
         new_pos = (parser.value(command.args['new_x']), parser.pos[1])
+        print(f"New x {new_pos}")
     elif 'new_y' in command.args:
-        new_pos = (parser.pos[1], parser.value(command.args['new_y']))
+        new_pos = (parser.pos[0], parser.value(command.args['new_y']))
+        print(f"New y {new_pos}")
     elif len(command.args) == 0:
-        new_pos = (100,100)
+        new_pos = (100, 100)
+        print(f"New {new_pos}")
 
     if parser.draw_status:
         svg.drawLine("teste.svg", parser.pos, new_pos, parser.color)

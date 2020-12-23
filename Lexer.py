@@ -18,7 +18,6 @@ class Lexer:
     def t_INT(self, t):
         r"""[0-9]+([0-9\.])*"""
         t.value = float(t.value)
-        print(t.value)
         return t
 
     def t_VARNAME(self, t):

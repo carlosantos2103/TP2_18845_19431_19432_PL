@@ -1,7 +1,9 @@
-make "i 10
-make "l 2
-while [ :i > 0 ] [
-fd :l rt 90
-make "i :i - 1
-make "l 1.75*2
-]
+make "i 100
+make "l 45
+forward :i
+right :l * 2
+forward :i
+right :l + 45
+forward :i
+right 135 - :l
+forward 100

@@ -5,6 +5,19 @@ import ply.yacc as yacc
 from Lexer import Lexer
 from Command import Command
 
+def math(operator, p1, p2):
+    if operator == "*":
+        return p1 * p2
+    elif operator == "/":
+        if p2 == 0:
+            print("Division by zero...")
+            exit(1)
+        return p1 / p2
+    elif operator == "+":
+        return p1 + p2
+    elif operator == "-":
+        return p1 - p2
+
 class Parser:
 
     tokens = Lexer.tokens
@@ -15,6 +28,8 @@ class Parser:
         self.vars = {}      # Symbol table
         self.color = (0, 0, 0)
         self.pos = (100, 100)
+        # Para se fazer o ex4.logo
+        # tem de se por self.pos = (100, 100)
         self.ang = 90
         self.draw_status = True
 
@@ -24,8 +39,13 @@ class Parser:
     def verif_color(self, color):
         return self.value(color[0]), self.value(color[1]), self.value(color[2])
 
-
     def value(self, val):
+        # args = {'value_1': p[1], 'oper': p[2], 'value_2': p[3]}
+        if type(val) == dict:
+            v1 = self.value(val['value_1'])
+            v2 = self.value(val['value_2'])
+            oper = val['oper']
+            return math(oper, v1, v2)
         if type(val) == tuple:
             v1 = self.value(val[0])
             v2 = self.value(val[2])
@@ -131,7 +151,7 @@ class Parser:
         p[0] = Command("pen_color", args)
 
     def p_command12(self, p):
-        """ command  :  MAKE VARNAME value """
+        """ command  :  MAKE VARNAME value """  # Acrestei este tipo de situcao: :i*2
         args = {'var_name': p[2], 'value': p[3]}
         p[0] = Command("make", args)
 
@@ -178,12 +198,13 @@ class Parser:
        if len(p) == 2:
            p[0] = p[1]
        else:
-           p[0] = (p[1], p[2], p[3])
+           args = {'value_1': p[1], 'oper': p[2], 'value_2': p[3]}
+           p[0] = args
 
     def p_condition(self, p):
         """ condition  :  value
                       |  value LOGIC value """
-        if len(p)==2:
+        if len(p) == 2:
             p[0] = p[1]
         else:
             p[0] = (p[1], p[2], p[3])

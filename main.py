@@ -5,7 +5,7 @@ from Parser import Parser
 from Lexer import Lexer
 import svg
 
-with open("tests/ex4.logo", mode="r") as fh:
+with open("teste", mode="r") as fh:
     contents = fh.read()
 
 
