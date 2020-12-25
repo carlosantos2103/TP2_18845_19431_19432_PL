@@ -1,6 +1,5 @@
 # svg.py
 
-import math
 
 def writeFile(file_name, content):
     with open(file_name, mode="a") as fh:

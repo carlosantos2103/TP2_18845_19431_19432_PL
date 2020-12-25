@@ -1,9 +1,10 @@
-# parser.py
+# Parser.py
 
 import sys
 import ply.yacc as yacc
 from Lexer import Lexer
 from Command import Command
+
 
 def math(operator, p1, p2):
     if operator == "*":
@@ -18,18 +19,34 @@ def math(operator, p1, p2):
     elif operator == "-":
         return p1 - p2
 
-class Parser:
+    if operator == "<":
+        if p1 < p2:
+            return True
+        else:
+            return False
+    elif operator == ">":
+        if p1 > p2:
+            return True
+        else:
+            return False
+    elif operator == "==":
+        if p1 == p2:
+            return True
+        else:
+            return False
 
+class Parser:
     tokens = Lexer.tokens
 
     def __init__(self):
         self.parser = None
         self.lexer = None
-        self.vars = {}      # Symbol table
+        self.vars = {}  # Symbol table
         self.color = (0, 0, 0)
         self.pos = (100, 100)
         # Para se fazer o ex4.logo
         # tem de se por self.pos = (100, 100)
+        self.function = {}
         self.ang = 90
         self.draw_status = True
 
@@ -40,7 +57,6 @@ class Parser:
         return self.value(color[0]), self.value(color[1]), self.value(color[2])
 
     def value(self, val):
-        # args = {'value_1': p[1], 'oper': p[2], 'value_2': p[3]}
         if type(val) == dict:
             v1 = self.value(val['value_1'])
             v2 = self.value(val['value_2'])
@@ -147,11 +163,11 @@ class Parser:
 
     def p_command11(self, p):
         """ command  :  SETPENCOLOR '[' value value value ']' """
-        args={'new_color': (p[3], p[4], p[5])}
+        args = {'new_color': (p[3], p[4], p[5])}
         p[0] = Command("pen_color", args)
 
     def p_command12(self, p):
-        """ command  :  MAKE VARNAME value """  # Acrestei este tipo de situcao: :i*2
+        """ command  :  MAKE VARNAME value """
         args = {'var_name': p[2], 'value': p[3]}
         p[0] = Command("make", args)
 
@@ -163,38 +179,44 @@ class Parser:
         })
 
     def p_command14(self, p):
-         """ command  :  IFELSE condition '[' program ']' '[' program ']' """
-         p[0] = Command("ifelse", {
-             'condition': p[2],
-             'code1': p[4],
-             'code2': p[7],
-         })
+        """ command  :  IFELSE condition '[' program ']' '[' program ']' """
+        p[0] = Command("ifelse", {
+            'condition': p[2],
+            'code1': p[4],
+            'code2': p[7],
+        })
 
     def p_command15(self, p):
         """ command  :  REPEAT value '[' program ']' """
         p[0] = Command("repeat", {
-             'var': p[2],
-             'code': p[4]
+            'var': p[2],
+            'code': p[4]
         })
 
     def p_command16(self, p):
-       """ command  :  WHILE '[' condition ']' '[' program ']'"""  # TODO: Adicionar a expressao (TRUE ou FALSE)
-       p[0] = Command("while", {
-           'condition': p[3],
-           'code': p[6],
-       })
+        """ command  :  WHILE '[' condition ']' '[' program ']'"""
+        p[0] = Command("while", {
+            'condition': p[3],
+            'code': p[6],
+        })
 
-    # def p_command17(self, p):
-    #    """ command  :  TO """  # TODO
+    def p_command17(self, p):
+        """ command  :  TO NAMETO VARUSE program END"""  # TODO
+        args = {'nameto': p[2], 'varuse': p[3], 'code': p[4]}
+        p[0] = Command('to', args)
 
     def p_command18(self, p):
+        """ command  : NAMETO value"""
+        args = {'nameto': p[1], 'value': p[2]}
+        p[0] = Command('nameto', args)
+
+    def p_command19(self, p):
        """ value  :  INT
                   |  VARUSE
                   |  VARUSE OPERATOR INT
                   |  INT OPERATOR VARUSE
                   |  INT OPERATOR INT
                   |  VARUSE OPERATOR VARUSE """
-
        if len(p) == 2:
            p[0] = p[1]
        else:
@@ -207,4 +229,5 @@ class Parser:
         if len(p) == 2:
             p[0] = p[1]
         else:
-            p[0] = (p[1], p[2], p[3])
+            args = {'value_1': p[1], 'oper': p[2], 'value_2': p[3]}
+            p[0] = args

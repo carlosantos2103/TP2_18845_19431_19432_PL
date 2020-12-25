@@ -1,9 +1,10 @@
-make "i 100
-make "l 45
-forward :i
-right :l * 2
-forward :i
-right :l + 45
-forward :i
-right 135 - :l
-forward 100
+to tree :size
+   if :size < 5 [forward :size back :size]
+   forward :size/3
+   left 30
+   forward :size/6
+   forward :size/3
+
+end
+
+tree 100

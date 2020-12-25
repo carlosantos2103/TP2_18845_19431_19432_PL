@@ -6,13 +6,18 @@ import sys
 class Lexer:
     literals = "[]"
     t_ignore = " \n\t"
+
     tokens = ("OPERATOR", "LOGIC", "INT", "VARNAME", "VARUSE", "FD", "FORWARD", "BK", "BACK", "LT", "LEFT", "RT", "RIGHT", "SETPOS", "SETXY", "SETX",
-              "SETY", "HOME", "PD", "PENDOWN", "PU", "PENUP", "SETPENCOLOR", "MAKE", "IF", "IFELSE", "REPEAT", "WHILE")
+              "SETY", "HOME", "PD", "PENDOWN", "PU", "PENUP", "SETPENCOLOR", "MAKE", "IF", "IFELSE", "REPEAT", "WHILE","TO", "END", "NAMETO")
 
     def t_COMMAND(self, t):
         r"""fd|forward|bk|back|lt|left|rt|right|setpos|setxy|setx|sety|home|pd|pendown|pu|penup|
-        setpencolor|make|if(else)?|repeat|while"""
+        setpencolor|make|if(else)?|repeat|while|to|end"""
         t.type = t.value.upper()
+        return t
+
+    def t_NAMETO(self, t):
+        r"""[ ]*[a-zA-Z ]+"""
         return t
 
     def t_INT(self, t):
@@ -35,7 +40,6 @@ class Lexer:
     def t_OPERATOR(self, t):
         r"""\+|\-|\/|\*"""
         return t
-
 
     def t_error(self, t):
         print(f"Erro. Caractere inesperado: {t.value[0]}", file=sys.stderr)

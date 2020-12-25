@@ -58,26 +58,36 @@ def do_make(command, parser):
 def do_if(command, parser):
     condition = command.args['condition']
     code = command.args['code']
+    result = parser.value(condition)
 
+# Estava assim caso queiram fazer alterações:
     # print(eval(f"{parser.value(condition[0])} {condition[1]} {parser.value(condition[2])}"))
-    if type(condition) == tuple:
-        result = eval(f"{parser.value(condition[0])} {condition[1]} {parser.value(condition[2])}") # TODO: ISTO É CORRETO?
-    else:
-        result = eval(f"{parser.value(condition)}")
+    #if type(condition) == tuple:
+    #   result = eval(f"{parser.value(condition[0])} {condition[1]} {parser.value(condition[2])}") # TODO: ISTO É CORRETO?
+    #else:
+    #   result = eval(f"{parser.value(condition)}")
+#
 
     if result:
-        print(result)
         Command.exec(code, parser)
 
 def do_ifelse(command, parser):
+    #""" command  :  IFELSE condition '[' program ']' '[' program ']' """
+    #     p[0] = Command("ifelse", {
+    #         'condition': p[2],
+    #         'code1': p[4],
+    #        'code2': p[7],
+    #     })
     condition = command.args['condition']
+    result = parser.value(condition)
     code1 = command.args['code1']
     code2 = command.args['code2']
 
-    if type(condition) == tuple:
-        result = eval(f"{parser.value(condition[0])} {condition[1]} {parser.value(condition[2])}")
-    else:
-        result = eval(f"{parser.value(condition)}")
+# Estava assim caso queiram fazer alterações:
+    #if type(condition) == tuple:
+    #    result = eval(f"{parser.value(condition[0])} {condition[1]} {parser.value(condition[2])}")
+    #else:
+    #    result = eval(f"{parser.value(condition)}")
 
     if result:
         Command.exec(code1, parser)
@@ -96,6 +106,11 @@ def do_repeat(command, parser):
 
 
 def do_while(command, parser):
+    # """ command  :  WHILE '[' condition ']' '[' program ']'"""  # TODO: Adicionar a expressao (TRUE ou FALSE)
+    #        p[0] = Command("while", {
+    #            'condition': p[3],
+    #            'code': p[6],
+    #        })
     condition = command.args['condition']
     code = command.args['code']
 
@@ -113,7 +128,16 @@ def do_while(command, parser):
         else:
             result = eval(f"{parser.value(condition)}")
 
+def do_to(command, parser):
+    parser.function[command.args['nameto']] = command.args['code']
+    parser.vars[command.args['nameto']] = command.args['varuse'][1:]
 
+def do_nameto(command, parser):
+    program = parser.function[command.args['nameto']]
+    var = parser.vars[command.args['nameto']]
+    parser.vars[var] = command.args['value']
+    parser.vars.pop(command.args['nameto'])
+    command.exec(program, parser)
 
 class Command:
     dispatch_table = {
@@ -129,6 +153,8 @@ class Command:
         "ifelse": do_ifelse,
         "repeat": do_repeat,
         "while": do_while,
+        "to": do_to,
+        "nameto": do_nameto,
     }
 
     def __init__(self, name, args):
@@ -144,5 +170,5 @@ class Command:
     @classmethod
     def exec(cls, program, parser):
         for cmd in program:
-            # print(cmd)
+            #print(cmd)
             cmd.run(parser)
