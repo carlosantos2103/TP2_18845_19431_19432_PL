@@ -1,9 +1,10 @@
-# parser.py
+# Parser.py
 
 import sys
 import ply.yacc as yacc
 from Lexer import Lexer
 from Command import Command
+
 
 def math(operator, p1, p2):
     if operator == "*":
@@ -18,14 +19,14 @@ def math(operator, p1, p2):
     elif operator == "-":
         return p1 - p2
 
-class Parser:
 
+class Parser:
     tokens = Lexer.tokens
 
     def __init__(self):
         self.parser = None
         self.lexer = None
-        self.vars = {}      # Symbol table
+        self.vars = {}  # Symbol table
         self.color = (0, 0, 0)
         self.pos = (100, 100)
         # Para se fazer o ex4.logo
@@ -147,7 +148,7 @@ class Parser:
 
     def p_command11(self, p):
         """ command  :  SETPENCOLOR '[' value value value ']' """
-        args={'new_color': (p[3], p[4], p[5])}
+        args = {'new_color': (p[3], p[4], p[5])}
         p[0] = Command("pen_color", args)
 
     def p_command12(self, p):
@@ -163,43 +164,42 @@ class Parser:
         })
 
     def p_command14(self, p):
-         """ command  :  IFELSE condition '[' program ']' '[' program ']' """
-         p[0] = Command("ifelse", {
-             'condition': p[2],
-             'code1': p[4],
-             'code2': p[7],
-         })
+        """ command  :  IFELSE condition '[' program ']' '[' program ']' """
+        p[0] = Command("ifelse", {
+            'condition': p[2],
+            'code1': p[4],
+            'code2': p[7],
+        })
 
     def p_command15(self, p):
         """ command  :  REPEAT value '[' program ']' """
         p[0] = Command("repeat", {
-             'var': p[2],
-             'code': p[4]
+            'var': p[2],
+            'code': p[4]
         })
 
     def p_command16(self, p):
-       """ command  :  WHILE '[' condition ']' '[' program ']'"""  # TODO: Adicionar a expressao (TRUE ou FALSE)
-       p[0] = Command("while", {
-           'condition': p[3],
-           'code': p[6],
-       })
+        """ command  :  WHILE '[' condition ']' '[' program ']'"""
+        p[0] = Command("while", {
+            'condition': p[3],
+            'code': p[6],
+        })
 
     # def p_command17(self, p):
     #    """ command  :  TO """  # TODO
 
     def p_command18(self, p):
-       """ value  :  INT
+        """ value  :  NUM
                   |  VARUSE
-                  |  VARUSE OPERATOR INT
-                  |  INT OPERATOR VARUSE
-                  |  INT OPERATOR INT
+                  |  VARUSE OPERATOR NUM
+                  |  NUM OPERATOR VARUSE
+                  |  NUM OPERATOR NUM
                   |  VARUSE OPERATOR VARUSE """
-
-       if len(p) == 2:
-           p[0] = p[1]
-       else:
-           args = {'value_1': p[1], 'oper': p[2], 'value_2': p[3]}
-           p[0] = args
+        if len(p) == 2:
+            p[0] = p[1]
+        else:
+            args = {'value_1': p[1], 'oper': p[2], 'value_2': p[3]}
+            p[0] = args
 
     def p_condition(self, p):
         """ condition  :  value

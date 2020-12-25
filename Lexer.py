@@ -6,7 +6,7 @@ import sys
 class Lexer:
     literals = "[]"
     t_ignore = " \n\t"
-    tokens = ("OPERATOR", "LOGIC", "INT", "VARNAME", "VARUSE", "FD", "FORWARD", "BK", "BACK", "LT", "LEFT", "RT", "RIGHT", "SETPOS", "SETXY", "SETX",
+    tokens = ("OPERATOR", "LOGIC", "NUM", "VARNAME", "VARUSE", "FD", "FORWARD", "BK", "BACK", "LT", "LEFT", "RT", "RIGHT", "SETPOS", "SETXY", "SETX",
               "SETY", "HOME", "PD", "PENDOWN", "PU", "PENUP", "SETPENCOLOR", "MAKE", "IF", "IFELSE", "REPEAT", "WHILE")
 
     def t_COMMAND(self, t):
@@ -15,8 +15,8 @@ class Lexer:
         t.type = t.value.upper()
         return t
 
-    def t_INT(self, t):
-        r"""[0-9]+([0-9\.])*"""
+    def t_NUM(self, t):
+        r"""[0-9]+(\.)?[0-9]*"""
         t.value = float(t.value)
         return t
 
