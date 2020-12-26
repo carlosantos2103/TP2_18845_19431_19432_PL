@@ -7,6 +7,15 @@ def writeFile(file_name, content):
     fh.close()
     pass
 
+def readFile(file):
+    fh = open(file, mode="r")
+    content = fh.read()
+    fh.close()
+    return content
+
+def clearFile(file):
+    open(file, 'w+').close()
+
 def createFile(file_name):
     writeFile(file_name, '<svg viewBox="0 0 200.00 200.00" xmlns="http://www.w3.org/2000/svg">\n')
 

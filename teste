@@ -1,7 +1,8 @@
-make "x 0
+make "x 20
 
-to tree :size
-    fd :size
+to tree :tree
+    fd :tree
+    rt 90
 end
 
-tree 1
+while :x < 20 [ tree :x make "x :x + 1 ]

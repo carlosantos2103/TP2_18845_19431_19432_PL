@@ -5,7 +5,6 @@ import ply.yacc as yacc
 from Lexer import Lexer
 from Command import Command
 
-
 def math(operator, p1, p2):
     if operator == "*":
         return p1 * p2
@@ -55,6 +54,7 @@ def math(operator, p1, p2):
 
 
 class Parser:
+
     tokens = Lexer.tokens
 
     def __init__(self):
@@ -174,7 +174,7 @@ class Parser:
 
     def p_command11(self, p):
         """ command  :  SETPENCOLOR '[' value value value ']' """
-        args = {'new_color': (p[3], p[4], p[5])}
+        args={'new_color': (p[3], p[4], p[5])}
         p[0] = Command("pen_color", args)
 
     def p_command12(self, p):
@@ -205,19 +205,25 @@ class Parser:
         })
 
     def p_command16(self, p):
-        """ command  :  WHILE '[' condition ']' '[' program ']'"""
-        p[0] = Command("while", {
-            'condition': p[3],
-            'code': p[6],
-        })
+        """ command  :  WHILE '[' condition ']' '[' program ']'
+                     | WHILE condition '[' program ']' """
+
+        if len(p) == 8:
+            args = {'condition': p[3], 'code': p[6]}
+        else:
+            args = {'condition': p[2], 'code': p[4]}
+
+        p[0] = Command("while", args)
 
     def p_command17(self, p):
-        """ command  :  TO NAMETO VARUSE program END"""  # TODO
+        """ command  :  TO NAMETO VARUSE program END"""
+        
         args = {'nameto': p[2], 'varuse': p[3], 'code': p[4]}
         p[0] = Command('to', args)
 
     def p_command18(self, p):
         """ command  : NAMETO value"""
+
         args = {'nameto': p[1], 'value': p[2]}
         p[0] = Command('nameto', args)
 
@@ -228,6 +234,7 @@ class Parser:
                   |  NUM OPERATOR VARUSE
                   |  NUM OPERATOR NUM
                   |  VARUSE OPERATOR VARUSE """
+
         if len(p) == 2:
             p[0] = p[1]
         else:
@@ -236,6 +243,7 @@ class Parser:
     def p_condition(self, p):
         """ condition  :  value
                       |  value LOGIC value """
+
         if len(p) == 2:
             p[0] = p[1]
         else:
