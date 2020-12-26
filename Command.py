@@ -7,7 +7,7 @@ def do_forward(command, parser):
     dist = parser.value(command.args['distance'])
     new_pos = (parser.pos[0]+dist*math.cos(math.radians(parser.ang)), parser.pos[1]-dist*math.sin(math.radians(parser.ang)))
     if parser.draw_status:
-        svg.drawLine("teste.svg", parser.pos, new_pos, parser.color)
+        svg.drawLine("result.svg", parser.pos, new_pos, parser.color)
     parser.pos = new_pos
     return 0
 
@@ -15,7 +15,7 @@ def do_back(command, parser):
     dist = parser.value(command.args['distance'])
     new_pos = (parser.pos[0]-dist*math.cos(math.radians(parser.ang)), parser.pos[1]+dist*math.sin(math.radians(parser.ang)))
     if parser.draw_status:
-        svg.drawLine("teste.svg", parser.pos, new_pos, parser.color)
+        svg.drawLine("result.svg", parser.pos, new_pos, parser.color)
     parser.pos = new_pos
 
 def do_left(command, parser):
@@ -28,19 +28,15 @@ def do_set_position(command, parser):
     new_pos = parser.pos
     if 'new_pos' in command.args:
         new_pos = parser.verif_pos(command.args['new_pos'])
-        print(f"New x:y {new_pos}")
     elif 'new_x' in command.args:
         new_pos = (parser.value(command.args['new_x']), parser.pos[1])
-        print(f"New x {new_pos}")
     elif 'new_y' in command.args:
         new_pos = (parser.pos[0], parser.value(command.args['new_y']))
-        print(f"New y {new_pos}")
     elif len(command.args) == 0:
         new_pos = (100, 100)
-        print(f"New {new_pos}")
 
     if parser.draw_status:
-        svg.drawLine("teste.svg", parser.pos, new_pos, parser.color)
+        svg.drawLine("result.svg", parser.pos, new_pos, parser.color)
 
     parser.pos = new_pos
 
@@ -95,24 +91,29 @@ def do_while(command, parser):
         result = parser.value(condition)
 
 def do_to(command, parser):
-    if command.args['varuse'] == -1:
-        parser.function[command.args['nameto']] = command.args['code']
-    else:
-        parser.function[command.args['nameto']] = command.args['code']
-        parser.vars_function[command.args['nameto']] = command.args['varuse'][1:]
+    function_name = command.args['nameto']
+    parser.function[function_name] = command.args['code']
+    parser.vars_function[function_name] = []
+    for v in command.args['vars']:
+        parser.vars_function[function_name].append("fun" + v[1:])
 
 def do_nameto(command, parser):
-    if command.args['value'] == -1:
-        program = parser.function[command.args['nameto']]
-        command.exec(program, parser)
-    else:
-        program = parser.function[command.args['nameto']]
-        # Saber qual o argumento da funcao  tree -> :size
-        var = parser.vars_function[command.args['nameto']]
-        # Assegura que aquele argumento fica com o determinado valor :size -> 0,1...
-        parser.vars[var] = parser.value(command.args['value'])
-        command.exec(program, parser)
+    function_name = command.args['nameto']
+    program = parser.function[function_name]
+    i=0
+    for v in command.args['values']:
+        var = parser.vars_function[function_name][i]
+        parser.vars[var] = parser.value(v)
+        i += 1
+    command.exec(program, parser)
 
+    i=0
+    for v in command.args['values']:
+        var = parser.vars_function[function_name][i]
+        if var in parser.vars:
+            parser.vars.pop(var)
+        i += 1
+                
 class Command:
     dispatch_table = {
         "forward": do_forward,

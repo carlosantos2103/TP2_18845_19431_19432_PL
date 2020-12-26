@@ -11,13 +11,13 @@ class Lexer:
               "SETY", "HOME", "PD", "PENDOWN", "PU", "PENUP", "SETPENCOLOR", "MAKE", "IF", "IFELSE", "REPEAT", "WHILE","TO", "END", "NAMETO")
 
     def t_COMMAND(self, t):
-        r"""fd|forward|bk|back|lt|left|rt|right|setpos|setxy|setx|sety|home|pd|pendown|pu|penup|
+        r"""fd|forward|bk|back|lt|left|rt|right|setpos|setx(y)?|sety|home|pd|pendown|pu|penup|
         setpencolor|make|if(else)?|repeat|while|to|end"""
-        t.type = t.value.upper()
+        t.type = t.value.upper() #TODO: forçar espaço?
         return t
 
     def t_NAMETO(self, t):
-        r"""[ ]*[a-zA-Z ]+"""
+        r"""[a-zA-Z][A-Za-z0-9]*"""
         return t
 
     def t_NUM(self, t):
@@ -34,7 +34,7 @@ class Lexer:
         return t
 
     def t_LOGIC(self, t):
-        r"""<|>|==|>=|<=|!="""  # >= ? TODO: ADICIONAR TRUE AND FALSE ?
+        r"""<|>|==|>=|<=|!="""
         return t
 
     def t_OPERATOR(self, t):
@@ -42,7 +42,7 @@ class Lexer:
         return t
 
     def t_error(self, t):
-        print(f"Erro. Caractere inesperado: {t.value[0]}", file=sys.stderr)
+        print(f"Caractere inesperado: {t.value[0]}", file=sys.stderr)
         exit(1)
 
     def __init__(self):

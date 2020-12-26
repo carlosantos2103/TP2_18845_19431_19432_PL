@@ -4,26 +4,22 @@
 from Parser import Parser
 from Lexer import Lexer
 import svg
+import sys
+import os
 
-with open("teste", mode="r") as fh:
-    contents = fh.read()
+contents = svg.readFile("teste")
 
+svg.clearFile("result.svg")
 
-def clearFile(file_name):
-    open(file_name, 'w+').close()
-
-clearFile("teste.svg")
-
-svg.createFile("teste.svg")
+svg.createFile("result.svg")
 
 lexer = Lexer()
 lexer.Build(contents)
 
-
 parser = Parser()
 parser.Parse(contents)
 
-svg.endFile("teste.svg")
+svg.endFile("result.svg")
 
 '''
 file_name = ""

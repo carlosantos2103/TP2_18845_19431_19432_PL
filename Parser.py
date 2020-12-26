@@ -11,7 +11,7 @@ def math(operator, p1, p2):
         return p1 * p2
     elif operator == "/":
         if p2 == 0:
-            print("Division by zero...")
+            print("Division by zero", file=sys.stderr)
             exit(1)
         return p1 / p2
     elif operator == "+":
@@ -59,15 +59,11 @@ class Parser:
     def __init__(self):
         self.parser = None
         self.lexer = None
-        self.vars = {}  # Symbol table
-        self.color = (0, 0, 0)
-        self.pos = (100, 100)
-        # Para se fazer o ex4.logo
-        # tem de se por self.pos = (100, 100)
-        # Referente as funcoes (TO)
+        self.vars = {}
         self.function = {}
         self.vars_function = {}
-        #self.draw_function = False
+        self.color = (0, 0, 0)
+        self.pos = (100, 100)
         self.ang = 90
         self.draw_status = True
 
@@ -78,23 +74,19 @@ class Parser:
         return self.value(color[0]), self.value(color[1]), self.value(color[2])
 
     def value(self, val):
-        if type(val) == dict:
-            v1 = self.value(val['value_1'])
-            v2 = self.value(val['value_2'])
-            oper = val['oper']
-            return math(oper, v1, v2)
-        ''' if type(val) == tuple:
+        if type(val) == tuple:
             v1 = self.value(val[0])
             v2 = self.value(val[2])
-            return math(val[1], v1, v2)'''
+            return math(val[1], v1, v2)
         if type(val) == float:
             return val
         val = val[1:]
+        if "fun" + val in self.vars:
+            return self.vars["fun" + val]
         if val in self.vars:
             return self.vars[val]
-        print(f"Undefined variable: {val}")
-        self.vars[val] = 0
-        return 0
+        print(f"Undefined variable: {val}", file = sys.stderr)
+        exit(1)
 
     def Parse(self, content, **kwargs):
         self.lexer = Lexer()
@@ -194,25 +186,18 @@ class Parser:
 
     def p_command13(self, p):
         """ command  :  IF condition '[' program ']'"""
-        p[0] = Command("if", {
-            'condition': p[2],
-            'code': p[4]
-        })
+        args = {'condition': p[2], 'code': p[4]}
+        p[0] = Command("if", args)
 
     def p_command14(self, p):
         """ command  :  IFELSE condition '[' program ']' '[' program ']' """
-        p[0] = Command("ifelse", {
-            'condition': p[2],
-            'code1': p[4],
-            'code2': p[7],
-        })
+        args = {'condition': p[2], 'code1': p[4], 'code2': p[7],}
+        p[0] = Command("ifelse", args)
 
     def p_command15(self, p):
         """ command  :  REPEAT value '[' program ']' """
-        p[0] = Command("repeat", {
-            'var': p[2],
-            'code': p[4]
-        })
+        args = {'var': p[2], 'code': p[4]}
+        p[0] = Command("repeat", args)
 
     def p_command16(self, p):
         """ command  :  WHILE '[' condition ']' '[' program ']'
@@ -221,72 +206,63 @@ class Parser:
             args = {'condition': p[3], 'code': p[6]}
         else:
             args = {'condition': p[2], 'code': p[4]}
-
         p[0] = Command("while", args)
 
     def p_command17(self, p):
         """ command  :  TO NAMETO program END
-                     |  TO NAMETO VARUSE program END"""  # TODO
+                     |  TO NAMETO vars program END"""
         if len(p) == 6:
-            args = {'nameto': p[2], 'varuse': p[3], 'code': p[4]}
-            p[0] = Command('to', args)
+            args = {'nameto': p[2], 'vars': p[3], 'code': p[4]}
         else:
-            args = {'nameto': p[2], 'varuse': -1, 'code': p[3]}
-            p[0] = Command('to', args)
+            args = {'nameto': p[2], 'code': p[3]}
+        p[0] = Command('to', args)
 
     def p_command18(self, p):
         """ command  : NAMETO
-                     | NAMETO value"""
+                     | NAMETO values"""
         if len(p) == 3:
-            args = {'nameto': p[1], 'value': p[2]}
-            p[0] = Command('nameto', args)
+            args = {'nameto': p[1], 'values': p[2]}
         else:
-            args = {'nameto': p[1], 'value': -1}
-            p[0] = Command('nameto', args)
+            args = {'nameto': p[1]}
+        p[0] = Command('nameto', args)
 
-    def p_command20(self, p):
-       """ value  :  NUM
-                  |  VARUSE
-                  |  VARUSE OPERATOR NUM
-                  |  NUM OPERATOR VARUSE
-                  |  NUM OPERATOR NUM
-                  |  VARUSE OPERATOR VARUSE """
-       if len(p) == 2:
-           p[0] = p[1]
-       else:
-           args = {'value_1': p[1], 'oper': p[2], 'value_2': p[3]}
-           p[0] = args
-
-    def p_condition(self, p):
-        """ condition  :  value
-                      |  value LOGIC value """
-        if len(p) == 2:
-            p[0] = p[1]
-        else:
-            args = {'value_1': p[1], 'oper': p[2], 'value_2': p[3]}
-            p[0] = args
-
-'''
-    def p_command19(self, p):
+    def p_value(self, p):
         """ value  :  NUM
-                  |  VARUSE
-                  |  VARUSE OPERATOR NUM
-                  |  NUM OPERATOR VARUSE
-                  |  NUM OPERATOR NUM
-                  |  VARUSE OPERATOR VARUSE """
+                   |  VARUSE
+                   |  VARUSE OPERATOR NUM
+                   |  NUM OPERATOR VARUSE
+                   |  NUM OPERATOR NUM
+                   |  VARUSE OPERATOR VARUSE """
 
         if len(p) == 2:
             p[0] = p[1]
         else:
             p[0] = (p[1], p[2], p[3])
+
+    def p_values0(self, p):
+        """ values  :  value  """
+        p[0] = [p[1]]
+
+    def p_values1(self, p):
+        """ values  :  values value  """
+        lst = p[1]
+        lst.append(p[2])
+        p[0] = lst
 
     def p_condition(self, p):
         """ condition  :  value
-                      |  value LOGIC value """
-
+                       |  value LOGIC value """
         if len(p) == 2:
             p[0] = p[1]
         else:
             p[0] = (p[1], p[2], p[3])
 
-'''
+    def p_vars0(self, p):
+        """ vars  :  VARUSE  """
+        p[0] = [p[1]]
+
+    def p_vars1(self, p):
+        """ vars  :  vars VARUSE  """
+        lst = p[1]
+        lst.append(p[2])
+        p[0] = lst

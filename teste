@@ -1,5 +1,27 @@
-to square
-  repeat 4 [ fd 100 rt 90 ]
+to teste :var1 :var2
+  right :var1
+  forward :var1
+  lt :var1
+  back :var1
+  setpos [0 0]
+  pu
+  setpencolor [100 0 :var2*2]
+  setxy :var2 :var2
+  pd
+  sety :var2
+  setx 50
+  pu home pd
 end
 
-square
+to taupeira:var1:var2
+  make "i 50
+  make "j :var2
+  teste :var1 :j
+  ifelse :i < 20 [fd :j] [teste 90 80]
+  if :i == 20 [rt :var2 fd :i]
+  repeat 4 [fd :i rt 90]
+end
+
+make "x 10
+
+while :x < 15 [taupeira :x+20 80 make "x :x+1]
