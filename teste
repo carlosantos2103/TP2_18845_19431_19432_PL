@@ -1,8 +1,5 @@
-make "x 20
-
-to tree :tree
-    fd :tree
-    rt 90
+to square
+  repeat 4 [ fd 100 rt 90 ]
 end
 
-while :x < 20 [ tree :x make "x :x + 1 ]
+square

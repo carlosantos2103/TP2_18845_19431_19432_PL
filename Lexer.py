@@ -3,15 +3,12 @@
 import ply.lex as lex
 import sys
 
-
 class Lexer:
     literals = "[]"
     t_ignore = " \n\t"
 
-    tokens = (
-        "OPERATOR", "LOGIC", "NUM", "VARNAME", "VARUSE", "FD", "FORWARD", "BK", "BACK", "LT", "LEFT", "RT", "RIGHT",
-        "SETPOS", "SETXY", "SETX", "SETY", "HOME", "PD", "PENDOWN", "PU", "PENUP", "SETPENCOLOR", "MAKE", "IF",
-        "IFELSE", "REPEAT", "WHILE", "TO", "END", "NAMETO")
+    tokens = ("OPERATOR", "LOGIC", "NUM", "VARNAME", "VARUSE", "FD", "FORWARD", "BK", "BACK", "LT", "LEFT", "RT", "RIGHT", "SETPOS", "SETXY", "SETX",
+              "SETY", "HOME", "PD", "PENDOWN", "PU", "PENUP", "SETPENCOLOR", "MAKE", "IF", "IFELSE", "REPEAT", "WHILE","TO", "END", "NAMETO")
 
     def t_COMMAND(self, t):
         r"""fd|forward|bk|back|lt|left|rt|right|setpos|setxy|setx|sety|home|pd|pendown|pu|penup|
@@ -24,7 +21,7 @@ class Lexer:
         return t
 
     def t_NUM(self, t):
-        r"""[0-9]+(\.[0-9]+)?""" # r"""[+-]?[0-9]+(\.[0-9]+)?"""
+        r"""[0-9]+(\.[0-9]+)?"""  # r"""[+-]?[0-9]+(\.[0-9]+)?"""
         t.value = float(t.value)
         return t
 
@@ -37,7 +34,7 @@ class Lexer:
         return t
 
     def t_LOGIC(self, t):
-        r"""<|>|==|>=|<=|!="""
+        r"""<|>|==|>=|<=|!="""  # >= ? TODO: ADICIONAR TRUE AND FALSE ?
         return t
 
     def t_OPERATOR(self, t):

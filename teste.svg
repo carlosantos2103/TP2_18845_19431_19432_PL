@@ -1,3 +1,6 @@
 <svg viewBox="0 0 200.00 200.00" xmlns="http://www.w3.org/2000/svg">
-<line x1="100" y1="100"                     x2="100.0" y2="99.0"                     style="stroke: rgb(0, 0, 0); stroke-width: 1px"/>
+<line x1="100" y1="100"                     x2="100.0" y2="0.0"                     style="stroke: rgb(0, 0, 0); stroke-width: 1px"/>
+<line x1="100.0" y1="0.0"                     x2="200.0" y2="0.0"                     style="stroke: rgb(0, 0, 0); stroke-width: 1px"/>
+<line x1="200.0" y1="0.0"                     x2="200.0" y2="100.0"                     style="stroke: rgb(0, 0, 0); stroke-width: 1px"/>
+<line x1="200.0" y1="100.0"                     x2="100.0" y2="100.00000000000001"                     style="stroke: rgb(0, 0, 0); stroke-width: 1px"/>
 </svg>

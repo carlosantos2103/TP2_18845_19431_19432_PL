@@ -5,12 +5,13 @@ import ply.yacc as yacc
 from Lexer import Lexer
 from Command import Command
 
+
 def math(operator, p1, p2):
     if operator == "*":
         return p1 * p2
     elif operator == "/":
         if p2 == 0:
-            print("Division by zero", file=sys.stderr)
+            print("Division by zero...")
             exit(1)
         return p1 / p2
     elif operator == "+":
@@ -52,18 +53,21 @@ def math(operator, p1, p2):
     print("Operator not found", file=sys.stderr)
     exit(1)
 
-
 class Parser:
-
     tokens = Lexer.tokens
 
     def __init__(self):
         self.parser = None
         self.lexer = None
-        self.vars = {}
-        self.function = {}
+        self.vars = {}  # Symbol table
         self.color = (0, 0, 0)
         self.pos = (100, 100)
+        # Para se fazer o ex4.logo
+        # tem de se por self.pos = (100, 100)
+        # Referente as funcoes (TO)
+        self.function = {}
+        self.vars_function = {}
+        #self.draw_function = False
         self.ang = 90
         self.draw_status = True
 
@@ -74,17 +78,23 @@ class Parser:
         return self.value(color[0]), self.value(color[1]), self.value(color[2])
 
     def value(self, val):
-        if type(val) == tuple:
+        if type(val) == dict:
+            v1 = self.value(val['value_1'])
+            v2 = self.value(val['value_2'])
+            oper = val['oper']
+            return math(oper, v1, v2)
+        ''' if type(val) == tuple:
             v1 = self.value(val[0])
             v2 = self.value(val[2])
-            return math(val[1], v1, v2)
+            return math(val[1], v1, v2)'''
         if type(val) == float:
             return val
         val = val[1:]
         if val in self.vars:
             return self.vars[val]
-        print(f"Undefined variable: {val}", file = sys.stderr)
-        exit(1)
+        print(f"Undefined variable: {val}")
+        self.vars[val] = 0
+        return 0
 
     def Parse(self, content, **kwargs):
         self.lexer = Lexer()
@@ -174,7 +184,7 @@ class Parser:
 
     def p_command11(self, p):
         """ command  :  SETPENCOLOR '[' value value value ']' """
-        args={'new_color': (p[3], p[4], p[5])}
+        args = {'new_color': (p[3], p[4], p[5])}
         p[0] = Command("pen_color", args)
 
     def p_command12(self, p):
@@ -207,7 +217,6 @@ class Parser:
     def p_command16(self, p):
         """ command  :  WHILE '[' condition ']' '[' program ']'
                      | WHILE condition '[' program ']' """
-
         if len(p) == 8:
             args = {'condition': p[3], 'code': p[6]}
         else:
@@ -216,17 +225,48 @@ class Parser:
         p[0] = Command("while", args)
 
     def p_command17(self, p):
-        """ command  :  TO NAMETO VARUSE program END"""
-        
-        args = {'nameto': p[2], 'varuse': p[3], 'code': p[4]}
-        p[0] = Command('to', args)
+        """ command  :  TO NAMETO program END
+                     |  TO NAMETO VARUSE program END"""  # TODO
+        if len(p) == 6:
+            args = {'nameto': p[2], 'varuse': p[3], 'code': p[4]}
+            p[0] = Command('to', args)
+        else:
+            args = {'nameto': p[2], 'varuse': -1, 'code': p[3]}
+            p[0] = Command('to', args)
 
     def p_command18(self, p):
-        """ command  : NAMETO value"""
+        """ command  : NAMETO
+                     | NAMETO value"""
+        if len(p) == 3:
+            args = {'nameto': p[1], 'value': p[2]}
+            p[0] = Command('nameto', args)
+        else:
+            args = {'nameto': p[1], 'value': -1}
+            p[0] = Command('nameto', args)
 
-        args = {'nameto': p[1], 'value': p[2]}
-        p[0] = Command('nameto', args)
+    def p_command20(self, p):
+       """ value  :  NUM
+                  |  VARUSE
+                  |  VARUSE OPERATOR NUM
+                  |  NUM OPERATOR VARUSE
+                  |  NUM OPERATOR NUM
+                  |  VARUSE OPERATOR VARUSE """
+       if len(p) == 2:
+           p[0] = p[1]
+       else:
+           args = {'value_1': p[1], 'oper': p[2], 'value_2': p[3]}
+           p[0] = args
 
+    def p_condition(self, p):
+        """ condition  :  value
+                      |  value LOGIC value """
+        if len(p) == 2:
+            p[0] = p[1]
+        else:
+            args = {'value_1': p[1], 'oper': p[2], 'value_2': p[3]}
+            p[0] = args
+
+'''
     def p_command19(self, p):
         """ value  :  NUM
                   |  VARUSE
@@ -248,3 +288,5 @@ class Parser:
             p[0] = p[1]
         else:
             p[0] = (p[1], p[2], p[3])
+
+'''
