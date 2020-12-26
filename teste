@@ -1,10 +1,7 @@
-to tree :size
-   if :size < 5 [forward :size back :size]
-   forward :size/3
-   left 30
-   forward :size/6
-   forward :size/3
+make "x 0
 
+to tree :size
+    fd :size
 end
 
-tree 100
+tree 1

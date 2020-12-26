@@ -11,7 +11,7 @@ def math(operator, p1, p2):
         return p1 * p2
     elif operator == "/":
         if p2 == 0:
-            print("Division by zero...")
+            print("Division by zero", file=sys.stderr)
             exit(1)
         return p1 / p2
     elif operator == "+":
@@ -34,6 +34,25 @@ def math(operator, p1, p2):
             return True
         else:
             return False
+    elif operator == "<=":
+        if p1 <= p2:
+            return True
+        else:
+            return False
+    elif operator == ">=":
+        if p1 >= p2:
+            return True
+        else:
+            return False
+    elif operator == "!=":
+        if p1 >= p2:
+            return True
+        else:
+            return False
+
+    print("Operator not found", file=sys.stderr)
+    exit(1)
+
 
 class Parser:
     tokens = Lexer.tokens
@@ -41,12 +60,10 @@ class Parser:
     def __init__(self):
         self.parser = None
         self.lexer = None
-        self.vars = {}  # Symbol table
+        self.vars = {}
+        self.function = {}
         self.color = (0, 0, 0)
         self.pos = (100, 100)
-        # Para se fazer o ex4.logo
-        # tem de se por self.pos = (100, 100)
-        self.function = {}
         self.ang = 90
         self.draw_status = True
 
@@ -57,23 +74,17 @@ class Parser:
         return self.value(color[0]), self.value(color[1]), self.value(color[2])
 
     def value(self, val):
-        if type(val) == dict:
-            v1 = self.value(val['value_1'])
-            v2 = self.value(val['value_2'])
-            oper = val['oper']
-            return math(oper, v1, v2)
         if type(val) == tuple:
             v1 = self.value(val[0])
             v2 = self.value(val[2])
-            return eval("v1+v2")
+            return math(val[1], v1, v2)
         if type(val) == float:
             return val
         val = val[1:]
         if val in self.vars:
             return self.vars[val]
-        print(f"Undefined variable: {val}")
-        self.vars[val] = 0
-        return 0
+        print(f"Undefined variable: {val}", file = sys.stderr)
+        exit(1)
 
     def Parse(self, content, **kwargs):
         self.lexer = Lexer()
@@ -211,17 +222,16 @@ class Parser:
         p[0] = Command('nameto', args)
 
     def p_command19(self, p):
-       """ value  :  INT
+        """ value  :  NUM
                   |  VARUSE
-                  |  VARUSE OPERATOR INT
-                  |  INT OPERATOR VARUSE
-                  |  INT OPERATOR INT
+                  |  VARUSE OPERATOR NUM
+                  |  NUM OPERATOR VARUSE
+                  |  NUM OPERATOR NUM
                   |  VARUSE OPERATOR VARUSE """
-       if len(p) == 2:
-           p[0] = p[1]
-       else:
-           args = {'value_1': p[1], 'oper': p[2], 'value_2': p[3]}
-           p[0] = args
+        if len(p) == 2:
+            p[0] = p[1]
+        else:
+            p[0] = (p[1], p[2], p[3])
 
     def p_condition(self, p):
         """ condition  :  value
@@ -229,5 +239,4 @@ class Parser:
         if len(p) == 2:
             p[0] = p[1]
         else:
-            args = {'value_1': p[1], 'oper': p[2], 'value_2': p[3]}
-            p[0] = args
+            p[0] = (p[1], p[2], p[3])
