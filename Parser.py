@@ -46,7 +46,10 @@ class Parser:
         self.pos = (100, 100)
         # Para se fazer o ex4.logo
         # tem de se por self.pos = (100, 100)
+        # Referente as funcoes (TO)
         self.function = {}
+        self.vars_function = {}
+        #self.draw_function = False
         self.ang = 90
         self.draw_status = True
 
@@ -201,16 +204,27 @@ class Parser:
         })
 
     def p_command17(self, p):
-        """ command  :  TO NAMETO VARUSE program END"""  # TODO
-        args = {'nameto': p[2], 'varuse': p[3], 'code': p[4]}
-        p[0] = Command('to', args)
+        """ command  :  TO NAMETO program END
+                     |  TO NAMETO VARUSE program END"""  # TODO
+        if len(p) == 6:
+            args = {'nameto': p[2], 'varuse': p[3], 'code': p[4]}
+            p[0] = Command('to', args)
+        else:
+            args = {'nameto': p[2], 'varuse': -1, 'code': p[3]}
+            p[0] = Command('to', args)
 
     def p_command18(self, p):
-        """ command  : NAMETO value"""
-        args = {'nameto': p[1], 'value': p[2]}
-        p[0] = Command('nameto', args)
+        """ command  : NAMETO
+                     | NAMETO value"""
+        if len(p) == 3:
+            args = {'nameto': p[1], 'value': p[2]}
+            p[0] = Command('nameto', args)
+        else:
+            args = {'nameto': p[1], 'value': -1}
+            p[0] = Command('nameto', args)
 
-    def p_command19(self, p):
+
+    def p_command20(self, p):
        """ value  :  INT
                   |  VARUSE
                   |  VARUSE OPERATOR INT

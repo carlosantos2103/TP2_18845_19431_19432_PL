@@ -60,34 +60,14 @@ def do_if(command, parser):
     code = command.args['code']
     result = parser.value(condition)
 
-# Estava assim caso queiram fazer alterações:
-    # print(eval(f"{parser.value(condition[0])} {condition[1]} {parser.value(condition[2])}"))
-    #if type(condition) == tuple:
-    #   result = eval(f"{parser.value(condition[0])} {condition[1]} {parser.value(condition[2])}") # TODO: ISTO É CORRETO?
-    #else:
-    #   result = eval(f"{parser.value(condition)}")
-#
-
     if result:
         Command.exec(code, parser)
 
 def do_ifelse(command, parser):
-    #""" command  :  IFELSE condition '[' program ']' '[' program ']' """
-    #     p[0] = Command("ifelse", {
-    #         'condition': p[2],
-    #         'code1': p[4],
-    #        'code2': p[7],
-    #     })
     condition = command.args['condition']
     result = parser.value(condition)
     code1 = command.args['code1']
     code2 = command.args['code2']
-
-# Estava assim caso queiram fazer alterações:
-    #if type(condition) == tuple:
-    #    result = eval(f"{parser.value(condition[0])} {condition[1]} {parser.value(condition[2])}")
-    #else:
-    #    result = eval(f"{parser.value(condition)}")
 
     if result:
         Command.exec(code1, parser)
@@ -99,45 +79,40 @@ def do_repeat(command, parser):
     var = parser.value(command.args['var'])
     code = command.args['code']
 
-    while var>count:
+    while var > count:
         Command.exec(code, parser)
-        count+=1
+        count += 1
 
 
 
 def do_while(command, parser):
-    # """ command  :  WHILE '[' condition ']' '[' program ']'"""  # TODO: Adicionar a expressao (TRUE ou FALSE)
-    #        p[0] = Command("while", {
-    #            'condition': p[3],
-    #            'code': p[6],
-    #        })
     condition = command.args['condition']
     code = command.args['code']
-
-    if type(condition) == tuple:
-        result = eval(f"{parser.value(condition[0])} {condition[1]} {parser.value(condition[2])}")
-    else:
-        result = eval(f"{parser.value(condition)}")
-
+    result = parser.value(condition)
 
     while result:
         Command.exec(code, parser)
-
-        if type(condition) == tuple:
-            result = eval(f"{parser.value(condition[0])} {condition[1]} {parser.value(condition[2])}")
-        else:
-            result = eval(f"{parser.value(condition)}")
+        result = parser.value(condition)
 
 def do_to(command, parser):
-    parser.function[command.args['nameto']] = command.args['code']
-    parser.vars[command.args['nameto']] = command.args['varuse'][1:]
+    if command.args['varuse'] == -1:
+        parser.function[command.args['nameto']] = command.args['code']
+    else:
+        parser.function[command.args['nameto']] = command.args['code']
+        parser.vars_function[command.args['nameto']] = command.args['varuse'][1:]
+        # parser.vars[command.args['nameto']] = command.args['varuse'][1:]
 
 def do_nameto(command, parser):
-    program = parser.function[command.args['nameto']]
-    var = parser.vars[command.args['nameto']]
-    parser.vars[var] = command.args['value']
-    parser.vars.pop(command.args['nameto'])
-    command.exec(program, parser)
+    if command.args['value'] == -1:
+        program = parser.function[command.args['nameto']]
+        command.exec(program, parser)
+    else:
+        program = parser.function[command.args['nameto']]
+        # Saber qual o argumento da funcao  tree -> :size
+        var = parser.vars_function[command.args['nameto']]
+        # Assegura que aquele argumento fica com o determinado valor :size -> 0,1...
+        parser.vars[var] = parser.value(command.args['value'])
+        command.exec(program, parser)
 
 class Command:
     dispatch_table = {
@@ -170,5 +145,4 @@ class Command:
     @classmethod
     def exec(cls, program, parser):
         for cmd in program:
-            #print(cmd)
             cmd.run(parser)

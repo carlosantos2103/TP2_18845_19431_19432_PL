@@ -34,7 +34,7 @@ class Lexer:
         return t
 
     def t_LOGIC(self, t):
-        r"""<|>|=="""  # >= ?
+        r"""<|>|=="""  # >= ? TODO: ADICIONAR TRUE AND FALSE ?
         return t
 
     def t_OPERATOR(self, t):
