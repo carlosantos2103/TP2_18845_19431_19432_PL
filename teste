@@ -1,15 +1,15 @@
-to teste :var1 :var2
-  right :var1
-  forward :var1
-  lt :var1
-  back :var1
+to teste
+  right 80
+  forward 80
+  lt  80
+  back 80
   setpos [0 0]
   pu
-  setpencolor [100 0 :var2*2]
-  setxy :var2 :var2
+  setpencolor [100 0 50*2]
+  setxy  50 50
   pd
-  sety :var2
-  setx 50
+  sety  50
+  setx  50
   pu home pd
 end
 

@@ -93,26 +93,29 @@ def do_while(command, parser):
 def do_to(command, parser):
     function_name = command.args['nameto']
     parser.function[function_name] = command.args['code']
-    parser.vars_function[function_name] = []
-    for v in command.args['vars']:
-        parser.vars_function[function_name].append("fun" + v[1:])
+    if 'vars' in command.args:
+        parser.vars_function[function_name] = []
+        for v in command.args['vars']:
+            parser.vars_function[function_name].append("fun" + v[1:])
 
 def do_nameto(command, parser):
     function_name = command.args['nameto']
     program = parser.function[function_name]
-    i=0
-    for v in command.args['values']:
-        var = parser.vars_function[function_name][i]
-        parser.vars[var] = parser.value(v)
-        i += 1
+    if 'values' in command.args:
+        i=0
+        for v in command.args['values']:
+            var = parser.vars_function[function_name][i]
+            parser.vars[var] = parser.value(v)
+            i += 1
     command.exec(program, parser)
 
-    i=0
-    for v in command.args['values']:
-        var = parser.vars_function[function_name][i]
-        if var in parser.vars:
-            parser.vars.pop(var)
-        i += 1
+    if 'values' in command.args:
+        i=0
+        for v in command.args['values']:
+            var = parser.vars_function[function_name][i]
+            if var in parser.vars:
+                parser.vars.pop(var)
+            i += 1
                 
 class Command:
     dispatch_table = {
