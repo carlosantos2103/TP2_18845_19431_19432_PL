@@ -4,7 +4,6 @@ to teste
   lt  80
   back 80
   setpos [0 0]
-  pu
   setpencolor [100 0 50*2]
   setxy  50 50
   pd
@@ -13,15 +12,4 @@ to teste
   pu home pd
 end
 
-to taupeira:var1:var2
-  make "i 50
-  make "j :var2
-  teste :var1 :j
-  ifelse :i < 20 [fd :j] [teste 90 80]
-  if :i == 20 [rt :var2 fd :i]
-  repeat 4 [fd :i rt 90]
-end
-
-make "x 10
-
-while :x < 15 [taupeira :x+20 80 make "x :x+1]
+teste

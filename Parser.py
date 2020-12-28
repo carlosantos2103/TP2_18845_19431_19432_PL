@@ -71,7 +71,7 @@ class Parser:
         return self.value(pos[0]), self.value(pos[1])
 
     def verif_color(self, color):
-        return self.value(color[0]), self.value(color[1]), self.value(color[2])
+        return int(self.value(color[0])), int(self.value(color[1])), int(self.value(color[2]))
 
     def value(self, val):
         if type(val) == tuple:
