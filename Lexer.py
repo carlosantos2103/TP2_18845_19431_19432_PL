@@ -4,7 +4,7 @@ import ply.lex as lex
 import sys
 
 class Lexer:
-    literals = "[]"
+    literals = "[]()"
     t_ignore = " \n\t"
 
     tokens = ("OPERATOR", "LOGIC", "NUM", "VARNAME", "VARUSE", "FD", "FORWARD", "BK", "BACK", "LT", "LEFT", "RT", "RIGHT", "SETPOS", "SETXY", "SETX",

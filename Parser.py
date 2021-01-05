@@ -56,6 +56,11 @@ def math(operator, p1, p2):
 class Parser:
     tokens = Lexer.tokens
 
+    #precedence = (
+    #    ("left", '+', '-'),
+    #    ("left", '*', '/'),
+    #)
+
     def __init__(self):
         self.parser = None
         self.lexer = None
@@ -96,6 +101,7 @@ class Parser:
         Command.exec(program, self)
 
     def p_error(self, p):
+        #verificar se existe p.value
         print(f"Syntax error: {p}", file=sys.stderr)
         exit(1)
 
@@ -238,6 +244,10 @@ class Parser:
             p[0] = p[1]
         else:
             p[0] = (p[1], p[2], p[3])
+
+    def p_value1(self, p):
+        """ value  :  '(' value ')' """
+        p[0] = p[2]
 
     def p_values0(self, p):
         """ values  :  value  """
