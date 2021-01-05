@@ -56,10 +56,10 @@ def math(operator, p1, p2):
 class Parser:
     tokens = Lexer.tokens
 
-    #precedence = (
-    #    ("left", '+', '-'),
-    #    ("left", '*', '/'),
-    #)
+    precedence = (
+        ("left", '+', '-'),
+        ("left", '*', '/'),
+    )
 
     def __init__(self):
         self.parser = None
@@ -79,10 +79,10 @@ class Parser:
         return int(self.value(color[0])), int(self.value(color[1])), int(self.value(color[2]))
 
     def value(self, val):
-        if type(val) == tuple:
-            v1 = self.value(val[0])
-            v2 = self.value(val[2])
-            return math(val[1], v1, v2)
+        if type(val) == dict:
+            v1 = self.value(val["left"])
+            v2 = self.value(val["right"])
+            return math(val["operator"], v1, v2)
         if type(val) == float:
             return val
         val = val[1:]
@@ -101,8 +101,10 @@ class Parser:
         Command.exec(program, self)
 
     def p_error(self, p):
-        #verificar se existe p.value
-        print(f"Syntax error: {p}", file=sys.stderr)
+        print(f"Syntax error!", file=sys.stderr)
+        token = self.parser.token()
+        if token:
+            print(f"Unexpected token: {token}", file=sys.stderr)
         exit(1)
 
     def p_program0(self, p):
@@ -232,20 +234,21 @@ class Parser:
             args = {'nameto': p[1]}
         p[0] = Command('nameto', args)
 
-    def p_value(self, p):
-        """ value  :  NUM
-                   |  VARUSE
-                   |  VARUSE OPERATOR NUM
-                   |  NUM OPERATOR VARUSE
-                   |  NUM OPERATOR NUM
-                   |  VARUSE OPERATOR VARUSE """
-
-        if len(p) == 2:
-            p[0] = p[1]
-        else:
-            p[0] = (p[1], p[2], p[3])
-
     def p_value1(self, p):
+        """ value  :  NUM
+                   |  VARUSE """
+
+        p[0] = p[1]
+
+    def p_value2(self, p):
+        """ value  :  value '+' value
+                   |  value '-' value
+                   |  value '*' value
+                   |  value '/' value """
+
+        p[0] = {"left": p[1], "right": p[3], "operator": p[2]}
+
+    def p_value3(self, p):
         """ value  :  '(' value ')' """
         p[0] = p[2]
 
@@ -265,7 +268,7 @@ class Parser:
         if len(p) == 2:
             p[0] = p[1]
         else:
-            p[0] = (p[1], p[2], p[3])
+            p[0] = {"left": p[1], "right": p[3], "operator": p[2]}
 
     def p_vars0(self, p):
         """ vars  :  VARUSE  """

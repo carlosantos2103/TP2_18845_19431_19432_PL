@@ -35,10 +35,10 @@ Rule 29    command -> NAMETO
 Rule 30    command -> NAMETO values
 Rule 31    value -> NUM
 Rule 32    value -> VARUSE
-Rule 33    value -> VARUSE OPERATOR NUM
-Rule 34    value -> NUM OPERATOR VARUSE
-Rule 35    value -> NUM OPERATOR NUM
-Rule 36    value -> VARUSE OPERATOR VARUSE
+Rule 33    value -> value + value
+Rule 34    value -> value - value
+Rule 35    value -> value * value
+Rule 36    value -> value / value
 Rule 37    value -> ( value )
 Rule 38    values -> value
 Rule 39    values -> values value
@@ -51,6 +51,10 @@ Terminals, with rules where they appear
 
 (                    : 37
 )                    : 37
+*                    : 35
++                    : 33
+-                    : 34
+/                    : 36
 BACK                 : 5
 BK                   : 6
 END                  : 27 28
@@ -64,8 +68,7 @@ LOGIC                : 41
 LT                   : 7
 MAKE                 : 21
 NAMETO               : 27 28 29 30
-NUM                  : 31 33 34 35 35
-OPERATOR             : 33 34 35 36
+NUM                  : 31
 PD                   : 16
 PENDOWN              : 17
 PENUP                : 19
@@ -80,7 +83,7 @@ SETXY                : 12
 SETY                 : 14
 TO                   : 27 28
 VARNAME              : 21
-VARUSE               : 32 33 34 36 36 42 43
+VARUSE               : 32 42 43
 WHILE                : 25 26
 [                    : 11 20 22 23 23 24 25 25 26
 ]                    : 11 20 22 23 23 24 25 25 26
@@ -91,7 +94,7 @@ Nonterminals, with rules where they appear
 command              : 1 2
 condition            : 22 23 25 26
 program              : 2 22 23 23 24 25 26 27 28 0
-value                : 3 4 5 6 7 8 9 10 11 11 12 12 13 14 20 20 20 21 24 37 38 39 40 41 41
+value                : 3 4 5 6 7 8 9 10 11 11 12 12 13 14 20 20 20 21 24 33 33 34 34 35 35 36 36 37 38 39 40 41 41
 values               : 30 39
 vars                 : 28 43
 
@@ -260,10 +263,10 @@ state 3
     (3) command -> FORWARD . value
     (31) value -> . NUM
     (32) value -> . VARUSE
-    (33) value -> . VARUSE OPERATOR NUM
-    (34) value -> . NUM OPERATOR VARUSE
-    (35) value -> . NUM OPERATOR NUM
-    (36) value -> . VARUSE OPERATOR VARUSE
+    (33) value -> . value + value
+    (34) value -> . value - value
+    (35) value -> . value * value
+    (36) value -> . value / value
     (37) value -> . ( value )
 
     NUM             shift and go to state 30
@@ -277,10 +280,10 @@ state 4
     (4) command -> FD . value
     (31) value -> . NUM
     (32) value -> . VARUSE
-    (33) value -> . VARUSE OPERATOR NUM
-    (34) value -> . NUM OPERATOR VARUSE
-    (35) value -> . NUM OPERATOR NUM
-    (36) value -> . VARUSE OPERATOR VARUSE
+    (33) value -> . value + value
+    (34) value -> . value - value
+    (35) value -> . value * value
+    (36) value -> . value / value
     (37) value -> . ( value )
 
     NUM             shift and go to state 30
@@ -294,10 +297,10 @@ state 5
     (5) command -> BACK . value
     (31) value -> . NUM
     (32) value -> . VARUSE
-    (33) value -> . VARUSE OPERATOR NUM
-    (34) value -> . NUM OPERATOR VARUSE
-    (35) value -> . NUM OPERATOR NUM
-    (36) value -> . VARUSE OPERATOR VARUSE
+    (33) value -> . value + value
+    (34) value -> . value - value
+    (35) value -> . value * value
+    (36) value -> . value / value
     (37) value -> . ( value )
 
     NUM             shift and go to state 30
@@ -311,10 +314,10 @@ state 6
     (6) command -> BK . value
     (31) value -> . NUM
     (32) value -> . VARUSE
-    (33) value -> . VARUSE OPERATOR NUM
-    (34) value -> . NUM OPERATOR VARUSE
-    (35) value -> . NUM OPERATOR NUM
-    (36) value -> . VARUSE OPERATOR VARUSE
+    (33) value -> . value + value
+    (34) value -> . value - value
+    (35) value -> . value * value
+    (36) value -> . value / value
     (37) value -> . ( value )
 
     NUM             shift and go to state 30
@@ -328,10 +331,10 @@ state 7
     (7) command -> LT . value
     (31) value -> . NUM
     (32) value -> . VARUSE
-    (33) value -> . VARUSE OPERATOR NUM
-    (34) value -> . NUM OPERATOR VARUSE
-    (35) value -> . NUM OPERATOR NUM
-    (36) value -> . VARUSE OPERATOR VARUSE
+    (33) value -> . value + value
+    (34) value -> . value - value
+    (35) value -> . value * value
+    (36) value -> . value / value
     (37) value -> . ( value )
 
     NUM             shift and go to state 30
@@ -345,10 +348,10 @@ state 8
     (8) command -> LEFT . value
     (31) value -> . NUM
     (32) value -> . VARUSE
-    (33) value -> . VARUSE OPERATOR NUM
-    (34) value -> . NUM OPERATOR VARUSE
-    (35) value -> . NUM OPERATOR NUM
-    (36) value -> . VARUSE OPERATOR VARUSE
+    (33) value -> . value + value
+    (34) value -> . value - value
+    (35) value -> . value * value
+    (36) value -> . value / value
     (37) value -> . ( value )
 
     NUM             shift and go to state 30
@@ -362,10 +365,10 @@ state 9
     (9) command -> RT . value
     (31) value -> . NUM
     (32) value -> . VARUSE
-    (33) value -> . VARUSE OPERATOR NUM
-    (34) value -> . NUM OPERATOR VARUSE
-    (35) value -> . NUM OPERATOR NUM
-    (36) value -> . VARUSE OPERATOR VARUSE
+    (33) value -> . value + value
+    (34) value -> . value - value
+    (35) value -> . value * value
+    (36) value -> . value / value
     (37) value -> . ( value )
 
     NUM             shift and go to state 30
@@ -379,10 +382,10 @@ state 10
     (10) command -> RIGHT . value
     (31) value -> . NUM
     (32) value -> . VARUSE
-    (33) value -> . VARUSE OPERATOR NUM
-    (34) value -> . NUM OPERATOR VARUSE
-    (35) value -> . NUM OPERATOR NUM
-    (36) value -> . VARUSE OPERATOR VARUSE
+    (33) value -> . value + value
+    (34) value -> . value - value
+    (35) value -> . value * value
+    (36) value -> . value / value
     (37) value -> . ( value )
 
     NUM             shift and go to state 30
@@ -403,10 +406,10 @@ state 12
     (12) command -> SETXY . value value
     (31) value -> . NUM
     (32) value -> . VARUSE
-    (33) value -> . VARUSE OPERATOR NUM
-    (34) value -> . NUM OPERATOR VARUSE
-    (35) value -> . NUM OPERATOR NUM
-    (36) value -> . VARUSE OPERATOR VARUSE
+    (33) value -> . value + value
+    (34) value -> . value - value
+    (35) value -> . value * value
+    (36) value -> . value / value
     (37) value -> . ( value )
 
     NUM             shift and go to state 30
@@ -420,10 +423,10 @@ state 13
     (13) command -> SETX . value
     (31) value -> . NUM
     (32) value -> . VARUSE
-    (33) value -> . VARUSE OPERATOR NUM
-    (34) value -> . NUM OPERATOR VARUSE
-    (35) value -> . NUM OPERATOR NUM
-    (36) value -> . VARUSE OPERATOR VARUSE
+    (33) value -> . value + value
+    (34) value -> . value - value
+    (35) value -> . value * value
+    (36) value -> . value / value
     (37) value -> . ( value )
 
     NUM             shift and go to state 30
@@ -437,10 +440,10 @@ state 14
     (14) command -> SETY . value
     (31) value -> . NUM
     (32) value -> . VARUSE
-    (33) value -> . VARUSE OPERATOR NUM
-    (34) value -> . NUM OPERATOR VARUSE
-    (35) value -> . NUM OPERATOR NUM
-    (36) value -> . VARUSE OPERATOR VARUSE
+    (33) value -> . value + value
+    (34) value -> . value - value
+    (35) value -> . value * value
+    (36) value -> . value / value
     (37) value -> . ( value )
 
     NUM             shift and go to state 30
@@ -640,10 +643,10 @@ state 22
     (41) condition -> . value LOGIC value
     (31) value -> . NUM
     (32) value -> . VARUSE
-    (33) value -> . VARUSE OPERATOR NUM
-    (34) value -> . NUM OPERATOR VARUSE
-    (35) value -> . NUM OPERATOR NUM
-    (36) value -> . VARUSE OPERATOR VARUSE
+    (33) value -> . value + value
+    (34) value -> . value - value
+    (35) value -> . value * value
+    (36) value -> . value / value
     (37) value -> . ( value )
 
     NUM             shift and go to state 30
@@ -660,10 +663,10 @@ state 23
     (41) condition -> . value LOGIC value
     (31) value -> . NUM
     (32) value -> . VARUSE
-    (33) value -> . VARUSE OPERATOR NUM
-    (34) value -> . NUM OPERATOR VARUSE
-    (35) value -> . NUM OPERATOR NUM
-    (36) value -> . VARUSE OPERATOR VARUSE
+    (33) value -> . value + value
+    (34) value -> . value - value
+    (35) value -> . value * value
+    (36) value -> . value / value
     (37) value -> . ( value )
 
     NUM             shift and go to state 30
@@ -678,10 +681,10 @@ state 24
     (24) command -> REPEAT . value [ program ]
     (31) value -> . NUM
     (32) value -> . VARUSE
-    (33) value -> . VARUSE OPERATOR NUM
-    (34) value -> . NUM OPERATOR VARUSE
-    (35) value -> . NUM OPERATOR NUM
-    (36) value -> . VARUSE OPERATOR VARUSE
+    (33) value -> . value + value
+    (34) value -> . value - value
+    (35) value -> . value * value
+    (36) value -> . value / value
     (37) value -> . ( value )
 
     NUM             shift and go to state 30
@@ -698,10 +701,10 @@ state 25
     (41) condition -> . value LOGIC value
     (31) value -> . NUM
     (32) value -> . VARUSE
-    (33) value -> . VARUSE OPERATOR NUM
-    (34) value -> . NUM OPERATOR VARUSE
-    (35) value -> . NUM OPERATOR NUM
-    (36) value -> . VARUSE OPERATOR VARUSE
+    (33) value -> . value + value
+    (34) value -> . value - value
+    (35) value -> . value * value
+    (36) value -> . value / value
     (37) value -> . ( value )
 
     [               shift and go to state 50
@@ -728,10 +731,10 @@ state 27
     (39) values -> . values value
     (31) value -> . NUM
     (32) value -> . VARUSE
-    (33) value -> . VARUSE OPERATOR NUM
-    (34) value -> . NUM OPERATOR VARUSE
-    (35) value -> . NUM OPERATOR NUM
-    (36) value -> . VARUSE OPERATOR VARUSE
+    (33) value -> . value + value
+    (34) value -> . value - value
+    (35) value -> . value * value
+    (36) value -> . value / value
     (37) value -> . ( value )
 
     FORWARD         reduce using rule 29 (command -> NAMETO .)
@@ -806,6 +809,10 @@ state 28
 state 29
 
     (3) command -> FORWARD value .
+    (33) value -> value . + value
+    (34) value -> value . - value
+    (35) value -> value . * value
+    (36) value -> value . / value
 
     FORWARD         reduce using rule 3 (command -> FORWARD value .)
     FD              reduce using rule 3 (command -> FORWARD value .)
@@ -835,14 +842,20 @@ state 29
     $end            reduce using rule 3 (command -> FORWARD value .)
     END             reduce using rule 3 (command -> FORWARD value .)
     ]               reduce using rule 3 (command -> FORWARD value .)
+    +               shift and go to state 55
+    -               shift and go to state 56
+    *               shift and go to state 57
+    /               shift and go to state 58
 
 
 state 30
 
     (31) value -> NUM .
-    (34) value -> NUM . OPERATOR VARUSE
-    (35) value -> NUM . OPERATOR NUM
 
+    +               reduce using rule 31 (value -> NUM .)
+    -               reduce using rule 31 (value -> NUM .)
+    *               reduce using rule 31 (value -> NUM .)
+    /               reduce using rule 31 (value -> NUM .)
     FORWARD         reduce using rule 31 (value -> NUM .)
     FD              reduce using rule 31 (value -> NUM .)
     BACK            reduce using rule 31 (value -> NUM .)
@@ -877,15 +890,16 @@ state 30
     LOGIC           reduce using rule 31 (value -> NUM .)
     [               reduce using rule 31 (value -> NUM .)
     )               reduce using rule 31 (value -> NUM .)
-    OPERATOR        shift and go to state 55
 
 
 state 31
 
     (32) value -> VARUSE .
-    (33) value -> VARUSE . OPERATOR NUM
-    (36) value -> VARUSE . OPERATOR VARUSE
 
+    +               reduce using rule 32 (value -> VARUSE .)
+    -               reduce using rule 32 (value -> VARUSE .)
+    *               reduce using rule 32 (value -> VARUSE .)
+    /               reduce using rule 32 (value -> VARUSE .)
     FORWARD         reduce using rule 32 (value -> VARUSE .)
     FD              reduce using rule 32 (value -> VARUSE .)
     BACK            reduce using rule 32 (value -> VARUSE .)
@@ -920,7 +934,6 @@ state 31
     LOGIC           reduce using rule 32 (value -> VARUSE .)
     [               reduce using rule 32 (value -> VARUSE .)
     )               reduce using rule 32 (value -> VARUSE .)
-    OPERATOR        shift and go to state 56
 
 
 state 32
@@ -928,21 +941,25 @@ state 32
     (37) value -> ( . value )
     (31) value -> . NUM
     (32) value -> . VARUSE
-    (33) value -> . VARUSE OPERATOR NUM
-    (34) value -> . NUM OPERATOR VARUSE
-    (35) value -> . NUM OPERATOR NUM
-    (36) value -> . VARUSE OPERATOR VARUSE
+    (33) value -> . value + value
+    (34) value -> . value - value
+    (35) value -> . value * value
+    (36) value -> . value / value
     (37) value -> . ( value )
 
     NUM             shift and go to state 30
     VARUSE          shift and go to state 31
     (               shift and go to state 32
 
-    value                          shift and go to state 57
+    value                          shift and go to state 59
 
 state 33
 
     (4) command -> FD value .
+    (33) value -> value . + value
+    (34) value -> value . - value
+    (35) value -> value . * value
+    (36) value -> value . / value
 
     FORWARD         reduce using rule 4 (command -> FD value .)
     FD              reduce using rule 4 (command -> FD value .)
@@ -972,11 +989,19 @@ state 33
     $end            reduce using rule 4 (command -> FD value .)
     END             reduce using rule 4 (command -> FD value .)
     ]               reduce using rule 4 (command -> FD value .)
+    +               shift and go to state 55
+    -               shift and go to state 56
+    *               shift and go to state 57
+    /               shift and go to state 58
 
 
 state 34
 
     (5) command -> BACK value .
+    (33) value -> value . + value
+    (34) value -> value . - value
+    (35) value -> value . * value
+    (36) value -> value . / value
 
     FORWARD         reduce using rule 5 (command -> BACK value .)
     FD              reduce using rule 5 (command -> BACK value .)
@@ -1006,11 +1031,19 @@ state 34
     $end            reduce using rule 5 (command -> BACK value .)
     END             reduce using rule 5 (command -> BACK value .)
     ]               reduce using rule 5 (command -> BACK value .)
+    +               shift and go to state 55
+    -               shift and go to state 56
+    *               shift and go to state 57
+    /               shift and go to state 58
 
 
 state 35
 
     (6) command -> BK value .
+    (33) value -> value . + value
+    (34) value -> value . - value
+    (35) value -> value . * value
+    (36) value -> value . / value
 
     FORWARD         reduce using rule 6 (command -> BK value .)
     FD              reduce using rule 6 (command -> BK value .)
@@ -1040,11 +1073,19 @@ state 35
     $end            reduce using rule 6 (command -> BK value .)
     END             reduce using rule 6 (command -> BK value .)
     ]               reduce using rule 6 (command -> BK value .)
+    +               shift and go to state 55
+    -               shift and go to state 56
+    *               shift and go to state 57
+    /               shift and go to state 58
 
 
 state 36
 
     (7) command -> LT value .
+    (33) value -> value . + value
+    (34) value -> value . - value
+    (35) value -> value . * value
+    (36) value -> value . / value
 
     FORWARD         reduce using rule 7 (command -> LT value .)
     FD              reduce using rule 7 (command -> LT value .)
@@ -1074,11 +1115,19 @@ state 36
     $end            reduce using rule 7 (command -> LT value .)
     END             reduce using rule 7 (command -> LT value .)
     ]               reduce using rule 7 (command -> LT value .)
+    +               shift and go to state 55
+    -               shift and go to state 56
+    *               shift and go to state 57
+    /               shift and go to state 58
 
 
 state 37
 
     (8) command -> LEFT value .
+    (33) value -> value . + value
+    (34) value -> value . - value
+    (35) value -> value . * value
+    (36) value -> value . / value
 
     FORWARD         reduce using rule 8 (command -> LEFT value .)
     FD              reduce using rule 8 (command -> LEFT value .)
@@ -1108,11 +1157,19 @@ state 37
     $end            reduce using rule 8 (command -> LEFT value .)
     END             reduce using rule 8 (command -> LEFT value .)
     ]               reduce using rule 8 (command -> LEFT value .)
+    +               shift and go to state 55
+    -               shift and go to state 56
+    *               shift and go to state 57
+    /               shift and go to state 58
 
 
 state 38
 
     (9) command -> RT value .
+    (33) value -> value . + value
+    (34) value -> value . - value
+    (35) value -> value . * value
+    (36) value -> value . / value
 
     FORWARD         reduce using rule 9 (command -> RT value .)
     FD              reduce using rule 9 (command -> RT value .)
@@ -1142,11 +1199,19 @@ state 38
     $end            reduce using rule 9 (command -> RT value .)
     END             reduce using rule 9 (command -> RT value .)
     ]               reduce using rule 9 (command -> RT value .)
+    +               shift and go to state 55
+    -               shift and go to state 56
+    *               shift and go to state 57
+    /               shift and go to state 58
 
 
 state 39
 
     (10) command -> RIGHT value .
+    (33) value -> value . + value
+    (34) value -> value . - value
+    (35) value -> value . * value
+    (36) value -> value . / value
 
     FORWARD         reduce using rule 10 (command -> RIGHT value .)
     FD              reduce using rule 10 (command -> RIGHT value .)
@@ -1176,6 +1241,10 @@ state 39
     $end            reduce using rule 10 (command -> RIGHT value .)
     END             reduce using rule 10 (command -> RIGHT value .)
     ]               reduce using rule 10 (command -> RIGHT value .)
+    +               shift and go to state 55
+    -               shift and go to state 56
+    *               shift and go to state 57
+    /               shift and go to state 58
 
 
 state 40
@@ -1183,38 +1252,50 @@ state 40
     (11) command -> SETPOS [ . value value ]
     (31) value -> . NUM
     (32) value -> . VARUSE
-    (33) value -> . VARUSE OPERATOR NUM
-    (34) value -> . NUM OPERATOR VARUSE
-    (35) value -> . NUM OPERATOR NUM
-    (36) value -> . VARUSE OPERATOR VARUSE
+    (33) value -> . value + value
+    (34) value -> . value - value
+    (35) value -> . value * value
+    (36) value -> . value / value
     (37) value -> . ( value )
 
     NUM             shift and go to state 30
     VARUSE          shift and go to state 31
     (               shift and go to state 32
 
-    value                          shift and go to state 58
+    value                          shift and go to state 60
 
 state 41
 
     (12) command -> SETXY value . value
+    (33) value -> value . + value
+    (34) value -> value . - value
+    (35) value -> value . * value
+    (36) value -> value . / value
     (31) value -> . NUM
     (32) value -> . VARUSE
-    (33) value -> . VARUSE OPERATOR NUM
-    (34) value -> . NUM OPERATOR VARUSE
-    (35) value -> . NUM OPERATOR NUM
-    (36) value -> . VARUSE OPERATOR VARUSE
+    (33) value -> . value + value
+    (34) value -> . value - value
+    (35) value -> . value * value
+    (36) value -> . value / value
     (37) value -> . ( value )
 
+    +               shift and go to state 55
+    -               shift and go to state 56
+    *               shift and go to state 57
+    /               shift and go to state 58
     NUM             shift and go to state 30
     VARUSE          shift and go to state 31
     (               shift and go to state 32
 
-    value                          shift and go to state 59
+    value                          shift and go to state 61
 
 state 42
 
     (13) command -> SETX value .
+    (33) value -> value . + value
+    (34) value -> value . - value
+    (35) value -> value . * value
+    (36) value -> value . / value
 
     FORWARD         reduce using rule 13 (command -> SETX value .)
     FD              reduce using rule 13 (command -> SETX value .)
@@ -1244,11 +1325,19 @@ state 42
     $end            reduce using rule 13 (command -> SETX value .)
     END             reduce using rule 13 (command -> SETX value .)
     ]               reduce using rule 13 (command -> SETX value .)
+    +               shift and go to state 55
+    -               shift and go to state 56
+    *               shift and go to state 57
+    /               shift and go to state 58
 
 
 state 43
 
     (14) command -> SETY value .
+    (33) value -> value . + value
+    (34) value -> value . - value
+    (35) value -> value . * value
+    (36) value -> value . / value
 
     FORWARD         reduce using rule 14 (command -> SETY value .)
     FD              reduce using rule 14 (command -> SETY value .)
@@ -1278,6 +1367,10 @@ state 43
     $end            reduce using rule 14 (command -> SETY value .)
     END             reduce using rule 14 (command -> SETY value .)
     ]               reduce using rule 14 (command -> SETY value .)
+    +               shift and go to state 55
+    -               shift and go to state 56
+    *               shift and go to state 57
+    /               shift and go to state 58
 
 
 state 44
@@ -1285,64 +1378,80 @@ state 44
     (20) command -> SETPENCOLOR [ . value value value ]
     (31) value -> . NUM
     (32) value -> . VARUSE
-    (33) value -> . VARUSE OPERATOR NUM
-    (34) value -> . NUM OPERATOR VARUSE
-    (35) value -> . NUM OPERATOR NUM
-    (36) value -> . VARUSE OPERATOR VARUSE
+    (33) value -> . value + value
+    (34) value -> . value - value
+    (35) value -> . value * value
+    (36) value -> . value / value
     (37) value -> . ( value )
 
     NUM             shift and go to state 30
     VARUSE          shift and go to state 31
     (               shift and go to state 32
 
-    value                          shift and go to state 60
+    value                          shift and go to state 62
 
 state 45
 
     (21) command -> MAKE VARNAME . value
     (31) value -> . NUM
     (32) value -> . VARUSE
-    (33) value -> . VARUSE OPERATOR NUM
-    (34) value -> . NUM OPERATOR VARUSE
-    (35) value -> . NUM OPERATOR NUM
-    (36) value -> . VARUSE OPERATOR VARUSE
+    (33) value -> . value + value
+    (34) value -> . value - value
+    (35) value -> . value * value
+    (36) value -> . value / value
     (37) value -> . ( value )
 
     NUM             shift and go to state 30
     VARUSE          shift and go to state 31
     (               shift and go to state 32
 
-    value                          shift and go to state 61
+    value                          shift and go to state 63
 
 state 46
 
     (22) command -> IF condition . [ program ]
 
-    [               shift and go to state 62
+    [               shift and go to state 64
 
 
 state 47
 
     (40) condition -> value .
     (41) condition -> value . LOGIC value
+    (33) value -> value . + value
+    (34) value -> value . - value
+    (35) value -> value . * value
+    (36) value -> value . / value
 
     [               reduce using rule 40 (condition -> value .)
     ]               reduce using rule 40 (condition -> value .)
-    LOGIC           shift and go to state 63
+    LOGIC           shift and go to state 65
+    +               shift and go to state 55
+    -               shift and go to state 56
+    *               shift and go to state 57
+    /               shift and go to state 58
 
 
 state 48
 
     (23) command -> IFELSE condition . [ program ] [ program ]
 
-    [               shift and go to state 64
+    [               shift and go to state 66
 
 
 state 49
 
     (24) command -> REPEAT value . [ program ]
+    (33) value -> value . + value
+    (34) value -> value . - value
+    (35) value -> value . * value
+    (36) value -> value . / value
 
-    [               shift and go to state 65
+    [               shift and go to state 67
+    +               shift and go to state 55
+    -               shift and go to state 56
+    *               shift and go to state 57
+    /               shift and go to state 58
 
 
 state 50
@@ -1352,24 +1461,24 @@ state 50
     (41) condition -> . value LOGIC value
     (31) value -> . NUM
     (32) value -> . VARUSE
-    (33) value -> . VARUSE OPERATOR NUM
-    (34) value -> . NUM OPERATOR VARUSE
-    (35) value -> . NUM OPERATOR NUM
-    (36) value -> . VARUSE OPERATOR VARUSE
+    (33) value -> . value + value
+    (34) value -> . value - value
+    (35) value -> . value * value
+    (36) value -> . value / value
     (37) value -> . ( value )
 
     NUM             shift and go to state 30
     VARUSE          shift and go to state 31
     (               shift and go to state 32
 
-    condition                      shift and go to state 66
+    condition                      shift and go to state 68
     value                          shift and go to state 47
 
 state 51
 
     (26) command -> WHILE condition . [ program ]
 
-    [               shift and go to state 67
+    [               shift and go to state 69
 
 
 state 52
@@ -1409,7 +1518,7 @@ state 52
     (29) command -> . NAMETO
     (30) command -> . NAMETO values
 
-    VARUSE          shift and go to state 70
+    VARUSE          shift and go to state 72
     FORWARD         shift and go to state 3
     FD              shift and go to state 4
     BACK            shift and go to state 5
@@ -1436,8 +1545,8 @@ state 52
     TO              shift and go to state 26
     NAMETO          shift and go to state 27
 
-    program                        shift and go to state 68
-    vars                           shift and go to state 69
+    program                        shift and go to state 70
+    vars                           shift and go to state 71
     command                        shift and go to state 2
 
 state 53
@@ -1446,10 +1555,10 @@ state 53
     (39) values -> values . value
     (31) value -> . NUM
     (32) value -> . VARUSE
-    (33) value -> . VARUSE OPERATOR NUM
-    (34) value -> . NUM OPERATOR VARUSE
-    (35) value -> . NUM OPERATOR NUM
-    (36) value -> . VARUSE OPERATOR VARUSE
+    (33) value -> . value + value
+    (34) value -> . value - value
+    (35) value -> . value * value
+    (36) value -> . value / value
     (37) value -> . ( value )
 
     FORWARD         reduce using rule 30 (command -> NAMETO values .)
@@ -1484,11 +1593,15 @@ state 53
     VARUSE          shift and go to state 31
     (               shift and go to state 32
 
-    value                          shift and go to state 71
+    value                          shift and go to state 73
 
 state 54
 
     (38) values -> value .
+    (33) value -> value . + value
+    (34) value -> value . - value
+    (35) value -> value . * value
+    (36) value -> value . / value
 
     NUM             reduce using rule 38 (values -> value .)
     VARUSE          reduce using rule 38 (values -> value .)
@@ -1521,42 +1634,72 @@ state 54
     $end            reduce using rule 38 (values -> value .)
     END             reduce using rule 38 (values -> value .)
     ]               reduce using rule 38 (values -> value .)
+    +               shift and go to state 55
+    -               shift and go to state 56
+    *               shift and go to state 57
+    /               shift and go to state 58
 
 
 state 55
 
-    (34) value -> NUM OPERATOR . VARUSE
-    (35) value -> NUM OPERATOR . NUM
+    (33) value -> value + . value
+    (31) value -> . NUM
+    (32) value -> . VARUSE
+    (33) value -> . value + value
+    (34) value -> . value - value
+    (35) value -> . value * value
+    (36) value -> . value / value
+    (37) value -> . ( value )
 
-    VARUSE          shift and go to state 73
-    NUM             shift and go to state 72
+    NUM             shift and go to state 30
+    VARUSE          shift and go to state 31
+    (               shift and go to state 32
 
+    value                          shift and go to state 74
 
 state 56
 
-    (33) value -> VARUSE OPERATOR . NUM
-    (36) value -> VARUSE OPERATOR . VARUSE
+    (34) value -> value - . value
+    (31) value -> . NUM
+    (32) value -> . VARUSE
+    (33) value -> . value + value
+    (34) value -> . value - value
+    (35) value -> . value * value
+    (36) value -> . value / value
+    (37) value -> . ( value )
 
-    NUM             shift and go to state 75
-    VARUSE          shift and go to state 74
+    NUM             shift and go to state 30
+    VARUSE          shift and go to state 31
+    (               shift and go to state 32
 
+    value                          shift and go to state 75
 
 state 57
 
-    (37) value -> ( value . )
+    (35) value -> value * . value
+    (31) value -> . NUM
+    (32) value -> . VARUSE
+    (33) value -> . value + value
+    (34) value -> . value - value
+    (35) value -> . value * value
+    (36) value -> . value / value
+    (37) value -> . ( value )
 
-    )               shift and go to state 76
+    NUM             shift and go to state 30
+    VARUSE          shift and go to state 31
+    (               shift and go to state 32
 
+    value                          shift and go to state 76
 
 state 58
 
-    (11) command -> SETPOS [ value . value ]
+    (36) value -> value / . value
     (31) value -> . NUM
     (32) value -> . VARUSE
-    (33) value -> . VARUSE OPERATOR NUM
-    (34) value -> . NUM OPERATOR VARUSE
-    (35) value -> . NUM OPERATOR NUM
-    (36) value -> . VARUSE OPERATOR VARUSE
+    (33) value -> . value + value
+    (34) value -> . value - value
+    (35) value -> . value * value
+    (36) value -> . value / value
     (37) value -> . ( value )
 
     NUM             shift and go to state 30
@@ -1567,7 +1710,51 @@ state 58
 
 state 59
 
+    (37) value -> ( value . )
+    (33) value -> value . + value
+    (34) value -> value . - value
+    (35) value -> value . * value
+    (36) value -> value . / value
+
+    )               shift and go to state 78
+    +               shift and go to state 55
+    -               shift and go to state 56
+    *               shift and go to state 57
+    /               shift and go to state 58
+
+
+state 60
+
+    (11) command -> SETPOS [ value . value ]
+    (33) value -> value . + value
+    (34) value -> value . - value
+    (35) value -> value . * value
+    (36) value -> value . / value
+    (31) value -> . NUM
+    (32) value -> . VARUSE
+    (33) value -> . value + value
+    (34) value -> . value - value
+    (35) value -> . value * value
+    (36) value -> . value / value
+    (37) value -> . ( value )
+
+    +               shift and go to state 55
+    -               shift and go to state 56
+    *               shift and go to state 57
+    /               shift and go to state 58
+    NUM             shift and go to state 30
+    VARUSE          shift and go to state 31
+    (               shift and go to state 32
+
+    value                          shift and go to state 79
+
+state 61
+
     (12) command -> SETXY value value .
+    (33) value -> value . + value
+    (34) value -> value . - value
+    (35) value -> value . * value
+    (36) value -> value . / value
 
     FORWARD         reduce using rule 12 (command -> SETXY value value .)
     FD              reduce using rule 12 (command -> SETXY value value .)
@@ -1597,28 +1784,44 @@ state 59
     $end            reduce using rule 12 (command -> SETXY value value .)
     END             reduce using rule 12 (command -> SETXY value value .)
     ]               reduce using rule 12 (command -> SETXY value value .)
+    +               shift and go to state 55
+    -               shift and go to state 56
+    *               shift and go to state 57
+    /               shift and go to state 58
 
 
-state 60
+state 62
 
     (20) command -> SETPENCOLOR [ value . value value ]
+    (33) value -> value . + value
+    (34) value -> value . - value
+    (35) value -> value . * value
+    (36) value -> value . / value
     (31) value -> . NUM
     (32) value -> . VARUSE
-    (33) value -> . VARUSE OPERATOR NUM
-    (34) value -> . NUM OPERATOR VARUSE
-    (35) value -> . NUM OPERATOR NUM
-    (36) value -> . VARUSE OPERATOR VARUSE
+    (33) value -> . value + value
+    (34) value -> . value - value
+    (35) value -> . value * value
+    (36) value -> . value / value
     (37) value -> . ( value )
 
+    +               shift and go to state 55
+    -               shift and go to state 56
+    *               shift and go to state 57
+    /               shift and go to state 58
     NUM             shift and go to state 30
     VARUSE          shift and go to state 31
     (               shift and go to state 32
 
-    value                          shift and go to state 78
+    value                          shift and go to state 80
 
-state 61
+state 63
 
     (21) command -> MAKE VARNAME value .
+    (33) value -> value . + value
+    (34) value -> value . - value
+    (35) value -> value . * value
+    (36) value -> value . / value
 
     FORWARD         reduce using rule 21 (command -> MAKE VARNAME value .)
     FD              reduce using rule 21 (command -> MAKE VARNAME value .)
@@ -1648,91 +1851,15 @@ state 61
     $end            reduce using rule 21 (command -> MAKE VARNAME value .)
     END             reduce using rule 21 (command -> MAKE VARNAME value .)
     ]               reduce using rule 21 (command -> MAKE VARNAME value .)
+    +               shift and go to state 55
+    -               shift and go to state 56
+    *               shift and go to state 57
+    /               shift and go to state 58
 
-
-state 62
-
-    (22) command -> IF condition [ . program ]
-    (1) program -> . command
-    (2) program -> . program command
-    (3) command -> . FORWARD value
-    (4) command -> . FD value
-    (5) command -> . BACK value
-    (6) command -> . BK value
-    (7) command -> . LT value
-    (8) command -> . LEFT value
-    (9) command -> . RT value
-    (10) command -> . RIGHT value
-    (11) command -> . SETPOS [ value value ]
-    (12) command -> . SETXY value value
-    (13) command -> . SETX value
-    (14) command -> . SETY value
-    (15) command -> . HOME
-    (16) command -> . PD
-    (17) command -> . PENDOWN
-    (18) command -> . PU
-    (19) command -> . PENUP
-    (20) command -> . SETPENCOLOR [ value value value ]
-    (21) command -> . MAKE VARNAME value
-    (22) command -> . IF condition [ program ]
-    (23) command -> . IFELSE condition [ program ] [ program ]
-    (24) command -> . REPEAT value [ program ]
-    (25) command -> . WHILE [ condition ] [ program ]
-    (26) command -> . WHILE condition [ program ]
-    (27) command -> . TO NAMETO program END
-    (28) command -> . TO NAMETO vars program END
-    (29) command -> . NAMETO
-    (30) command -> . NAMETO values
-
-    FORWARD         shift and go to state 3
-    FD              shift and go to state 4
-    BACK            shift and go to state 5
-    BK              shift and go to state 6
-    LT              shift and go to state 7
-    LEFT            shift and go to state 8
-    RT              shift and go to state 9
-    RIGHT           shift and go to state 10
-    SETPOS          shift and go to state 11
-    SETXY           shift and go to state 12
-    SETX            shift and go to state 13
-    SETY            shift and go to state 14
-    HOME            shift and go to state 15
-    PD              shift and go to state 16
-    PENDOWN         shift and go to state 17
-    PU              shift and go to state 18
-    PENUP           shift and go to state 19
-    SETPENCOLOR     shift and go to state 20
-    MAKE            shift and go to state 21
-    IF              shift and go to state 22
-    IFELSE          shift and go to state 23
-    REPEAT          shift and go to state 24
-    WHILE           shift and go to state 25
-    TO              shift and go to state 26
-    NAMETO          shift and go to state 27
-
-    program                        shift and go to state 79
-    command                        shift and go to state 2
-
-state 63
-
-    (41) condition -> value LOGIC . value
-    (31) value -> . NUM
-    (32) value -> . VARUSE
-    (33) value -> . VARUSE OPERATOR NUM
-    (34) value -> . NUM OPERATOR VARUSE
-    (35) value -> . NUM OPERATOR NUM
-    (36) value -> . VARUSE OPERATOR VARUSE
-    (37) value -> . ( value )
-
-    NUM             shift and go to state 30
-    VARUSE          shift and go to state 31
-    (               shift and go to state 32
-
-    value                          shift and go to state 80
 
 state 64
 
-    (23) command -> IFELSE condition [ . program ] [ program ]
+    (22) command -> IF condition [ . program ]
     (1) program -> . command
     (2) program -> . program command
     (3) command -> . FORWARD value
@@ -1795,7 +1922,24 @@ state 64
 
 state 65
 
-    (24) command -> REPEAT value [ . program ]
+    (41) condition -> value LOGIC . value
+    (31) value -> . NUM
+    (32) value -> . VARUSE
+    (33) value -> . value + value
+    (34) value -> . value - value
+    (35) value -> . value * value
+    (36) value -> . value / value
+    (37) value -> . ( value )
+
+    NUM             shift and go to state 30
+    VARUSE          shift and go to state 31
+    (               shift and go to state 32
+
+    value                          shift and go to state 82
+
+state 66
+
+    (23) command -> IFELSE condition [ . program ] [ program ]
     (1) program -> . command
     (2) program -> . program command
     (3) command -> . FORWARD value
@@ -1853,19 +1997,12 @@ state 65
     TO              shift and go to state 26
     NAMETO          shift and go to state 27
 
-    program                        shift and go to state 82
+    program                        shift and go to state 83
     command                        shift and go to state 2
-
-state 66
-
-    (25) command -> WHILE [ condition . ] [ program ]
-
-    ]               shift and go to state 83
-
 
 state 67
 
-    (26) command -> WHILE condition [ . program ]
+    (24) command -> REPEAT value [ . program ]
     (1) program -> . command
     (2) program -> . program command
     (3) command -> . FORWARD value
@@ -1928,6 +2065,76 @@ state 67
 
 state 68
 
+    (25) command -> WHILE [ condition . ] [ program ]
+
+    ]               shift and go to state 85
+
+
+state 69
+
+    (26) command -> WHILE condition [ . program ]
+    (1) program -> . command
+    (2) program -> . program command
+    (3) command -> . FORWARD value
+    (4) command -> . FD value
+    (5) command -> . BACK value
+    (6) command -> . BK value
+    (7) command -> . LT value
+    (8) command -> . LEFT value
+    (9) command -> . RT value
+    (10) command -> . RIGHT value
+    (11) command -> . SETPOS [ value value ]
+    (12) command -> . SETXY value value
+    (13) command -> . SETX value
+    (14) command -> . SETY value
+    (15) command -> . HOME
+    (16) command -> . PD
+    (17) command -> . PENDOWN
+    (18) command -> . PU
+    (19) command -> . PENUP
+    (20) command -> . SETPENCOLOR [ value value value ]
+    (21) command -> . MAKE VARNAME value
+    (22) command -> . IF condition [ program ]
+    (23) command -> . IFELSE condition [ program ] [ program ]
+    (24) command -> . REPEAT value [ program ]
+    (25) command -> . WHILE [ condition ] [ program ]
+    (26) command -> . WHILE condition [ program ]
+    (27) command -> . TO NAMETO program END
+    (28) command -> . TO NAMETO vars program END
+    (29) command -> . NAMETO
+    (30) command -> . NAMETO values
+
+    FORWARD         shift and go to state 3
+    FD              shift and go to state 4
+    BACK            shift and go to state 5
+    BK              shift and go to state 6
+    LT              shift and go to state 7
+    LEFT            shift and go to state 8
+    RT              shift and go to state 9
+    RIGHT           shift and go to state 10
+    SETPOS          shift and go to state 11
+    SETXY           shift and go to state 12
+    SETX            shift and go to state 13
+    SETY            shift and go to state 14
+    HOME            shift and go to state 15
+    PD              shift and go to state 16
+    PENDOWN         shift and go to state 17
+    PU              shift and go to state 18
+    PENUP           shift and go to state 19
+    SETPENCOLOR     shift and go to state 20
+    MAKE            shift and go to state 21
+    IF              shift and go to state 22
+    IFELSE          shift and go to state 23
+    REPEAT          shift and go to state 24
+    WHILE           shift and go to state 25
+    TO              shift and go to state 26
+    NAMETO          shift and go to state 27
+
+    program                        shift and go to state 86
+    command                        shift and go to state 2
+
+state 70
+
     (27) command -> TO NAMETO program . END
     (2) program -> program . command
     (3) command -> . FORWARD value
@@ -1959,7 +2166,7 @@ state 68
     (29) command -> . NAMETO
     (30) command -> . NAMETO values
 
-    END             shift and go to state 85
+    END             shift and go to state 87
     FORWARD         shift and go to state 3
     FD              shift and go to state 4
     BACK            shift and go to state 5
@@ -1988,7 +2195,7 @@ state 68
 
     command                        shift and go to state 28
 
-state 69
+state 71
 
     (28) command -> TO NAMETO vars . program END
     (43) vars -> vars . VARUSE
@@ -2023,7 +2230,7 @@ state 69
     (29) command -> . NAMETO
     (30) command -> . NAMETO values
 
-    VARUSE          shift and go to state 87
+    VARUSE          shift and go to state 89
     FORWARD         shift and go to state 3
     FD              shift and go to state 4
     BACK            shift and go to state 5
@@ -2050,10 +2257,10 @@ state 69
     TO              shift and go to state 26
     NAMETO          shift and go to state 27
 
-    program                        shift and go to state 86
+    program                        shift and go to state 88
     command                        shift and go to state 2
 
-state 70
+state 72
 
     (42) vars -> VARUSE .
 
@@ -2085,9 +2292,13 @@ state 70
     NAMETO          reduce using rule 42 (vars -> VARUSE .)
 
 
-state 71
+state 73
 
     (39) values -> values value .
+    (33) value -> value . + value
+    (34) value -> value . - value
+    (35) value -> value . * value
+    (36) value -> value . / value
 
     NUM             reduce using rule 39 (values -> values value .)
     VARUSE          reduce using rule 39 (values -> values value .)
@@ -2120,172 +2331,232 @@ state 71
     $end            reduce using rule 39 (values -> values value .)
     END             reduce using rule 39 (values -> values value .)
     ]               reduce using rule 39 (values -> values value .)
-
-
-state 72
-
-    (35) value -> NUM OPERATOR NUM .
-
-    FORWARD         reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    FD              reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    BACK            reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    BK              reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    LT              reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    LEFT            reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    RT              reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    RIGHT           reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    SETPOS          reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    SETXY           reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    SETX            reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    SETY            reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    HOME            reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    PD              reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    PENDOWN         reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    PU              reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    PENUP           reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    SETPENCOLOR     reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    MAKE            reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    IF              reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    IFELSE          reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    REPEAT          reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    WHILE           reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    TO              reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    NAMETO          reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    $end            reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    END             reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    ]               reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    NUM             reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    VARUSE          reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    (               reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    LOGIC           reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    [               reduce using rule 35 (value -> NUM OPERATOR NUM .)
-    )               reduce using rule 35 (value -> NUM OPERATOR NUM .)
-
-
-state 73
-
-    (34) value -> NUM OPERATOR VARUSE .
-
-    FORWARD         reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    FD              reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    BACK            reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    BK              reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    LT              reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    LEFT            reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    RT              reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    RIGHT           reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    SETPOS          reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    SETXY           reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    SETX            reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    SETY            reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    HOME            reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    PD              reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    PENDOWN         reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    PU              reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    PENUP           reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    SETPENCOLOR     reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    MAKE            reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    IF              reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    IFELSE          reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    REPEAT          reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    WHILE           reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    TO              reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    NAMETO          reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    $end            reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    END             reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    ]               reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    NUM             reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    VARUSE          reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    (               reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    LOGIC           reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    [               reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
-    )               reduce using rule 34 (value -> NUM OPERATOR VARUSE .)
+    +               shift and go to state 55
+    -               shift and go to state 56
+    *               shift and go to state 57
+    /               shift and go to state 58
 
 
 state 74
 
-    (36) value -> VARUSE OPERATOR VARUSE .
+    (33) value -> value + value .
+    (33) value -> value . + value
+    (34) value -> value . - value
+    (35) value -> value . * value
+    (36) value -> value . / value
 
-    FORWARD         reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    FD              reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    BACK            reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    BK              reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    LT              reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    LEFT            reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    RT              reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    RIGHT           reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    SETPOS          reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    SETXY           reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    SETX            reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    SETY            reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    HOME            reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    PD              reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    PENDOWN         reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    PU              reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    PENUP           reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    SETPENCOLOR     reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    MAKE            reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    IF              reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    IFELSE          reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    REPEAT          reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    WHILE           reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    TO              reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    NAMETO          reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    $end            reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    END             reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    ]               reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    NUM             reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    VARUSE          reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    (               reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    LOGIC           reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    [               reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
-    )               reduce using rule 36 (value -> VARUSE OPERATOR VARUSE .)
+    +               reduce using rule 33 (value -> value + value .)
+    -               reduce using rule 33 (value -> value + value .)
+    FORWARD         reduce using rule 33 (value -> value + value .)
+    FD              reduce using rule 33 (value -> value + value .)
+    BACK            reduce using rule 33 (value -> value + value .)
+    BK              reduce using rule 33 (value -> value + value .)
+    LT              reduce using rule 33 (value -> value + value .)
+    LEFT            reduce using rule 33 (value -> value + value .)
+    RT              reduce using rule 33 (value -> value + value .)
+    RIGHT           reduce using rule 33 (value -> value + value .)
+    SETPOS          reduce using rule 33 (value -> value + value .)
+    SETXY           reduce using rule 33 (value -> value + value .)
+    SETX            reduce using rule 33 (value -> value + value .)
+    SETY            reduce using rule 33 (value -> value + value .)
+    HOME            reduce using rule 33 (value -> value + value .)
+    PD              reduce using rule 33 (value -> value + value .)
+    PENDOWN         reduce using rule 33 (value -> value + value .)
+    PU              reduce using rule 33 (value -> value + value .)
+    PENUP           reduce using rule 33 (value -> value + value .)
+    SETPENCOLOR     reduce using rule 33 (value -> value + value .)
+    MAKE            reduce using rule 33 (value -> value + value .)
+    IF              reduce using rule 33 (value -> value + value .)
+    IFELSE          reduce using rule 33 (value -> value + value .)
+    REPEAT          reduce using rule 33 (value -> value + value .)
+    WHILE           reduce using rule 33 (value -> value + value .)
+    TO              reduce using rule 33 (value -> value + value .)
+    NAMETO          reduce using rule 33 (value -> value + value .)
+    $end            reduce using rule 33 (value -> value + value .)
+    END             reduce using rule 33 (value -> value + value .)
+    ]               reduce using rule 33 (value -> value + value .)
+    NUM             reduce using rule 33 (value -> value + value .)
+    VARUSE          reduce using rule 33 (value -> value + value .)
+    (               reduce using rule 33 (value -> value + value .)
+    LOGIC           reduce using rule 33 (value -> value + value .)
+    [               reduce using rule 33 (value -> value + value .)
+    )               reduce using rule 33 (value -> value + value .)
+    *               shift and go to state 57
+    /               shift and go to state 58
+
+  ! *               [ reduce using rule 33 (value -> value + value .) ]
+  ! /               [ reduce using rule 33 (value -> value + value .) ]
+  ! +               [ shift and go to state 55 ]
+  ! -               [ shift and go to state 56 ]
 
 
 state 75
 
-    (33) value -> VARUSE OPERATOR NUM .
+    (34) value -> value - value .
+    (33) value -> value . + value
+    (34) value -> value . - value
+    (35) value -> value . * value
+    (36) value -> value . / value
 
-    FORWARD         reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    FD              reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    BACK            reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    BK              reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    LT              reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    LEFT            reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    RT              reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    RIGHT           reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    SETPOS          reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    SETXY           reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    SETX            reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    SETY            reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    HOME            reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    PD              reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    PENDOWN         reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    PU              reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    PENUP           reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    SETPENCOLOR     reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    MAKE            reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    IF              reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    IFELSE          reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    REPEAT          reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    WHILE           reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    TO              reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    NAMETO          reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    $end            reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    END             reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    ]               reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    NUM             reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    VARUSE          reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    (               reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    LOGIC           reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    [               reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
-    )               reduce using rule 33 (value -> VARUSE OPERATOR NUM .)
+    +               reduce using rule 34 (value -> value - value .)
+    -               reduce using rule 34 (value -> value - value .)
+    FORWARD         reduce using rule 34 (value -> value - value .)
+    FD              reduce using rule 34 (value -> value - value .)
+    BACK            reduce using rule 34 (value -> value - value .)
+    BK              reduce using rule 34 (value -> value - value .)
+    LT              reduce using rule 34 (value -> value - value .)
+    LEFT            reduce using rule 34 (value -> value - value .)
+    RT              reduce using rule 34 (value -> value - value .)
+    RIGHT           reduce using rule 34 (value -> value - value .)
+    SETPOS          reduce using rule 34 (value -> value - value .)
+    SETXY           reduce using rule 34 (value -> value - value .)
+    SETX            reduce using rule 34 (value -> value - value .)
+    SETY            reduce using rule 34 (value -> value - value .)
+    HOME            reduce using rule 34 (value -> value - value .)
+    PD              reduce using rule 34 (value -> value - value .)
+    PENDOWN         reduce using rule 34 (value -> value - value .)
+    PU              reduce using rule 34 (value -> value - value .)
+    PENUP           reduce using rule 34 (value -> value - value .)
+    SETPENCOLOR     reduce using rule 34 (value -> value - value .)
+    MAKE            reduce using rule 34 (value -> value - value .)
+    IF              reduce using rule 34 (value -> value - value .)
+    IFELSE          reduce using rule 34 (value -> value - value .)
+    REPEAT          reduce using rule 34 (value -> value - value .)
+    WHILE           reduce using rule 34 (value -> value - value .)
+    TO              reduce using rule 34 (value -> value - value .)
+    NAMETO          reduce using rule 34 (value -> value - value .)
+    $end            reduce using rule 34 (value -> value - value .)
+    END             reduce using rule 34 (value -> value - value .)
+    ]               reduce using rule 34 (value -> value - value .)
+    NUM             reduce using rule 34 (value -> value - value .)
+    VARUSE          reduce using rule 34 (value -> value - value .)
+    (               reduce using rule 34 (value -> value - value .)
+    LOGIC           reduce using rule 34 (value -> value - value .)
+    [               reduce using rule 34 (value -> value - value .)
+    )               reduce using rule 34 (value -> value - value .)
+    *               shift and go to state 57
+    /               shift and go to state 58
+
+  ! *               [ reduce using rule 34 (value -> value - value .) ]
+  ! /               [ reduce using rule 34 (value -> value - value .) ]
+  ! +               [ shift and go to state 55 ]
+  ! -               [ shift and go to state 56 ]
 
 
 state 76
 
+    (35) value -> value * value .
+    (33) value -> value . + value
+    (34) value -> value . - value
+    (35) value -> value . * value
+    (36) value -> value . / value
+
+    +               reduce using rule 35 (value -> value * value .)
+    -               reduce using rule 35 (value -> value * value .)
+    *               reduce using rule 35 (value -> value * value .)
+    /               reduce using rule 35 (value -> value * value .)
+    FORWARD         reduce using rule 35 (value -> value * value .)
+    FD              reduce using rule 35 (value -> value * value .)
+    BACK            reduce using rule 35 (value -> value * value .)
+    BK              reduce using rule 35 (value -> value * value .)
+    LT              reduce using rule 35 (value -> value * value .)
+    LEFT            reduce using rule 35 (value -> value * value .)
+    RT              reduce using rule 35 (value -> value * value .)
+    RIGHT           reduce using rule 35 (value -> value * value .)
+    SETPOS          reduce using rule 35 (value -> value * value .)
+    SETXY           reduce using rule 35 (value -> value * value .)
+    SETX            reduce using rule 35 (value -> value * value .)
+    SETY            reduce using rule 35 (value -> value * value .)
+    HOME            reduce using rule 35 (value -> value * value .)
+    PD              reduce using rule 35 (value -> value * value .)
+    PENDOWN         reduce using rule 35 (value -> value * value .)
+    PU              reduce using rule 35 (value -> value * value .)
+    PENUP           reduce using rule 35 (value -> value * value .)
+    SETPENCOLOR     reduce using rule 35 (value -> value * value .)
+    MAKE            reduce using rule 35 (value -> value * value .)
+    IF              reduce using rule 35 (value -> value * value .)
+    IFELSE          reduce using rule 35 (value -> value * value .)
+    REPEAT          reduce using rule 35 (value -> value * value .)
+    WHILE           reduce using rule 35 (value -> value * value .)
+    TO              reduce using rule 35 (value -> value * value .)
+    NAMETO          reduce using rule 35 (value -> value * value .)
+    $end            reduce using rule 35 (value -> value * value .)
+    END             reduce using rule 35 (value -> value * value .)
+    ]               reduce using rule 35 (value -> value * value .)
+    NUM             reduce using rule 35 (value -> value * value .)
+    VARUSE          reduce using rule 35 (value -> value * value .)
+    (               reduce using rule 35 (value -> value * value .)
+    LOGIC           reduce using rule 35 (value -> value * value .)
+    [               reduce using rule 35 (value -> value * value .)
+    )               reduce using rule 35 (value -> value * value .)
+
+  ! +               [ shift and go to state 55 ]
+  ! -               [ shift and go to state 56 ]
+  ! *               [ shift and go to state 57 ]
+  ! /               [ shift and go to state 58 ]
+
+
+state 77
+
+    (36) value -> value / value .
+    (33) value -> value . + value
+    (34) value -> value . - value
+    (35) value -> value . * value
+    (36) value -> value . / value
+
+    +               reduce using rule 36 (value -> value / value .)
+    -               reduce using rule 36 (value -> value / value .)
+    *               reduce using rule 36 (value -> value / value .)
+    /               reduce using rule 36 (value -> value / value .)
+    FORWARD         reduce using rule 36 (value -> value / value .)
+    FD              reduce using rule 36 (value -> value / value .)
+    BACK            reduce using rule 36 (value -> value / value .)
+    BK              reduce using rule 36 (value -> value / value .)
+    LT              reduce using rule 36 (value -> value / value .)
+    LEFT            reduce using rule 36 (value -> value / value .)
+    RT              reduce using rule 36 (value -> value / value .)
+    RIGHT           reduce using rule 36 (value -> value / value .)
+    SETPOS          reduce using rule 36 (value -> value / value .)
+    SETXY           reduce using rule 36 (value -> value / value .)
+    SETX            reduce using rule 36 (value -> value / value .)
+    SETY            reduce using rule 36 (value -> value / value .)
+    HOME            reduce using rule 36 (value -> value / value .)
+    PD              reduce using rule 36 (value -> value / value .)
+    PENDOWN         reduce using rule 36 (value -> value / value .)
+    PU              reduce using rule 36 (value -> value / value .)
+    PENUP           reduce using rule 36 (value -> value / value .)
+    SETPENCOLOR     reduce using rule 36 (value -> value / value .)
+    MAKE            reduce using rule 36 (value -> value / value .)
+    IF              reduce using rule 36 (value -> value / value .)
+    IFELSE          reduce using rule 36 (value -> value / value .)
+    REPEAT          reduce using rule 36 (value -> value / value .)
+    WHILE           reduce using rule 36 (value -> value / value .)
+    TO              reduce using rule 36 (value -> value / value .)
+    NAMETO          reduce using rule 36 (value -> value / value .)
+    $end            reduce using rule 36 (value -> value / value .)
+    END             reduce using rule 36 (value -> value / value .)
+    ]               reduce using rule 36 (value -> value / value .)
+    NUM             reduce using rule 36 (value -> value / value .)
+    VARUSE          reduce using rule 36 (value -> value / value .)
+    (               reduce using rule 36 (value -> value / value .)
+    LOGIC           reduce using rule 36 (value -> value / value .)
+    [               reduce using rule 36 (value -> value / value .)
+    )               reduce using rule 36 (value -> value / value .)
+
+  ! +               [ shift and go to state 55 ]
+  ! -               [ shift and go to state 56 ]
+  ! *               [ shift and go to state 57 ]
+  ! /               [ shift and go to state 58 ]
+
+
+state 78
+
     (37) value -> ( value ) .
 
+    +               reduce using rule 37 (value -> ( value ) .)
+    -               reduce using rule 37 (value -> ( value ) .)
+    *               reduce using rule 37 (value -> ( value ) .)
+    /               reduce using rule 37 (value -> ( value ) .)
     FORWARD         reduce using rule 37 (value -> ( value ) .)
     FD              reduce using rule 37 (value -> ( value ) .)
     BACK            reduce using rule 37 (value -> ( value ) .)
@@ -2322,165 +2593,49 @@ state 76
     )               reduce using rule 37 (value -> ( value ) .)
 
 
-state 77
+state 79
 
     (11) command -> SETPOS [ value value . ]
+    (33) value -> value . + value
+    (34) value -> value . - value
+    (35) value -> value . * value
+    (36) value -> value . / value
 
-    ]               shift and go to state 88
+    ]               shift and go to state 90
+    +               shift and go to state 55
+    -               shift and go to state 56
+    *               shift and go to state 57
+    /               shift and go to state 58
 
 
-state 78
+state 80
 
     (20) command -> SETPENCOLOR [ value value . value ]
+    (33) value -> value . + value
+    (34) value -> value . - value
+    (35) value -> value . * value
+    (36) value -> value . / value
     (31) value -> . NUM
     (32) value -> . VARUSE
-    (33) value -> . VARUSE OPERATOR NUM
-    (34) value -> . NUM OPERATOR VARUSE
-    (35) value -> . NUM OPERATOR NUM
-    (36) value -> . VARUSE OPERATOR VARUSE
+    (33) value -> . value + value
+    (34) value -> . value - value
+    (35) value -> . value * value
+    (36) value -> . value / value
     (37) value -> . ( value )
 
+    +               shift and go to state 55
+    -               shift and go to state 56
+    *               shift and go to state 57
+    /               shift and go to state 58
     NUM             shift and go to state 30
     VARUSE          shift and go to state 31
     (               shift and go to state 32
 
-    value                          shift and go to state 89
-
-state 79
-
-    (22) command -> IF condition [ program . ]
-    (2) program -> program . command
-    (3) command -> . FORWARD value
-    (4) command -> . FD value
-    (5) command -> . BACK value
-    (6) command -> . BK value
-    (7) command -> . LT value
-    (8) command -> . LEFT value
-    (9) command -> . RT value
-    (10) command -> . RIGHT value
-    (11) command -> . SETPOS [ value value ]
-    (12) command -> . SETXY value value
-    (13) command -> . SETX value
-    (14) command -> . SETY value
-    (15) command -> . HOME
-    (16) command -> . PD
-    (17) command -> . PENDOWN
-    (18) command -> . PU
-    (19) command -> . PENUP
-    (20) command -> . SETPENCOLOR [ value value value ]
-    (21) command -> . MAKE VARNAME value
-    (22) command -> . IF condition [ program ]
-    (23) command -> . IFELSE condition [ program ] [ program ]
-    (24) command -> . REPEAT value [ program ]
-    (25) command -> . WHILE [ condition ] [ program ]
-    (26) command -> . WHILE condition [ program ]
-    (27) command -> . TO NAMETO program END
-    (28) command -> . TO NAMETO vars program END
-    (29) command -> . NAMETO
-    (30) command -> . NAMETO values
-
-    ]               shift and go to state 90
-    FORWARD         shift and go to state 3
-    FD              shift and go to state 4
-    BACK            shift and go to state 5
-    BK              shift and go to state 6
-    LT              shift and go to state 7
-    LEFT            shift and go to state 8
-    RT              shift and go to state 9
-    RIGHT           shift and go to state 10
-    SETPOS          shift and go to state 11
-    SETXY           shift and go to state 12
-    SETX            shift and go to state 13
-    SETY            shift and go to state 14
-    HOME            shift and go to state 15
-    PD              shift and go to state 16
-    PENDOWN         shift and go to state 17
-    PU              shift and go to state 18
-    PENUP           shift and go to state 19
-    SETPENCOLOR     shift and go to state 20
-    MAKE            shift and go to state 21
-    IF              shift and go to state 22
-    IFELSE          shift and go to state 23
-    REPEAT          shift and go to state 24
-    WHILE           shift and go to state 25
-    TO              shift and go to state 26
-    NAMETO          shift and go to state 27
-
-    command                        shift and go to state 28
-
-state 80
-
-    (41) condition -> value LOGIC value .
-
-    [               reduce using rule 41 (condition -> value LOGIC value .)
-    ]               reduce using rule 41 (condition -> value LOGIC value .)
-
+    value                          shift and go to state 91
 
 state 81
 
-    (23) command -> IFELSE condition [ program . ] [ program ]
-    (2) program -> program . command
-    (3) command -> . FORWARD value
-    (4) command -> . FD value
-    (5) command -> . BACK value
-    (6) command -> . BK value
-    (7) command -> . LT value
-    (8) command -> . LEFT value
-    (9) command -> . RT value
-    (10) command -> . RIGHT value
-    (11) command -> . SETPOS [ value value ]
-    (12) command -> . SETXY value value
-    (13) command -> . SETX value
-    (14) command -> . SETY value
-    (15) command -> . HOME
-    (16) command -> . PD
-    (17) command -> . PENDOWN
-    (18) command -> . PU
-    (19) command -> . PENUP
-    (20) command -> . SETPENCOLOR [ value value value ]
-    (21) command -> . MAKE VARNAME value
-    (22) command -> . IF condition [ program ]
-    (23) command -> . IFELSE condition [ program ] [ program ]
-    (24) command -> . REPEAT value [ program ]
-    (25) command -> . WHILE [ condition ] [ program ]
-    (26) command -> . WHILE condition [ program ]
-    (27) command -> . TO NAMETO program END
-    (28) command -> . TO NAMETO vars program END
-    (29) command -> . NAMETO
-    (30) command -> . NAMETO values
-
-    ]               shift and go to state 91
-    FORWARD         shift and go to state 3
-    FD              shift and go to state 4
-    BACK            shift and go to state 5
-    BK              shift and go to state 6
-    LT              shift and go to state 7
-    LEFT            shift and go to state 8
-    RT              shift and go to state 9
-    RIGHT           shift and go to state 10
-    SETPOS          shift and go to state 11
-    SETXY           shift and go to state 12
-    SETX            shift and go to state 13
-    SETY            shift and go to state 14
-    HOME            shift and go to state 15
-    PD              shift and go to state 16
-    PENDOWN         shift and go to state 17
-    PU              shift and go to state 18
-    PENUP           shift and go to state 19
-    SETPENCOLOR     shift and go to state 20
-    MAKE            shift and go to state 21
-    IF              shift and go to state 22
-    IFELSE          shift and go to state 23
-    REPEAT          shift and go to state 24
-    WHILE           shift and go to state 25
-    TO              shift and go to state 26
-    NAMETO          shift and go to state 27
-
-    command                        shift and go to state 28
-
-state 82
-
-    (24) command -> REPEAT value [ program . ]
+    (22) command -> IF condition [ program . ]
     (2) program -> program . command
     (3) command -> . FORWARD value
     (4) command -> . FD value
@@ -2540,16 +2695,87 @@ state 82
 
     command                        shift and go to state 28
 
+state 82
+
+    (41) condition -> value LOGIC value .
+    (33) value -> value . + value
+    (34) value -> value . - value
+    (35) value -> value . * value
+    (36) value -> value . / value
+
+    [               reduce using rule 41 (condition -> value LOGIC value .)
+    ]               reduce using rule 41 (condition -> value LOGIC value .)
+    +               shift and go to state 55
+    -               shift and go to state 56
+    *               shift and go to state 57
+    /               shift and go to state 58
+
+
 state 83
 
-    (25) command -> WHILE [ condition ] . [ program ]
+    (23) command -> IFELSE condition [ program . ] [ program ]
+    (2) program -> program . command
+    (3) command -> . FORWARD value
+    (4) command -> . FD value
+    (5) command -> . BACK value
+    (6) command -> . BK value
+    (7) command -> . LT value
+    (8) command -> . LEFT value
+    (9) command -> . RT value
+    (10) command -> . RIGHT value
+    (11) command -> . SETPOS [ value value ]
+    (12) command -> . SETXY value value
+    (13) command -> . SETX value
+    (14) command -> . SETY value
+    (15) command -> . HOME
+    (16) command -> . PD
+    (17) command -> . PENDOWN
+    (18) command -> . PU
+    (19) command -> . PENUP
+    (20) command -> . SETPENCOLOR [ value value value ]
+    (21) command -> . MAKE VARNAME value
+    (22) command -> . IF condition [ program ]
+    (23) command -> . IFELSE condition [ program ] [ program ]
+    (24) command -> . REPEAT value [ program ]
+    (25) command -> . WHILE [ condition ] [ program ]
+    (26) command -> . WHILE condition [ program ]
+    (27) command -> . TO NAMETO program END
+    (28) command -> . TO NAMETO vars program END
+    (29) command -> . NAMETO
+    (30) command -> . NAMETO values
 
-    [               shift and go to state 93
+    ]               shift and go to state 93
+    FORWARD         shift and go to state 3
+    FD              shift and go to state 4
+    BACK            shift and go to state 5
+    BK              shift and go to state 6
+    LT              shift and go to state 7
+    LEFT            shift and go to state 8
+    RT              shift and go to state 9
+    RIGHT           shift and go to state 10
+    SETPOS          shift and go to state 11
+    SETXY           shift and go to state 12
+    SETX            shift and go to state 13
+    SETY            shift and go to state 14
+    HOME            shift and go to state 15
+    PD              shift and go to state 16
+    PENDOWN         shift and go to state 17
+    PU              shift and go to state 18
+    PENUP           shift and go to state 19
+    SETPENCOLOR     shift and go to state 20
+    MAKE            shift and go to state 21
+    IF              shift and go to state 22
+    IFELSE          shift and go to state 23
+    REPEAT          shift and go to state 24
+    WHILE           shift and go to state 25
+    TO              shift and go to state 26
+    NAMETO          shift and go to state 27
 
+    command                        shift and go to state 28
 
 state 84
 
-    (26) command -> WHILE condition [ program . ]
+    (24) command -> REPEAT value [ program . ]
     (2) program -> program . command
     (3) command -> . FORWARD value
     (4) command -> . FD value
@@ -2611,6 +2837,75 @@ state 84
 
 state 85
 
+    (25) command -> WHILE [ condition ] . [ program ]
+
+    [               shift and go to state 95
+
+
+state 86
+
+    (26) command -> WHILE condition [ program . ]
+    (2) program -> program . command
+    (3) command -> . FORWARD value
+    (4) command -> . FD value
+    (5) command -> . BACK value
+    (6) command -> . BK value
+    (7) command -> . LT value
+    (8) command -> . LEFT value
+    (9) command -> . RT value
+    (10) command -> . RIGHT value
+    (11) command -> . SETPOS [ value value ]
+    (12) command -> . SETXY value value
+    (13) command -> . SETX value
+    (14) command -> . SETY value
+    (15) command -> . HOME
+    (16) command -> . PD
+    (17) command -> . PENDOWN
+    (18) command -> . PU
+    (19) command -> . PENUP
+    (20) command -> . SETPENCOLOR [ value value value ]
+    (21) command -> . MAKE VARNAME value
+    (22) command -> . IF condition [ program ]
+    (23) command -> . IFELSE condition [ program ] [ program ]
+    (24) command -> . REPEAT value [ program ]
+    (25) command -> . WHILE [ condition ] [ program ]
+    (26) command -> . WHILE condition [ program ]
+    (27) command -> . TO NAMETO program END
+    (28) command -> . TO NAMETO vars program END
+    (29) command -> . NAMETO
+    (30) command -> . NAMETO values
+
+    ]               shift and go to state 96
+    FORWARD         shift and go to state 3
+    FD              shift and go to state 4
+    BACK            shift and go to state 5
+    BK              shift and go to state 6
+    LT              shift and go to state 7
+    LEFT            shift and go to state 8
+    RT              shift and go to state 9
+    RIGHT           shift and go to state 10
+    SETPOS          shift and go to state 11
+    SETXY           shift and go to state 12
+    SETX            shift and go to state 13
+    SETY            shift and go to state 14
+    HOME            shift and go to state 15
+    PD              shift and go to state 16
+    PENDOWN         shift and go to state 17
+    PU              shift and go to state 18
+    PENUP           shift and go to state 19
+    SETPENCOLOR     shift and go to state 20
+    MAKE            shift and go to state 21
+    IF              shift and go to state 22
+    IFELSE          shift and go to state 23
+    REPEAT          shift and go to state 24
+    WHILE           shift and go to state 25
+    TO              shift and go to state 26
+    NAMETO          shift and go to state 27
+
+    command                        shift and go to state 28
+
+state 87
+
     (27) command -> TO NAMETO program END .
 
     FORWARD         reduce using rule 27 (command -> TO NAMETO program END .)
@@ -2643,7 +2938,7 @@ state 85
     ]               reduce using rule 27 (command -> TO NAMETO program END .)
 
 
-state 86
+state 88
 
     (28) command -> TO NAMETO vars program . END
     (2) program -> program . command
@@ -2676,7 +2971,7 @@ state 86
     (29) command -> . NAMETO
     (30) command -> . NAMETO values
 
-    END             shift and go to state 95
+    END             shift and go to state 97
     FORWARD         shift and go to state 3
     FD              shift and go to state 4
     BACK            shift and go to state 5
@@ -2705,7 +3000,7 @@ state 86
 
     command                        shift and go to state 28
 
-state 87
+state 89
 
     (43) vars -> vars VARUSE .
 
@@ -2737,7 +3032,7 @@ state 87
     NAMETO          reduce using rule 43 (vars -> vars VARUSE .)
 
 
-state 88
+state 90
 
     (11) command -> SETPOS [ value value ] .
 
@@ -2771,14 +3066,22 @@ state 88
     ]               reduce using rule 11 (command -> SETPOS [ value value ] .)
 
 
-state 89
+state 91
 
     (20) command -> SETPENCOLOR [ value value value . ]
+    (33) value -> value . + value
+    (34) value -> value . - value
+    (35) value -> value . * value
+    (36) value -> value . / value
 
-    ]               shift and go to state 96
+    ]               shift and go to state 98
+    +               shift and go to state 55
+    -               shift and go to state 56
+    *               shift and go to state 57
+    /               shift and go to state 58
 
 
-state 90
+state 92
 
     (22) command -> IF condition [ program ] .
 
@@ -2812,14 +3115,14 @@ state 90
     ]               reduce using rule 22 (command -> IF condition [ program ] .)
 
 
-state 91
+state 93
 
     (23) command -> IFELSE condition [ program ] . [ program ]
 
-    [               shift and go to state 97
+    [               shift and go to state 99
 
 
-state 92
+state 94
 
     (24) command -> REPEAT value [ program ] .
 
@@ -2853,7 +3156,7 @@ state 92
     ]               reduce using rule 24 (command -> REPEAT value [ program ] .)
 
 
-state 93
+state 95
 
     (25) command -> WHILE [ condition ] [ . program ]
     (1) program -> . command
@@ -2913,10 +3216,10 @@ state 93
     TO              shift and go to state 26
     NAMETO          shift and go to state 27
 
-    program                        shift and go to state 98
+    program                        shift and go to state 100
     command                        shift and go to state 2
 
-state 94
+state 96
 
     (26) command -> WHILE condition [ program ] .
 
@@ -2950,7 +3253,7 @@ state 94
     ]               reduce using rule 26 (command -> WHILE condition [ program ] .)
 
 
-state 95
+state 97
 
     (28) command -> TO NAMETO vars program END .
 
@@ -2984,7 +3287,7 @@ state 95
     ]               reduce using rule 28 (command -> TO NAMETO vars program END .)
 
 
-state 96
+state 98
 
     (20) command -> SETPENCOLOR [ value value value ] .
 
@@ -3018,7 +3321,7 @@ state 96
     ]               reduce using rule 20 (command -> SETPENCOLOR [ value value value ] .)
 
 
-state 97
+state 99
 
     (23) command -> IFELSE condition [ program ] [ . program ]
     (1) program -> . command
@@ -3078,10 +3381,10 @@ state 97
     TO              shift and go to state 26
     NAMETO          shift and go to state 27
 
-    program                        shift and go to state 99
+    program                        shift and go to state 101
     command                        shift and go to state 2
 
-state 98
+state 100
 
     (25) command -> WHILE [ condition ] [ program . ]
     (2) program -> program . command
@@ -3114,7 +3417,7 @@ state 98
     (29) command -> . NAMETO
     (30) command -> . NAMETO values
 
-    ]               shift and go to state 100
+    ]               shift and go to state 102
     FORWARD         shift and go to state 3
     FD              shift and go to state 4
     BACK            shift and go to state 5
@@ -3143,7 +3446,7 @@ state 98
 
     command                        shift and go to state 28
 
-state 99
+state 101
 
     (23) command -> IFELSE condition [ program ] [ program . ]
     (2) program -> program . command
@@ -3176,7 +3479,7 @@ state 99
     (29) command -> . NAMETO
     (30) command -> . NAMETO values
 
-    ]               shift and go to state 101
+    ]               shift and go to state 103
     FORWARD         shift and go to state 3
     FD              shift and go to state 4
     BACK            shift and go to state 5
@@ -3205,7 +3508,7 @@ state 99
 
     command                        shift and go to state 28
 
-state 100
+state 102
 
     (25) command -> WHILE [ condition ] [ program ] .
 
@@ -3239,7 +3542,7 @@ state 100
     ]               reduce using rule 25 (command -> WHILE [ condition ] [ program ] .)
 
 
-state 101
+state 103
 
     (23) command -> IFELSE condition [ program ] [ program ] .
 
