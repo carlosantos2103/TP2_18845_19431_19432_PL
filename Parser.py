@@ -65,8 +65,7 @@ class Parser:
         self.parser = None
         self.lexer = None
         self.vars = {}
-        self.function = {}
-        self.vars_function = {}
+        self.functions = {}
         self.color = (0, 0, 0)
         self.pos = (100, 100)
         self.ang = 90
@@ -86,8 +85,6 @@ class Parser:
         if type(val) == float:
             return val
         val = val[1:]
-        if "fun" + val in self.vars:
-            return self.vars["fun" + val]
         if val in self.vars:
             return self.vars[val]
         print(f"Undefined variable: {val}", file = sys.stderr)
@@ -98,15 +95,17 @@ class Parser:
         self.lexer.Build(content, **kwargs)
         self.parser = yacc.yacc(module=self, **kwargs)
         program = self.parser.parse(lexer=self.lexer.lexer)
-        Command.exec(program, self)
+        self.exec(program)
 
-        #TODO: do execute
+    def exec(self, program):
+        for command in program:
+            command.run(self)
 
     def p_error(self, p):
         print(f"Syntax error!", file=sys.stderr)
         token = self.parser.token()
         if token:
-            print(f"Unexpected token: {token}", file=sys.stderr)
+            print(f"Unexpected token: {token.value}", file=sys.stderr)
         exit(1)
 
     def p_program0(self, p):
@@ -191,7 +190,7 @@ class Parser:
 
     def p_command12(self, p):
         """ command  :  MAKE VARNAME value """
-        args = {'var_name': p[2], 'value': p[3]}
+        args = {'var_name': p[2][1:], 'value': p[3]}
         p[0] = Command("make", args)
 
     def p_command13(self, p):
@@ -225,7 +224,7 @@ class Parser:
             args = {'nameto': p[2], 'vars': p[3], 'code': p[4]}
         else:
             args = {'nameto': p[2], 'code': p[3]}
-        p[0] = Command('to', args)
+        p[0] = Command('function', args)
 
     def p_command18(self, p):
         """ command  : NAMETO
@@ -234,7 +233,7 @@ class Parser:
             args = {'nameto': p[1], 'values': p[2]}
         else:
             args = {'nameto': p[1]}
-        p[0] = Command('nameto', args)
+        p[0] = Command('call_function', args)
 
     def p_value1(self, p):
         """ value  :  NUM
@@ -274,10 +273,10 @@ class Parser:
 
     def p_vars0(self, p):
         """ vars  :  VARUSE  """
-        p[0] = [p[1]]
+        p[0] = [p[1][1:]]
 
     def p_vars1(self, p):
         """ vars  :  vars VARUSE  """
         lst = p[1]
-        lst.append(p[2])
+        lst.append(p[2][1:])
         p[0] = lst

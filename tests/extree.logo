@@ -12,8 +12,6 @@ to tree :size
     ]
 end
 
-make "ss 120
-
 pu sety 199.9 pd
 
-tree :ss
+tree 120

@@ -2,14 +2,13 @@
 
 import svg
 import math
-
-#TODO : passar command.exec para parser
+import sys
 
 def do_forward(command, parser):
     dist = parser.value(command.args['distance'])
     new_pos = (parser.pos[0]+dist*math.cos(math.radians(parser.ang)), parser.pos[1]-dist*math.sin(math.radians(parser.ang)))
     if parser.draw_status:
-        svg.drawLine("result.svg", parser.pos, new_pos, parser.color)
+        svg.drawLine(parser.pos, new_pos, parser.color)
     parser.pos = new_pos
     return 0
 
@@ -17,7 +16,7 @@ def do_back(command, parser):
     dist = parser.value(command.args['distance'])
     new_pos = (parser.pos[0]-dist*math.cos(math.radians(parser.ang)), parser.pos[1]+dist*math.sin(math.radians(parser.ang)))
     if parser.draw_status:
-        svg.drawLine("result.svg", parser.pos, new_pos, parser.color)
+        svg.drawLine(parser.pos, new_pos, parser.color)
     parser.pos = new_pos
 
 def do_left(command, parser):
@@ -38,7 +37,7 @@ def do_set_position(command, parser):
         new_pos = (100, 100)
 
     if parser.draw_status:
-        svg.drawLine("result.svg", parser.pos, new_pos, parser.color)
+        svg.drawLine(parser.pos, new_pos, parser.color)
 
     parser.pos = new_pos
 
@@ -49,7 +48,7 @@ def do_pen_color(command, parser):
     parser.color = parser.verif_color(command.args['new_color'])
 
 def do_make(command, parser):
-    var_name = command.args['var_name'][1:]
+    var_name = command.args['var_name']
     value = parser.value(command.args['value'])
     parser.vars[var_name] = value
 
@@ -59,7 +58,7 @@ def do_if(command, parser):
     result = parser.value(condition)
 
     if result:
-        Command.exec(code, parser)
+        parser.exec(code)
 
 def do_ifelse(command, parser):
     condition = command.args['condition']
@@ -68,9 +67,9 @@ def do_ifelse(command, parser):
     code2 = command.args['code2']
 
     if result:
-        Command.exec(code1, parser)
+        parser.exec(code1)
     else:
-        Command.exec(code2, parser)
+        parser.exec(code2)
 
 def do_repeat(command, parser):
     count = 0
@@ -78,7 +77,7 @@ def do_repeat(command, parser):
     code = command.args['code']
 
     while var > count:
-        Command.exec(code, parser)
+        parser.exec(code)
         count += 1
 
 def do_while(command, parser):
@@ -87,39 +86,45 @@ def do_while(command, parser):
     result = parser.value(condition)
 
     while result:
-        Command.exec(code, parser)
+        parser.exec(code)
         result = parser.value(condition)
 
-def do_to(command, parser):
+def do_function(command, parser):
     function_name = command.args['nameto']
-    parser.function[function_name] = command.args['code']
-    # parser.function[function_name] = {"vars": command.args['vars'], "code": command.args['code'] }
+    code = command.args['code']
     if 'vars' in command.args:
-        parser.vars_function[function_name] = []
-        for v in command.args['vars']:
-            parser.vars_function[function_name].append("fun" + v[1:])
+        parser.functions[function_name] = { "vars": command.args['vars'], "code": code }
+    else:        
+        parser.functions[function_name] = { "code": code }
 
-def do_nameto(command, parser):
-    # TODO: verificar se funcao existe
-    # verificar se existem vars e comparar tamanhos na funcao criada
-    # Criar vars temporarias com metodo copy() e atribuir novamente no fim
+def do_call_function(command, parser):
     function_name = command.args['nameto']
-    program = parser.function[function_name]
-    if 'values' in command.args:
-        i=0
-        for v in command.args['values']:
-            var = parser.vars_function[function_name][i]
-            parser.vars[var] = parser.value(v)
-            i += 1
-    command.exec(program, parser)
 
-    if 'values' in command.args:
-        i=0
-        for v in command.args['values']:
-            var = parser.vars_function[function_name][i]
-            if var in parser.vars:
-                parser.vars.pop(var)
-            i += 1
+    if function_name not in parser.functions:
+        print(f"Undefined function: {function_name}", file = sys.stderr)
+        exit(1)
+        
+    function = parser.functions[function_name]
+    code = function["code"]
+
+    if "vars" in function:
+        if 'values' not in command.args:
+            print(f"Parameters needed on function: {function_name}", file = sys.stderr)
+            exit(1)
+
+        if len(command.args["values"]) != len(function["vars"]):
+            print(f"Missmatched number of parameters on function: {function_name}", file = sys.stderr)
+            exit(1)
+
+        save_vars = parser.vars.copy()
+
+        for var, value in zip(function['vars'], command.args['values']):
+            parser.vars[var] = parser.value(value)
+
+    parser.exec(code)
+
+    if "vars" in function:
+        parser.vars = save_vars.copy()
                 
 class Command:
     dispatch_table = {
@@ -135,8 +140,8 @@ class Command:
         "ifelse": do_ifelse,
         "repeat": do_repeat,
         "while": do_while,
-        "to": do_to,
-        "nameto": do_nameto,
+        "function": do_function,
+        "call_function": do_call_function,
     }
 
     def __init__(self, name, args):

@@ -6,12 +6,7 @@ from Lexer import Lexer
 import svg
 import sys
 import os
-
 contents = svg.readFile("teste")
-
-svg.clearFile("result.svg")
-
-svg.createFile("result.svg")
 
 lexer = Lexer()
 lexer.Build(contents)
@@ -19,7 +14,7 @@ lexer.Build(contents)
 parser = Parser()
 parser.Parse(contents)
 
-svg.endFile("result.svg")
+svg.drawAll("result.svg")
 
 '''
 file_name = ""
@@ -27,17 +22,13 @@ if len(sys.argv) == 2:
     if os.path.isfile(sys.argv[1]):
         file_name = sys.argv[1]
     else:
-        print("Presented argument is not a file", file=sys.stderr)
+        print(f"Presented argument is not a file: {sys.argv[1]}", file=sys.stderr)
         exit(1)
 else:
     print("File name expected", file=sys.stderr)
     exit(1)
 
-
 contents = svg.readFile(file_name)
-
-svg.clearFile("result.svg")
-svg.createFile("result.svg")
 
 lexer = Lexer()
 lexer.Build(contents)
@@ -45,5 +36,5 @@ lexer.Build(contents)
 parser = Parser()
 parser.Parse(contents)
 
-svg.endFile("result.svg")
+svg.drawAll("result.svg")
 print("Drawing has ended with success.")'''
