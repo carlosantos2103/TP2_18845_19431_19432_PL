@@ -11,9 +11,9 @@ class Lexer:
               "SETY", "HOME", "PD", "PENDOWN", "PU", "PENUP", "SETPENCOLOR", "MAKE", "IF", "IFELSE", "REPEAT", "WHILE","TO", "END", "NAMETO")
 
     def t_COMMAND(self, t):
-        r"""fd|forward|bk|back|lt|left|rt|right|setpos|setx(y)?|sety|home|pd|pendown|pu|penup|
-        setpencolor|make|if(else)?|repeat|while|to|end"""
-        t.type = t.value.upper() #TODO: forçar espaço?
+        r"""(fd|forward|bk|back|lt|left|rt|right|setpos|setx(y)?|sety|home|pd|pendown|pu|penup|
+        setpencolor|make|if(else)?|repeat|while|to|end)\b"""
+        t.type = t.value.upper()
         return t
 
     def t_NAMETO(self, t):

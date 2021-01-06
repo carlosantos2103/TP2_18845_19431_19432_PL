@@ -3,6 +3,8 @@
 import svg
 import math
 
+#TODO : passar command.exec para parser
+
 def do_forward(command, parser):
     dist = parser.value(command.args['distance'])
     new_pos = (parser.pos[0]+dist*math.cos(math.radians(parser.ang)), parser.pos[1]-dist*math.sin(math.radians(parser.ang)))
@@ -79,8 +81,6 @@ def do_repeat(command, parser):
         Command.exec(code, parser)
         count += 1
 
-
-
 def do_while(command, parser):
     condition = command.args['condition']
     code = command.args['code']
@@ -93,12 +93,16 @@ def do_while(command, parser):
 def do_to(command, parser):
     function_name = command.args['nameto']
     parser.function[function_name] = command.args['code']
+    # parser.function[function_name] = {"vars": command.args['vars'], "code": command.args['code'] }
     if 'vars' in command.args:
         parser.vars_function[function_name] = []
         for v in command.args['vars']:
             parser.vars_function[function_name].append("fun" + v[1:])
 
 def do_nameto(command, parser):
+    # TODO: verificar se funcao existe
+    # verificar se existem vars e comparar tamanhos na funcao criada
+    # Criar vars temporarias com metodo copy() e atribuir novamente no fim
     function_name = command.args['nameto']
     program = parser.function[function_name]
     if 'values' in command.args:

@@ -100,6 +100,8 @@ class Parser:
         program = self.parser.parse(lexer=self.lexer.lexer)
         Command.exec(program, self)
 
+        #TODO: do execute
+
     def p_error(self, p):
         print(f"Syntax error!", file=sys.stderr)
         token = self.parser.token()
