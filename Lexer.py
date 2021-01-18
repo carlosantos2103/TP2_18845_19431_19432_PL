@@ -21,7 +21,7 @@ class Lexer:
         return t
 
     def t_NUM(self, t):
-        r"""[+-]?[0-9]+(\.[0-9]+)?"""  # r"""[+-]?[0-9]+(\.[0-9]+)?"""     tirar? [+-]?
+        r"""[0-9]+(\.[0-9]+)?"""  # com [+-]? impede de fazer calculos
         t.value = float(t.value)
         return t
 

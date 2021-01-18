@@ -1,19 +1,8 @@
-to tree :size
-    if :size < 5 [forward :size back :size]
-    if :size > 5 [
-        forward :size/3
-        left 30 tree :size*2/3 right 30
-        forward :size/6
-        right 25 tree :size/2 left 25
-        forward :size/3
-        right 25 tree :size/2 left 25
-        forward :size/6
-        back :size
-    ]
-end
-
-make "ss 120
-
-pu sety 199.9 pd
-
-tree :ss
+fd 50*(0-1)
+rt 90
+fd 20
+rt 90
+fd 20
+rt 90
+fd 20
+rt 90

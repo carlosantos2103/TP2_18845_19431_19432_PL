@@ -1,4 +1,5 @@
-# Trabalho_Pratico 2 - PL 2020/21
+# Trabalho Pratico 2 - PL 2020/21
+# 18845 - 19431 - 19432
 # main.py
 
 from Parser import Parser
