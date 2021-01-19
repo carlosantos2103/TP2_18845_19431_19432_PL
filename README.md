@@ -2,6 +2,9 @@
 
 Trabalho Prático 2 - Processamento de Linguagens - LESI 2A1S - 2020/21
 
+*Na consola:*  
+```python3 main.py [Ficheiro LOGO]```
+
 **Realizado por:**
 
 - João Azevedo (18845)
