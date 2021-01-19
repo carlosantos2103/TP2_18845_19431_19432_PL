@@ -7,17 +7,7 @@ from Lexer import Lexer
 import svg
 import sys
 import os
-contents = svg.readFile("teste")
 
-lexer = Lexer()
-lexer.Build(contents)
-
-parser = Parser()
-parser.Parse(contents)
-
-svg.drawAll("result.svg")
-
-'''
 file_name = ""
 if len(sys.argv) == 2:
     if os.path.isfile(sys.argv[1]):
@@ -38,4 +28,4 @@ parser = Parser()
 parser.Parse(contents)
 
 svg.drawAll("result.svg")
-print("Drawing has ended with success.")'''
+print("Drawing has ended with success.")
