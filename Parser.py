@@ -20,35 +20,17 @@ def math(operator, p1, p2):
         return p1 - p2
 
     if operator == "<":
-        if p1 < p2:
-            return True
-        else:
-            return False
+        return p1 < p2
     elif operator == ">":
-        if p1 > p2:
-            return True
-        else:
-            return False
+        return p1 > p2
     elif operator == "==":
-        if p1 == p2:
-            return True
-        else:
-            return False
+        return p1 == p2:
     elif operator == "<=":
-        if p1 <= p2:
-            return True
-        else:
-            return False
+        return p1 <= p2:
     elif operator == ">=":
-        if p1 >= p2:
-            return True
-        else:
-            return False
+        return p1 >= p2:
     elif operator == "!=":
-        if p1 >= p2:
-            return True
-        else:
-            return False
+        return p1 != p2:
 
     print("Operator not found", file=sys.stderr)
     exit(1)
