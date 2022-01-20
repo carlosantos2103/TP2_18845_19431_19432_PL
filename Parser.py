@@ -24,13 +24,13 @@ def math(operator, p1, p2):
     elif operator == ">":
         return p1 > p2
     elif operator == "==":
-        return p1 == p2:
+        return p1 == p2
     elif operator == "<=":
-        return p1 <= p2:
+        return p1 <= p2
     elif operator == ">=":
-        return p1 >= p2:
+        return p1 >= p2
     elif operator == "!=":
-        return p1 != p2:
+        return p1 != p2
 
     print("Operator not found", file=sys.stderr)
     exit(1)
